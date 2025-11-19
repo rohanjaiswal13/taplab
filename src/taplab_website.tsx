@@ -1,6 +1,6 @@
 // src/taplab_website.tsx
 import { useState, useEffect } from "react";
-import type { ReactNode, ChangeEvent, MouseEvent } from "react";
+import type { ReactNode, ChangeEvent, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 
 /* =========================
-   Types (single-file approach)
+   Types
    ========================= */
 type Variant = "primary" | "secondary" | "outline";
 
@@ -71,7 +71,7 @@ const Button = ({
   variant = "primary",
   className = "",
   ...props
-}: ButtonProps) => {
+}: ButtonProps): JSX.Element => {
   const baseClass =
     "px-8 py-3 rounded-full font-medium transition-all duration-300";
   const variants: Record<Variant, string> = {
@@ -97,7 +97,7 @@ const Button = ({
 /* =========================
    Navbar Component
    ========================= */
-const Navbar = ({ currentPage, setCurrentPage }: NavbarProps) => {
+const Navbar = ({ currentPage, setCurrentPage }: NavbarProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
 
@@ -197,7 +197,7 @@ const Navbar = ({ currentPage, setCurrentPage }: NavbarProps) => {
 /* =========================
    Footer Component
    ========================= */
-const Footer = ({ setCurrentPage }: FooterProps) => {
+const Footer = ({ setCurrentPage }: FooterProps): JSX.Element => {
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-black border-t border-white/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6">
@@ -285,14 +285,13 @@ const ProductCard = ({
   image,
   features,
   onClick,
-}: ProductCardProps) => (
+}: ProductCardProps): JSX.Element => (
   <motion.div
     whileHover={{ y: -10, scale: 1.02 }}
     className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 hover:border-blue-500/50 transition-all cursor-pointer shadow-xl"
     onClick={onClick}
   >
     <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl mb-6 flex items-center justify-center">
-      {/* show provided image (emoji) or fallback icon */}
       {image ? (
         <div className="text-6xl">{image}</div>
       ) : (
@@ -318,7 +317,10 @@ const ProductCard = ({
 /* =========================
    Home Page
    ========================= */
-const HomePage = ({ setCurrentPage, setSelectedProduct }: HomePageProps) => {
+const HomePage = ({
+  setCurrentPage,
+  setSelectedProduct,
+}: HomePageProps): JSX.Element => {
   const products: {
     id: ProductKey;
     title: string;
@@ -633,7 +635,7 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }: HomePageProps) => {
 const ProductsPage = ({
   selectedProduct,
   setSelectedProduct,
-}: ProductsPageProps) => {
+}: ProductsPageProps): JSX.Element => {
   const productDetails: Record<
     ProductKey,
     {
@@ -824,7 +826,7 @@ const ProductsPage = ({
 /* =========================
    Profile Page
    ========================= */
-const ProfilePage = () => {
+const ProfilePage = (): JSX.Element => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [profile, setProfile] = useState({
     name: "John Doe",
@@ -1114,7 +1116,7 @@ const ProfilePage = () => {
 /* =========================
    About Page
    ========================= */
-const AboutPage = () => {
+const AboutPage = (): JSX.Element => {
   return (
     <div className="min-h-screen pt-24 pb-16 px-6 bg-black">
       <div className="max-w-4xl mx-auto">
@@ -1229,14 +1231,14 @@ const AboutPage = () => {
 /* =========================
    Contact Page
    ========================= */
-const ContactPage = () => {
+const ContactPage = (): JSX.Element => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("Thank you! We will get back to you soon.");
     setFormData({ name: "", email: "", message: "" });
@@ -1292,12 +1294,7 @@ const ContactPage = () => {
             <h2 className="text-3xl font-bold text-white mb-6">
               Send us a Message
             </h2>
-            <form
-              onSubmit={(e) =>
-                handleSubmit(e as unknown as MouseEvent<HTMLFormElement>)
-              }
-              className="space-y-6"
-            >
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-gray-300 mb-2">Name</label>
                 <input
