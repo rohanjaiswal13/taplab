@@ -1,7 +1,8 @@
 // src/taplab_website.tsx
 import React, { useState, useEffect } from "react";
 import type { ReactNode, ChangeEvent, FormEvent } from "react";
-import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion";
 import {
   Menu,
   X,
