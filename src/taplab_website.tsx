@@ -1,7 +1,7 @@
 // src/taplab_website.tsx
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import type { ReactNode, ChangeEvent, FormEvent } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, HTMLMotionProps } from "framer-motion";
 import {
   Menu,
   X,
@@ -28,7 +28,8 @@ import {
    ========================= */
 type Variant = "primary" | "secondary" | "outline";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+// Fix: Extend HTMLMotionProps to avoid conflicts with Framer Motion props
+interface ButtonProps extends HTMLMotionProps<"button"> {
   children: ReactNode;
   variant?: Variant;
   className?: string;
@@ -71,7 +72,7 @@ const Button = ({
   variant = "primary",
   className = "",
   ...props
-}: ButtonProps): JSX.Element => {
+}: ButtonProps): React.ReactElement => {
   const baseClass =
     "px-8 py-3 rounded-full font-medium transition-all duration-300";
   const variants: Record<Variant, string> = {
@@ -97,7 +98,10 @@ const Button = ({
 /* =========================
    Navbar Component
    ========================= */
-const Navbar = ({ currentPage, setCurrentPage }: NavbarProps): JSX.Element => {
+const Navbar = ({
+  currentPage,
+  setCurrentPage,
+}: NavbarProps): React.ReactElement => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
 
@@ -197,7 +201,7 @@ const Navbar = ({ currentPage, setCurrentPage }: NavbarProps): JSX.Element => {
 /* =========================
    Footer Component
    ========================= */
-const Footer = ({ setCurrentPage }: FooterProps): JSX.Element => {
+const Footer = ({ setCurrentPage }: FooterProps): React.ReactElement => {
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-black border-t border-white/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6">
@@ -285,7 +289,7 @@ const ProductCard = ({
   image,
   features,
   onClick,
-}: ProductCardProps): JSX.Element => (
+}: ProductCardProps): React.ReactElement => (
   <motion.div
     whileHover={{ y: -10, scale: 1.02 }}
     className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 hover:border-blue-500/50 transition-all cursor-pointer shadow-xl"
@@ -320,7 +324,7 @@ const ProductCard = ({
 const HomePage = ({
   setCurrentPage,
   setSelectedProduct,
-}: HomePageProps): JSX.Element => {
+}: HomePageProps): React.ReactElement => {
   const products: {
     id: ProductKey;
     title: string;
@@ -635,7 +639,7 @@ const HomePage = ({
 const ProductsPage = ({
   selectedProduct,
   setSelectedProduct,
-}: ProductsPageProps): JSX.Element => {
+}: ProductsPageProps): React.ReactElement => {
   const productDetails: Record<
     ProductKey,
     {
@@ -826,7 +830,7 @@ const ProductsPage = ({
 /* =========================
    Profile Page
    ========================= */
-const ProfilePage = (): JSX.Element => {
+const ProfilePage = (): React.ReactElement => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [profile, setProfile] = useState({
     name: "John Doe",
@@ -1116,7 +1120,7 @@ const ProfilePage = (): JSX.Element => {
 /* =========================
    About Page
    ========================= */
-const AboutPage = (): JSX.Element => {
+const AboutPage = (): React.ReactElement => {
   return (
     <div className="min-h-screen pt-24 pb-16 px-6 bg-black">
       <div className="max-w-4xl mx-auto">
@@ -1231,7 +1235,7 @@ const AboutPage = (): JSX.Element => {
 /* =========================
    Contact Page
    ========================= */
-const ContactPage = (): JSX.Element => {
+const ContactPage = (): React.ReactElement => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -1450,7 +1454,7 @@ const ContactPage = (): JSX.Element => {
 /* =========================
    Main App Component
    ========================= */
-export default function TapLabWebsite(): JSX.Element {
+export default function TapLabWebsite(): React.ReactElement {
   const [currentPage, setCurrentPage] = useState<string>("home");
   const [selectedProduct, setSelectedProduct] =
     useState<ProductKey>("business-card");
