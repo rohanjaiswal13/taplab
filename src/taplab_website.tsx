@@ -1,16 +1,87 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Wifi, Shield, Smartphone, Zap, Star, Phone, Mail, MapPin, ChevronDown, Check, Edit2, Save, Instagram, Linkedin, Twitter, Facebook } from 'lucide-react';
+// src/taplab_website.tsx
+import { useState, useEffect } from "react";
+import type { ReactNode, ChangeEvent, MouseEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Menu,
+  X,
+  Wifi,
+  Shield,
+  Smartphone,
+  Zap,
+  Star,
+  Phone,
+  Mail,
+  MapPin,
+  ChevronDown,
+  Check,
+  Edit2,
+  Save,
+  Instagram,
+  Linkedin,
+  Twitter,
+  Facebook,
+} from "lucide-react";
 
-// Reusable Button Component
-const Button = ({ children, variant = 'primary', className = '', ...props }) => {
-  const baseClass = "px-8 py-3 rounded-full font-medium transition-all duration-300";
-  const variants = {
-    primary: "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg hover:shadow-blue-500/50 hover:scale-105",
-    secondary: "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/20",
-    outline: "border-2 border-white/30 text-white hover:bg-white/10"
+/* =========================
+   Types (single-file approach)
+   ========================= */
+type Variant = "primary" | "secondary" | "outline";
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  variant?: Variant;
+  className?: string;
+}
+
+interface NavbarProps {
+  currentPage: string;
+  setCurrentPage: (page: string) => void;
+}
+
+interface FooterProps {
+  setCurrentPage: (page: string) => void;
+}
+
+interface ProductCardProps {
+  title: string;
+  price: string;
+  image?: string;
+  features: string[];
+  onClick: () => void;
+}
+
+interface HomePageProps {
+  setCurrentPage: (page: string) => void;
+  setSelectedProduct: (id: ProductKey) => void;
+}
+
+type ProductKey = "business-card" | "smart-tag" | "restaurant-tag";
+
+interface ProductsPageProps {
+  selectedProduct: ProductKey;
+  setSelectedProduct: (id: ProductKey) => void;
+}
+
+/* =========================
+   Reusable Button Component
+   ========================= */
+const Button = ({
+  children,
+  variant = "primary",
+  className = "",
+  ...props
+}: ButtonProps) => {
+  const baseClass =
+    "px-8 py-3 rounded-full font-medium transition-all duration-300";
+  const variants: Record<Variant, string> = {
+    primary:
+      "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg hover:shadow-blue-500/50 hover:scale-105",
+    secondary:
+      "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm border border-white/20",
+    outline: "border-2 border-white/30 text-white hover:bg-white/10",
   };
-  
+
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}
@@ -23,23 +94,25 @@ const Button = ({ children, variant = 'primary', className = '', ...props }) => 
   );
 };
 
-// Navbar Component
-const Navbar = ({ currentPage, setCurrentPage }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+/* =========================
+   Navbar Component
+   ========================= */
+const Navbar = ({ currentPage, setCurrentPage }: NavbarProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { name: 'Home', id: 'home' },
-    { name: 'Products', id: 'products' },
-    { name: 'Digital Profile', id: 'profile' },
-    { name: 'About', id: 'about' },
-    { name: 'Contact', id: 'contact' }
+  const navItems: { name: string; id: string }[] = [
+    { name: "Home", id: "home" },
+    { name: "Products", id: "products" },
+    { name: "Digital Profile", id: "profile" },
+    { name: "About", id: "about" },
+    { name: "Contact", id: "contact" },
   ];
 
   return (
@@ -47,14 +120,14 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-black/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled ? "bg-black/90 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <motion.div
           whileHover={{ scale: 1.05 }}
           className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent cursor-pointer"
-          onClick={() => setCurrentPage('home')}
+          onClick={() => setCurrentPage("home")}
         >
           TapLab
         </motion.div>
@@ -67,17 +140,24 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
               whileHover={{ scale: 1.1 }}
               onClick={() => setCurrentPage(item.id)}
               className={`text-sm font-medium transition-colors ${
-                currentPage === item.id ? 'text-blue-400' : 'text-gray-300 hover:text-white'
+                currentPage === item.id
+                  ? "text-blue-400"
+                  : "text-gray-300 hover:text-white"
               }`}
             >
               {item.name}
             </motion.button>
           ))}
-          <Button variant="primary" className="text-sm">Get Started</Button>
+          <Button variant="primary" className="text-sm">
+            Get Started
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-white">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden text-white"
+        >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -87,7 +167,7 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-black/95 backdrop-blur-md"
           >
@@ -100,7 +180,7 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
                     setIsOpen(false);
                   }}
                   className={`block w-full text-left py-2 ${
-                    currentPage === item.id ? 'text-blue-400' : 'text-gray-300'
+                    currentPage === item.id ? "text-blue-400" : "text-gray-300"
                   }`}
                 >
                   {item.name}
@@ -114,8 +194,10 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
   );
 };
 
-// Footer Component
-const Footer = ({ setCurrentPage }) => {
+/* =========================
+   Footer Component
+   ========================= */
+const Footer = ({ setCurrentPage }: FooterProps) => {
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-black border-t border-white/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6">
@@ -124,27 +206,36 @@ const Footer = ({ setCurrentPage }) => {
             <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4">
               TapLab
             </h3>
-            <p className="text-gray-400 text-sm">Premium NFC solutions for modern businesses & creators.</p>
+            <p className="text-gray-400 text-sm">
+              Premium NFC solutions for modern businesses & creators.
+            </p>
           </div>
-          
+
           <div>
             <h4 className="text-white font-semibold mb-4">Products</h4>
             <div className="space-y-2">
-              {['NFC Business Cards', 'NFC Smart Tags', 'Restaurant Table Tags'].map((item) => (
-                <button key={item} className="block text-gray-400 hover:text-white text-sm transition-colors">
+              {[
+                "NFC Business Cards",
+                "NFC Smart Tags",
+                "Restaurant Table Tags",
+              ].map((item) => (
+                <button
+                  key={item}
+                  className="block text-gray-400 hover:text-white text-sm transition-colors"
+                >
                   {item}
                 </button>
               ))}
             </div>
           </div>
-          
+
           <div>
             <h4 className="text-white font-semibold mb-4">Company</h4>
             <div className="space-y-2">
               {[
-                { name: 'About Us', id: 'about' },
-                { name: 'Contact', id: 'contact' },
-                { name: 'Support', id: 'contact' }
+                { name: "About Us", id: "about" },
+                { name: "Contact", id: "contact" },
+                { name: "Support", id: "contact" },
               ].map((item) => (
                 <button
                   key={item.name}
@@ -156,7 +247,7 @@ const Footer = ({ setCurrentPage }) => {
               ))}
             </div>
           </div>
-          
+
           <div>
             <h4 className="text-white font-semibold mb-4">Connect</h4>
             <div className="flex space-x-4">
@@ -167,13 +258,16 @@ const Footer = ({ setCurrentPage }) => {
                   href="#"
                   className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-500/20 transition-colors"
                 >
-                  <Icon size={18} className="text-gray-400 hover:text-blue-400" />
+                  <Icon
+                    size={18}
+                    className="text-gray-400 hover:text-blue-400"
+                  />
                 </motion.a>
               ))}
             </div>
           </div>
         </div>
-        
+
         <div className="border-t border-white/10 pt-8 text-center text-gray-500 text-sm">
           <p>© 2025 TapLab. All rights reserved. Upgrade how you connect.</p>
         </div>
@@ -182,57 +276,118 @@ const Footer = ({ setCurrentPage }) => {
   );
 };
 
-// Product Card Component
-const ProductCard = ({ title, price, image, features, onClick }) => (
+/* =========================
+   Product Card Component
+   ========================= */
+const ProductCard = ({
+  title,
+  price,
+  image,
+  features,
+  onClick,
+}: ProductCardProps) => (
   <motion.div
     whileHover={{ y: -10, scale: 1.02 }}
     className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10 hover:border-blue-500/50 transition-all cursor-pointer shadow-xl"
     onClick={onClick}
   >
     <div className="w-full h-48 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl mb-6 flex items-center justify-center">
-      <Wifi size={64} className="text-blue-400" />
+      {/* show provided image (emoji) or fallback icon */}
+      {image ? (
+        <div className="text-6xl">{image}</div>
+      ) : (
+        <Wifi size={64} className="text-blue-400" />
+      )}
     </div>
     <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
     <p className="text-3xl font-bold text-blue-400 mb-6">₹{price}</p>
     <ul className="space-y-3 mb-6">
-      {features.map((feature, i) => (
+      {features.map((feature: string, i: number) => (
         <li key={i} className="flex items-start text-gray-300 text-sm">
           <Check size={16} className="text-blue-400 mr-2 mt-1 flex-shrink-0" />
           <span>{feature}</span>
         </li>
       ))}
     </ul>
-    <Button variant="primary" className="w-full">Order Now</Button>
+    <Button variant="primary" className="w-full">
+      Order Now
+    </Button>
   </motion.div>
 );
 
-// Home Page
-const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
-  const products = [
+/* =========================
+   Home Page
+   ========================= */
+const HomePage = ({ setCurrentPage, setSelectedProduct }: HomePageProps) => {
+  const products: {
+    id: ProductKey;
+    title: string;
+    price: string;
+    image?: string;
+    features: string[];
+  }[] = [
     {
-      id: 'business-card',
-      title: 'NFC Business Card',
-      price: '499',
-      features: ['Premium metal finish', 'Instant profile sharing', 'Customizable design', 'Lock-protected NFC']
+      id: "business-card",
+      title: "NFC Business Card",
+      price: "499",
+      image: "💳",
+      features: [
+        "Premium metal finish",
+        "Instant profile sharing",
+        "Customizable design",
+        "Lock-protected NFC",
+      ],
     },
     {
-      id: 'smart-tag',
-      title: 'NFC Circular Tag',
-      price: '299',
-      features: ['Compact & portable', 'Works on all phones', 'Reusable & durable', 'Easy to program']
+      id: "smart-tag",
+      title: "NFC Circular Tag",
+      price: "299",
+      image: "⭕",
+      features: [
+        "Compact & portable",
+        "Works on all phones",
+        "Reusable & durable",
+        "Easy to program",
+      ],
     },
     {
-      id: 'restaurant-tag',
-      title: 'Restaurant Table Tag',
-      price: '399',
-      features: ['Menu QR integration', 'Digital ordering', 'Contact-free service', 'Brand customization']
-    }
+      id: "restaurant-tag",
+      title: "Restaurant Table Tag",
+      price: "399",
+      image: "🍽️",
+      features: [
+        "Menu QR integration",
+        "Digital ordering",
+        "Contact-free service",
+        "Brand customization",
+      ],
+    },
   ];
 
-  const testimonials = [
-    { name: 'Rahul Sharma', role: 'Entrepreneur', text: 'TapLab cards are a game-changer. Clients are always impressed!', rating: 5 },
-    { name: 'Priya Patel', role: 'Designer', text: 'Premium quality and super easy to use. Highly recommend!', rating: 5 },
-    { name: 'Arjun Mehta', role: 'Restaurant Owner', text: 'Table tags revolutionized our customer experience.', rating: 5 }
+  const testimonials: {
+    name: string;
+    role: string;
+    text: string;
+    rating: number;
+  }[] = [
+    {
+      name: "Rahul Sharma",
+      role: "Entrepreneur",
+      text: "TapLab cards are a game-changer. Clients are always impressed!",
+      rating: 5,
+    },
+    {
+      name: "Priya Patel",
+      role: "Designer",
+      text: "Premium quality and super easy to use. Highly recommend!",
+      rating: 5,
+    },
+    {
+      name: "Arjun Mehta",
+      role: "Restaurant Owner",
+      text: "Table tags revolutionized our customer experience.",
+      rating: 5,
+    },
   ];
 
   return (
@@ -247,21 +402,21 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
               className="absolute w-1 h-1 bg-blue-400/30 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`
+                top: `${Math.random() * 100}%`,
               }}
               animate={{
                 scale: [0, 1, 0],
-                opacity: [0, 1, 0]
+                opacity: [0, 1, 0],
               }}
               transition={{
                 duration: Math.random() * 3 + 2,
                 repeat: Infinity,
-                delay: Math.random() * 2
+                delay: Math.random() * 2,
               }}
             />
           ))}
         </div>
-        
+
         <div className="relative z-10 text-center px-6 max-w-5xl">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -276,24 +431,27 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
             >
               <Wifi size={80} className="text-blue-400 mx-auto" />
             </motion.div>
-            
+
             <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-blue-100 to-blue-400 bg-clip-text text-transparent">
               Tap. Connect. Impress.
             </h1>
-            
+
             <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
               Premium NFC solutions for modern businesses & creators.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="primary" onClick={() => setCurrentPage('products')}>
+              <Button
+                variant="primary"
+                onClick={() => setCurrentPage("products")}
+              >
                 Explore Products
               </Button>
               <Button variant="outline">Watch Demo</Button>
             </div>
           </motion.div>
         </div>
-        
+
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -313,9 +471,11 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
             className="text-center mb-16"
           >
             <h2 className="text-5xl font-bold text-white mb-4">Our Products</h2>
-            <p className="text-gray-400 text-lg">Premium NFC solutions for every need</p>
+            <p className="text-gray-400 text-lg">
+              Premium NFC solutions for every need
+            </p>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {products.map((product, i) => (
               <motion.div
@@ -326,10 +486,13 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
                 transition={{ delay: i * 0.1 }}
               >
                 <ProductCard
-                  {...product}
+                  title={product.title}
+                  price={product.price}
+                  image={product.image}
+                  features={product.features}
                   onClick={() => {
                     setSelectedProduct(product.id);
-                    setCurrentPage('products');
+                    setCurrentPage("products");
                   }}
                 />
               </motion.div>
@@ -347,15 +510,33 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold text-white mb-4">Why Choose TapLab?</h2>
+            <h2 className="text-5xl font-bold text-white mb-4">
+              Why Choose TapLab?
+            </h2>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-4 gap-8">
             {[
-              { icon: Zap, title: 'One Tap Instant Profile', desc: 'Share everything instantly with a single tap' },
-              { icon: Shield, title: 'Lock-Protected NFC Tags', desc: 'Secure and safe from unauthorized access' },
-              { icon: Smartphone, title: 'Works on All Phones', desc: 'Compatible with iOS and Android devices' },
-              { icon: Star, title: 'Premium Materials', desc: 'Luxury metal and durable construction' }
+              {
+                icon: Zap,
+                title: "One Tap Instant Profile",
+                desc: "Share everything instantly with a single tap",
+              },
+              {
+                icon: Shield,
+                title: "Lock-Protected NFC Tags",
+                desc: "Secure and safe from unauthorized access",
+              },
+              {
+                icon: Smartphone,
+                title: "Works on All Phones",
+                desc: "Compatible with iOS and Android devices",
+              },
+              {
+                icon: Star,
+                title: "Premium Materials",
+                desc: "Luxury metal and durable construction",
+              },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -369,7 +550,9 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
                 <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center">
                   <item.icon size={32} className="text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-3">
+                  {item.title}
+                </h3>
                 <p className="text-gray-400">{item.desc}</p>
               </motion.div>
             ))}
@@ -386,9 +569,11 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold text-white mb-4">What Our Clients Say</h2>
+            <h2 className="text-5xl font-bold text-white mb-4">
+              What Our Clients Say
+            </h2>
           </motion.div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((test, i) => (
               <motion.div
@@ -401,7 +586,11 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
               >
                 <div className="flex mb-4">
                   {[...Array(test.rating)].map((_, j) => (
-                    <Star key={j} size={20} className="text-yellow-400 fill-yellow-400" />
+                    <Star
+                      key={j}
+                      size={20}
+                      className="text-yellow-400 fill-yellow-400"
+                    />
                   ))}
                 </div>
                 <p className="text-gray-300 mb-6 italic">"{test.text}"</p>
@@ -423,99 +612,130 @@ const HomePage = ({ setCurrentPage, setSelectedProduct }) => {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto text-center"
         >
-          <h2 className="text-5xl font-bold text-white mb-6">Upgrade How You Connect</h2>
-          <p className="text-xl text-gray-300 mb-8">Join thousands of professionals using TapLab</p>
-          <Button variant="primary" className="text-lg px-12 py-4">Get Started Today</Button>
+          <h2 className="text-5xl font-bold text-white mb-6">
+            Upgrade How You Connect
+          </h2>
+          <p className="text-xl text-gray-300 mb-8">
+            Join thousands of professionals using TapLab
+          </p>
+          <Button variant="primary" className="text-lg px-12 py-4">
+            Get Started Today
+          </Button>
         </motion.div>
       </section>
     </div>
   );
 };
 
-// Products Page
-const ProductsPage = ({ selectedProduct, setSelectedProduct }) => {
-  const productDetails = {
-    'business-card': {
-      title: 'NFC Business Card',
-      price: '499',
-      image: '💳',
-      description: 'Premium metal business cards with embedded NFC technology for instant profile sharing.',
-      features: [
-        'Premium stainless steel or black metal finish',
-        'Customizable with your logo and design',
-        'Instant digital profile sharing with one tap',
-        'Lock-protected NFC chip for security',
-        'Works with all NFC-enabled smartphones',
-        'Lifetime chip warranty'
-      ],
-      howItWorks: [
-        'Design your card with our customization tool',
-        'We manufacture with premium materials',
-        'Program your digital profile',
-        'Tap to share with anyone, instantly'
-      ],
-      specs: 'Size: 85.6 × 53.98 mm • Material: Stainless Steel • Chip: NTAG216'
-    },
-    'smart-tag': {
-      title: 'NFC Circular Tag',
-      price: '299',
-      image: '⭕',
-      description: 'Compact, portable NFC tags perfect for creators, freelancers, and anyone on the go.',
-      features: [
-        'Ultra-compact circular design',
-        'Durable waterproof construction',
-        'Attach to phone case or wallet',
-        'Reusable and reprogrammable',
-        'Works on all NFC phones',
-        'Multiple color options'
-      ],
-      howItWorks: [
-        'Receive your NFC tag',
-        'Program using our mobile app',
-        'Attach to your phone or accessories',
-        'Share your profile with a tap'
-      ],
-      specs: 'Diameter: 30mm • Material: PVC • Chip: NTAG213 • Waterproof: IP67'
-    },
-    'restaurant-tag': {
-      title: 'Restaurant Table NFC Tag',
-      price: '399',
-      image: '🍽️',
-      description: 'Transform your restaurant with contactless table ordering and digital menus.',
-      features: [
-        'Custom branded table stands',
-        'Integrated menu and ordering system',
-        'Contact-free customer experience',
-        'Real-time order notifications',
-        'Analytics and insights dashboard',
-        'Easy menu updates anytime'
-      ],
-      howItWorks: [
-        'Install tags on your tables',
-        'Upload your digital menu',
-        'Customers tap to view and order',
-        'Receive orders instantly on your system'
-      ],
-      specs: 'Size: Custom • Material: Acrylic Stand + NFC • Chip: NTAG215'
+/* =========================
+   Products Page
+   ========================= */
+const ProductsPage = ({
+  selectedProduct,
+  setSelectedProduct,
+}: ProductsPageProps) => {
+  const productDetails: Record<
+    ProductKey,
+    {
+      title: string;
+      price: string;
+      image?: string;
+      description: string;
+      features: string[];
+      howItWorks: string[];
+      specs: string;
     }
+  > = {
+    "business-card": {
+      title: "NFC Business Card",
+      price: "499",
+      image: "💳",
+      description:
+        "Premium metal business cards with embedded NFC technology for instant profile sharing.",
+      features: [
+        "Premium stainless steel or black metal finish",
+        "Customizable with your logo and design",
+        "Instant digital profile sharing with one tap",
+        "Lock-protected NFC chip for security",
+        "Works with all NFC-enabled smartphones",
+        "Lifetime chip warranty",
+      ],
+      howItWorks: [
+        "Design your card with our customization tool",
+        "We manufacture with premium materials",
+        "Program your digital profile",
+        "Tap to share with anyone, instantly",
+      ],
+      specs:
+        "Size: 85.6 × 53.98 mm • Material: Stainless Steel • Chip: NTAG216",
+    },
+    "smart-tag": {
+      title: "NFC Circular Tag",
+      price: "299",
+      image: "⭕",
+      description:
+        "Compact, portable NFC tags perfect for creators, freelancers, and anyone on the go.",
+      features: [
+        "Ultra-compact circular design",
+        "Durable waterproof construction",
+        "Attach to phone case or wallet",
+        "Reusable and reprogrammable",
+        "Works on all NFC phones",
+        "Multiple color options",
+      ],
+      howItWorks: [
+        "Receive your NFC tag",
+        "Program using our mobile app",
+        "Attach to your phone or accessories",
+        "Share your profile with a tap",
+      ],
+      specs:
+        "Diameter: 30mm • Material: PVC • Chip: NTAG213 • Waterproof: IP67",
+    },
+    "restaurant-tag": {
+      title: "Restaurant Table NFC Tag",
+      price: "399",
+      image: "🍽️",
+      description:
+        "Transform your restaurant with contactless table ordering and digital menus.",
+      features: [
+        "Custom branded table stands",
+        "Integrated menu and ordering system",
+        "Contact-free customer experience",
+        "Real-time order notifications",
+        "Analytics and insights dashboard",
+        "Easy menu updates anytime",
+      ],
+      howItWorks: [
+        "Install tags on your tables",
+        "Upload your digital menu",
+        "Customers tap to view and order",
+        "Receive orders instantly on your system",
+      ],
+      specs: "Size: Custom • Material: Acrylic Stand + NFC • Chip: NTAG215",
+    },
   };
 
-  const product = productDetails[selectedProduct] || productDetails['business-card'];
+  const product =
+    productDetails[selectedProduct] ?? productDetails["business-card"];
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-6 bg-black">
       <div className="max-w-7xl mx-auto">
         {/* Product Selection */}
         <div className="flex justify-center gap-4 mb-16 flex-wrap">
-          {Object.keys(productDetails).map((key) => (
-            <Button
-              key={key}
-              variant={selectedProduct === key ? 'primary' : 'secondary'}
-              onClick={() => setSelectedProduct(key)}
-            >
-              {productDetails[key].title}
-            </Button>
-          ))}
+          {Object.keys(productDetails).map((key) => {
+            const k = key as ProductKey;
+            return (
+              <Button
+                key={k}
+                variant={selectedProduct === k ? "primary" : "secondary"}
+                onClick={() => setSelectedProduct(k)}
+              >
+                {productDetails[k].title}
+              </Button>
+            );
+          })}
         </div>
 
         {/* Product Detail */}
@@ -533,19 +753,23 @@ const ProductsPage = ({ selectedProduct, setSelectedProduct }) => {
               transition={{ duration: 0.5 }}
               className="text-9xl"
             >
-              {product.image}
+              {product.image ?? "📦"}
             </motion.div>
           </div>
 
           {/* Details */}
           <div>
-            <h1 className="text-5xl font-bold text-white mb-4">{product.title}</h1>
-            <p className="text-4xl font-bold text-blue-400 mb-6">₹{product.price}</p>
+            <h1 className="text-5xl font-bold text-white mb-4">
+              {product.title}
+            </h1>
+            <p className="text-4xl font-bold text-blue-400 mb-6">
+              ₹{product.price}
+            </p>
             <p className="text-gray-300 text-lg mb-8">{product.description}</p>
 
             <h3 className="text-2xl font-bold text-white mb-4">Features</h3>
             <ul className="space-y-3 mb-8">
-              {product.features.map((feature, i) => (
+              {product.features.map((feature: string, i: number) => (
                 <motion.li
                   key={i}
                   initial={{ opacity: 0, x: -20 }}
@@ -553,7 +777,10 @@ const ProductsPage = ({ selectedProduct, setSelectedProduct }) => {
                   transition={{ delay: i * 0.1 }}
                   className="flex items-start text-gray-300"
                 >
-                  <Check size={20} className="text-blue-400 mr-3 mt-1 flex-shrink-0" />
+                  <Check
+                    size={20}
+                    className="text-blue-400 mr-3 mt-1 flex-shrink-0"
+                  />
                   <span>{feature}</span>
                 </motion.li>
               ))}
@@ -561,7 +788,7 @@ const ProductsPage = ({ selectedProduct, setSelectedProduct }) => {
 
             <h3 className="text-2xl font-bold text-white mb-4">How It Works</h3>
             <div className="space-y-4 mb-8">
-              {product.howItWorks.map((step, i) => (
+              {product.howItWorks.map((step: string, i: number) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, x: -20 }}
@@ -581,7 +808,10 @@ const ProductsPage = ({ selectedProduct, setSelectedProduct }) => {
               <p className="text-gray-400 text-sm">{product.specs}</p>
             </div>
 
-            <Button variant="primary" className="w-full md:w-auto text-lg px-12">
+            <Button
+              variant="primary"
+              className="w-full md:w-auto text-lg px-12"
+            >
               Order Now
             </Button>
           </div>
@@ -591,20 +821,22 @@ const ProductsPage = ({ selectedProduct, setSelectedProduct }) => {
   );
 };
 
-// Digital Profile Page
+/* =========================
+   Profile Page
+   ========================= */
 const ProfilePage = () => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   const [profile, setProfile] = useState({
-    name: 'John Doe',
-    title: 'Product Designer',
-    bio: 'Passionate about creating beautiful digital experiences.',
-    phone: '+91 98765 43210',
-    email: 'john@example.com',
-    website: 'johndoe.com',
-    upi: 'john@upi',
-    instagram: '@johndoe',
-    linkedin: 'johndoe',
-    twitter: '@johndoe'
+    name: "John Doe",
+    title: "Product Designer",
+    bio: "Passionate about creating beautiful digital experiences.",
+    phone: "+91 98765 43210",
+    email: "john@example.com",
+    website: "johndoe.com",
+    upi: "john@upi",
+    instagram: "@johndoe",
+    linkedin: "johndoe",
+    twitter: "@johndoe",
   });
 
   const [tempProfile, setTempProfile] = useState(profile);
@@ -627,8 +859,12 @@ const ProfilePage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl font-bold text-white mb-4">Digital Profile Demo</h1>
-          <p className="text-gray-400 text-lg">This is what people see when they tap your NFC card</p>
+          <h1 className="text-5xl font-bold text-white mb-4">
+            Digital Profile Demo
+          </h1>
+          <p className="text-gray-400 text-lg">
+            This is what people see when they tap your NFC card
+          </p>
         </motion.div>
 
         <motion.div
@@ -641,7 +877,7 @@ const ProfilePage = () => {
             <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-4xl text-white font-bold">
               {isEditing ? tempProfile.name.charAt(0) : profile.name.charAt(0)}
             </div>
-            
+
             <Button
               variant="secondary"
               onClick={() => {
@@ -654,7 +890,7 @@ const ProfilePage = () => {
               className="flex items-center gap-2"
             >
               <Edit2 size={16} />
-              {isEditing ? 'Cancel' : 'Edit Demo'}
+              {isEditing ? "Cancel" : "Edit Demo"}
             </Button>
           </div>
 
@@ -665,27 +901,35 @@ const ProfilePage = () => {
                 <input
                   type="text"
                   value={tempProfile.name}
-                  onChange={(e) => setTempProfile({ ...tempProfile, name: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTempProfile({ ...tempProfile, name: e.target.value })
+                  }
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-3xl font-bold focus:outline-none focus:border-blue-500"
                   placeholder="Name"
                 />
                 <input
                   type="text"
                   value={tempProfile.title}
-                  onChange={(e) => setTempProfile({ ...tempProfile, title: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTempProfile({ ...tempProfile, title: e.target.value })
+                  }
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-gray-300 text-xl focus:outline-none focus:border-blue-500"
                   placeholder="Title"
                 />
                 <textarea
                   value={tempProfile.bio}
-                  onChange={(e) => setTempProfile({ ...tempProfile, bio: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+                    setTempProfile({ ...tempProfile, bio: e.target.value })
+                  }
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-gray-400 focus:outline-none focus:border-blue-500 min-h-[100px]"
                   placeholder="Bio"
                 />
               </>
             ) : (
               <>
-                <h2 className="text-4xl font-bold text-white">{profile.name}</h2>
+                <h2 className="text-4xl font-bold text-white">
+                  {profile.name}
+                </h2>
                 <p className="text-xl text-gray-300">{profile.title}</p>
                 <p className="text-gray-400 leading-relaxed">{profile.bio}</p>
               </>
@@ -699,28 +943,36 @@ const ProfilePage = () => {
                 <input
                   type="tel"
                   value={tempProfile.phone}
-                  onChange={(e) => setTempProfile({ ...tempProfile, phone: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTempProfile({ ...tempProfile, phone: e.target.value })
+                  }
                   className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                   placeholder="Phone"
                 />
                 <input
                   type="email"
                   value={tempProfile.email}
-                  onChange={(e) => setTempProfile({ ...tempProfile, email: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTempProfile({ ...tempProfile, email: e.target.value })
+                  }
                   className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                   placeholder="Email"
                 />
                 <input
                   type="text"
                   value={tempProfile.website}
-                  onChange={(e) => setTempProfile({ ...tempProfile, website: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTempProfile({ ...tempProfile, website: e.target.value })
+                  }
                   className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                   placeholder="Website"
                 />
                 <input
                   type="text"
                   value={tempProfile.upi}
-                  onChange={(e) => setTempProfile({ ...tempProfile, upi: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTempProfile({ ...tempProfile, upi: e.target.value })
+                  }
                   className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                   placeholder="UPI ID"
                 />
@@ -770,21 +1022,30 @@ const ProfilePage = () => {
                 <input
                   type="text"
                   value={tempProfile.instagram}
-                  onChange={(e) => setTempProfile({ ...tempProfile, instagram: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTempProfile({
+                      ...tempProfile,
+                      instagram: e.target.value,
+                    })
+                  }
                   className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                   placeholder="Instagram handle"
                 />
                 <input
                   type="text"
                   value={tempProfile.linkedin}
-                  onChange={(e) => setTempProfile({ ...tempProfile, linkedin: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTempProfile({ ...tempProfile, linkedin: e.target.value })
+                  }
                   className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                   placeholder="LinkedIn username"
                 />
                 <input
                   type="text"
                   value={tempProfile.twitter}
-                  onChange={(e) => setTempProfile({ ...tempProfile, twitter: e.target.value })}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setTempProfile({ ...tempProfile, twitter: e.target.value })
+                  }
                   className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                   placeholder="Twitter handle"
                 />
@@ -792,9 +1053,9 @@ const ProfilePage = () => {
             ) : (
               <div className="flex gap-4">
                 {[
-                  { Icon: Instagram, label: 'Instagram' },
-                  { Icon: Linkedin, label: 'LinkedIn' },
-                  { Icon: Twitter, label: 'Twitter' }
+                  { Icon: Instagram, label: "Instagram" },
+                  { Icon: Linkedin, label: "LinkedIn" },
+                  { Icon: Twitter, label: "Twitter" },
                 ].map((social, i) => (
                   <motion.button
                     key={i}
@@ -841,7 +1102,8 @@ const ProfilePage = () => {
           className="mt-12 bg-blue-500/10 border border-blue-500/30 rounded-2xl p-6"
         >
           <p className="text-blue-300 text-center">
-            💡 This is a live demo. Try editing to see how your profile would look to others!
+            💡 This is a live demo. Try editing to see how your profile would
+            look to others!
           </p>
         </motion.div>
       </div>
@@ -849,7 +1111,9 @@ const ProfilePage = () => {
   );
 };
 
-// About Page
+/* =========================
+   About Page
+   ========================= */
 const AboutPage = () => {
   return (
     <div className="min-h-screen pt-24 pb-16 px-6 bg-black">
@@ -859,8 +1123,12 @@ const AboutPage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">About TapLab</h1>
-          <p className="text-xl text-gray-400">Revolutionizing how professionals connect</p>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            About TapLab
+          </h1>
+          <p className="text-xl text-gray-400">
+            Revolutionizing how professionals connect
+          </p>
         </motion.div>
 
         <motion.div
@@ -872,31 +1140,35 @@ const AboutPage = () => {
           <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10">
             <h2 className="text-3xl font-bold text-white mb-4">Our Story</h2>
             <p className="text-gray-300 leading-relaxed mb-4">
-              TapLab was born from a simple observation: business cards are outdated, but the need for instant, 
-              professional networking has never been stronger. We set out to create a solution that combines 
+              TapLab was born from a simple observation: business cards are
+              outdated, but the need for instant, professional networking has
+              never been stronger. We set out to create a solution that combines
               premium materials with cutting-edge NFC technology.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Today, thousands of professionals, entrepreneurs, and businesses use TapLab to make lasting 
-              impressions and seamlessly share their digital presence. Our mission is to eliminate friction 
-              in professional networking while maintaining the premium feel of traditional business cards.
+              Today, thousands of professionals, entrepreneurs, and businesses
+              use TapLab to make lasting impressions and seamlessly share their
+              digital presence. Our mission is to eliminate friction in
+              professional networking while maintaining the premium feel of
+              traditional business cards.
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10">
             <h2 className="text-3xl font-bold text-white mb-4">Our Mission</h2>
             <p className="text-gray-300 leading-relaxed">
-              We believe in a world where sharing your professional identity is as simple as a tap. 
-              Our mission is to empower modern professionals with premium, sustainable, and intelligent 
-              networking solutions that leave a lasting impression.
+              We believe in a world where sharing your professional identity is
+              as simple as a tap. Our mission is to empower modern professionals
+              with premium, sustainable, and intelligent networking solutions
+              that leave a lasting impression.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { num: '10,000+', label: 'Happy Customers' },
-              { num: '50,000+', label: 'Cards Delivered' },
-              { num: '98%', label: 'Satisfaction Rate' }
+              { num: "10,000+", label: "Happy Customers" },
+              { num: "50,000+", label: "Cards Delivered" },
+              { num: "98%", label: "Satisfaction Rate" },
             ].map((stat, i) => (
               <motion.div
                 key={i}
@@ -905,7 +1177,9 @@ const AboutPage = () => {
                 transition={{ delay: 0.3 + i * 0.1 }}
                 className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-2xl p-6 border border-blue-500/30 text-center"
               >
-                <div className="text-4xl font-bold text-blue-400 mb-2">{stat.num}</div>
+                <div className="text-4xl font-bold text-blue-400 mb-2">
+                  {stat.num}
+                </div>
                 <div className="text-gray-300">{stat.label}</div>
               </motion.div>
             ))}
@@ -915,17 +1189,31 @@ const AboutPage = () => {
             <h2 className="text-3xl font-bold text-white mb-4">Our Values</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { title: 'Quality First', desc: 'Premium materials and craftsmanship in every product' },
-                { title: 'Innovation', desc: 'Constantly pushing boundaries in NFC technology' },
-                { title: 'Sustainability', desc: 'Reducing paper waste with reusable digital solutions' },
-                { title: 'Customer Success', desc: 'Your success is our success' }
+                {
+                  title: "Quality First",
+                  desc: "Premium materials and craftsmanship in every product",
+                },
+                {
+                  title: "Innovation",
+                  desc: "Constantly pushing boundaries in NFC technology",
+                },
+                {
+                  title: "Sustainability",
+                  desc: "Reducing paper waste with reusable digital solutions",
+                },
+                {
+                  title: "Customer Success",
+                  desc: "Your success is our success",
+                },
               ].map((value, i) => (
                 <div key={i} className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Check size={20} className="text-white" />
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold mb-1">{value.title}</h3>
+                    <h3 className="text-white font-semibold mb-1">
+                      {value.title}
+                    </h3>
                     <p className="text-gray-400 text-sm">{value.desc}</p>
                   </div>
                 </div>
@@ -938,37 +1226,43 @@ const AboutPage = () => {
   );
 };
 
-// Contact Page
+/* =========================
+   Contact Page
+   ========================= */
 const ContactPage = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert('Thank you! We will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    alert("Thank you! We will get back to you soon.");
+    setFormData({ name: "", email: "", message: "" });
   };
 
-  const faqs = [
+  const faqs: { q: string; a: string }[] = [
     {
-      q: 'How does NFC technology work?',
-      a: 'NFC (Near Field Communication) allows devices to communicate when they are close together. Simply tap your TapLab card to any smartphone to instantly share your digital profile.'
+      q: "How does NFC technology work?",
+      a: "NFC (Near Field Communication) allows devices to communicate when they are close together. Simply tap your TapLab card to any smartphone to instantly share your digital profile.",
     },
     {
-      q: 'Do I need an app?',
-      a: 'No app needed! NFC works natively on all modern smartphones (iPhone and Android). Recipients just tap and view your profile in their browser.'
+      q: "Do I need an app?",
+      a: "No app needed! NFC works natively on all modern smartphones (iPhone and Android). Recipients just tap and view your profile in their browser.",
     },
     {
-      q: 'Can I update my profile information?',
-      a: 'Yes! You can update your digital profile anytime through our web dashboard. Changes are reflected instantly.'
+      q: "Can I update my profile information?",
+      a: "Yes! You can update your digital profile anytime through our web dashboard. Changes are reflected instantly.",
     },
     {
-      q: 'What is the delivery time?',
-      a: 'Standard delivery takes 7-10 business days. Express delivery options are available at checkout.'
+      q: "What is the delivery time?",
+      a: "Standard delivery takes 7-10 business days. Express delivery options are available at checkout.",
     },
     {
-      q: 'Is there a warranty?',
-      a: 'Yes! All TapLab products come with a lifetime chip warranty. If your NFC chip stops working, we will replace it free of charge.'
-    }
+      q: "Is there a warranty?",
+      a: "Yes! All TapLab products come with a lifetime chip warranty. If your NFC chip stops working, we will replace it free of charge.",
+    },
   ];
 
   return (
@@ -979,8 +1273,12 @@ const ContactPage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">Get in Touch</h1>
-          <p className="text-xl text-gray-400">We're here to help you upgrade how you connect</p>
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            Get in Touch
+          </h1>
+          <p className="text-xl text-gray-400">
+            We're here to help you upgrade how you connect
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 mb-16">
@@ -991,14 +1289,26 @@ const ContactPage = () => {
             transition={{ delay: 0.2 }}
             className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10"
           >
-            <h2 className="text-3xl font-bold text-white mb-6">Send us a Message</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <h2 className="text-3xl font-bold text-white mb-6">
+              Send us a Message
+            </h2>
+            <form
+              onSubmit={(e) =>
+                handleSubmit(e as unknown as MouseEvent<HTMLFormElement>)
+              }
+              className="space-y-6"
+            >
               <div>
                 <label className="block text-gray-300 mb-2">Name</label>
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      name: (e.target as HTMLInputElement).value,
+                    })
+                  }
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                   required
                 />
@@ -1008,7 +1318,12 @@ const ContactPage = () => {
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      email: (e.target as HTMLInputElement).value,
+                    })
+                  }
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                   required
                 />
@@ -1017,12 +1332,19 @@ const ContactPage = () => {
                 <label className="block text-gray-300 mb-2">Message</label>
                 <textarea
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      message: (e.target as HTMLTextAreaElement).value,
+                    })
+                  }
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 min-h-[150px]"
                   required
                 />
               </div>
-              <Button variant="primary" className="w-full">Send Message</Button>
+              <Button variant="primary" className="w-full">
+                Send Message
+              </Button>
             </form>
           </motion.div>
 
@@ -1034,8 +1356,10 @@ const ContactPage = () => {
             className="space-y-8"
           >
             <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10">
-              <h2 className="text-3xl font-bold text-white mb-6">Contact Information</h2>
-              
+              <h2 className="text-3xl font-bold text-white mb-6">
+                Contact Information
+              </h2>
+
               <div className="space-y-6">
                 <motion.a
                   href="https://wa.me/919876543210"
@@ -1048,8 +1372,12 @@ const ContactPage = () => {
                     <Phone size={24} className="text-white" />
                   </div>
                   <div>
-                    <div className="text-gray-400 text-sm">WhatsApp Support</div>
-                    <div className="text-white font-semibold">+91 98765 43210</div>
+                    <div className="text-gray-400 text-sm">
+                      WhatsApp Support
+                    </div>
+                    <div className="text-white font-semibold">
+                      +91 98765 43210
+                    </div>
                   </div>
                 </motion.a>
 
@@ -1059,7 +1387,9 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <div className="text-gray-400 text-sm">Email</div>
-                    <div className="text-white font-semibold">support@taplab.in</div>
+                    <div className="text-white font-semibold">
+                      support@taplab.in
+                    </div>
                   </div>
                 </div>
 
@@ -1069,16 +1399,21 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <div className="text-gray-400 text-sm">Location</div>
-                    <div className="text-white font-semibold">Mumbai, India</div>
+                    <div className="text-white font-semibold">
+                      Mumbai, India
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 rounded-2xl p-6 border border-blue-500/30">
-              <h3 className="text-white font-semibold mb-2">💬 Quick Response</h3>
+              <h3 className="text-white font-semibold mb-2">
+                💬 Quick Response
+              </h3>
               <p className="text-gray-300 text-sm">
-                We typically respond within 2-4 hours during business hours (9 AM - 6 PM IST)
+                We typically respond within 2-4 hours during business hours (9
+                AM - 6 PM IST)
               </p>
             </div>
           </motion.div>
@@ -1090,7 +1425,9 @@ const ContactPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <h2 className="text-4xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-4xl font-bold text-white mb-8 text-center">
+            Frequently Asked Questions
+          </h2>
           <div className="space-y-4">
             {faqs.map((faq, i) => (
               <motion.div
@@ -1100,7 +1437,9 @@ const ContactPage = () => {
                 transition={{ delay: 0.5 + i * 0.1 }}
                 className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-6 border border-white/10"
               >
-                <h3 className="text-xl font-semibold text-white mb-3">{faq.q}</h3>
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  {faq.q}
+                </h3>
                 <p className="text-gray-400">{faq.a}</p>
               </motion.div>
             ))}
@@ -1111,10 +1450,13 @@ const ContactPage = () => {
   );
 };
 
-// Main App Component
-export default function TapLabWebsite() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [selectedProduct, setSelectedProduct] = useState('business-card');
+/* =========================
+   Main App Component
+   ========================= */
+export default function TapLabWebsite(): JSX.Element {
+  const [currentPage, setCurrentPage] = useState<string>("home");
+  const [selectedProduct, setSelectedProduct] =
+    useState<ProductKey>("business-card");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1123,7 +1465,7 @@ export default function TapLabWebsite() {
   return (
     <div className="bg-black min-h-screen text-white">
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      
+
       <AnimatePresence mode="wait">
         <motion.div
           key={currentPage}
@@ -1132,18 +1474,24 @@ export default function TapLabWebsite() {
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
         >
-          {currentPage === 'home' && (
-            <HomePage setCurrentPage={setCurrentPage} setSelectedProduct={setSelectedProduct} />
+          {currentPage === "home" && (
+            <HomePage
+              setCurrentPage={setCurrentPage}
+              setSelectedProduct={setSelectedProduct}
+            />
           )}
-          {currentPage === 'products' && (
-            <ProductsPage selectedProduct={selectedProduct} setSelectedProduct={setSelectedProduct} />
+          {currentPage === "products" && (
+            <ProductsPage
+              selectedProduct={selectedProduct}
+              setSelectedProduct={setSelectedProduct}
+            />
           )}
-          {currentPage === 'profile' && <ProfilePage />}
-          {currentPage === 'about' && <AboutPage />}
-          {currentPage === 'contact' && <ContactPage />}
+          {currentPage === "profile" && <ProfilePage />}
+          {currentPage === "about" && <AboutPage />}
+          {currentPage === "contact" && <ContactPage />}
         </motion.div>
       </AnimatePresence>
-      
+
       <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
