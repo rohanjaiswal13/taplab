@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  Search,
-  Phone,
-  MapPin,
-  ExternalLink,
-  Utensils,
-  Sparkles,
-} from "lucide-react";
+import { Search, Phone, MapPin, Utensils, Sparkles } from "lucide-react";
 
 // --- Types ---
 interface MenuItem {
