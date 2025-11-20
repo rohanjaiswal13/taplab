@@ -1,95 +1,97 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Coffee, IceCream, Cookie, Milk, Sandwich, Pizza } from "lucide-react";
 
+const menuData = {
+  shakes: {
+    icon: <Milk className="w-6 h-6" />,
+    title: "Thick Shakes",
+    items: [
+      { name: "Oreo Shake", price: 130 },
+      { name: "Kitkat Shake", price: 140 },
+      { name: "Ferrero Rocher Shake", price: 160 },
+      { name: "Brownie Shake", price: 140 },
+      { name: "Nutella Shake", price: 150 },
+      { name: "Snickers Shake", price: 140 },
+      { name: "Bueno Shake", price: 160 },
+      { name: "Lotus Biscoff Shake", price: 150 },
+      { name: "Peanut Butter Shake", price: 140 },
+      { name: "Vanilla Shake", price: 110 },
+      { name: "Chocolate Shake", price: 110 },
+      { name: "Strawberry Shake", price: 110 },
+      { name: "Butterscotch Shake", price: 110 },
+      { name: "Mango Shake", price: 110 },
+    ],
+  },
+  coffee: {
+    icon: <Coffee className="w-6 h-6" />,
+    title: "Coffee",
+    items: [
+      { name: "Espresso", price: 80 },
+      { name: "Americano", price: 100 },
+      { name: "Cappuccino", price: 120 },
+      { name: "Latte", price: 130 },
+      { name: "Cold Coffee", price: 130 },
+      { name: "Hazelnut Coffee", price: 150 },
+      { name: "Caramel Coffee", price: 150 },
+      { name: "Vanilla Coffee", price: 140 },
+    ],
+  },
+  desserts: {
+    icon: <IceCream className="w-6 h-6" />,
+    title: "Desserts",
+    items: [
+      { name: "Brownie with Ice Cream", price: 140 },
+      { name: "Waffle with Ice Cream", price: 150 },
+      { name: "Nutella Waffle", price: 160 },
+      { name: "Oreo Waffle", price: 150 },
+      { name: "Pancakes", price: 130 },
+      { name: "Nutella Pancakes", price: 150 },
+    ],
+  },
+  sandwich: {
+    icon: <Sandwich className="w-6 h-6" />,
+    title: "Sandwiches & Toast",
+    items: [
+      { name: "Veg Grilled Sandwich", price: 100 },
+      { name: "Cheese Grilled Sandwich", price: 120 },
+      { name: "Veg Club Sandwich", price: 140 },
+      { name: "Paneer Tikka Sandwich", price: 150 },
+      { name: "Corn Cheese Toast", price: 120 },
+      { name: "Garlic Bread", price: 100 },
+    ],
+  },
+  maggi: {
+    icon: <Pizza className="w-6 h-6" />,
+    title: "Maggi & Pasta",
+    items: [
+      { name: "Classic Maggi", price: 60 },
+      { name: "Cheese Maggi", price: 80 },
+      { name: "Veg Maggi", price: 80 },
+      { name: "White Sauce Pasta", price: 140 },
+      { name: "Red Sauce Pasta", price: 140 },
+      { name: "Pink Sauce Pasta", price: 150 },
+    ],
+  },
+  fries: {
+    icon: <Cookie className="w-6 h-6" />,
+    title: "Fries & Snacks",
+    items: [
+      { name: "Classic Fries", price: 80 },
+      { name: "Peri Peri Fries", price: 100 },
+      { name: "Cheese Fries", price: 120 },
+      { name: "Loaded Fries", price: 150 },
+      { name: "Veg Nuggets", price: 120 },
+      { name: "Cheese Balls", price: 100 },
+    ],
+  },
+};
+
+type MenuCategory = keyof typeof menuData;
+
 const HighOnShakesMenu = () => {
-  const [activeCategory, setActiveCategory] = useState("shakes");
+  const [activeCategory, setActiveCategory] = useState<MenuCategory>("shakes");
 
-  const menuData = {
-    shakes: {
-      icon: <Milk className="w-6 h-6" />,
-      title: "Thick Shakes",
-      items: [
-        { name: "Oreo Shake", price: 130 },
-        { name: "Kitkat Shake", price: 140 },
-        { name: "Ferrero Rocher Shake", price: 160 },
-        { name: "Brownie Shake", price: 140 },
-        { name: "Nutella Shake", price: 150 },
-        { name: "Snickers Shake", price: 140 },
-        { name: "Bueno Shake", price: 160 },
-        { name: "Lotus Biscoff Shake", price: 150 },
-        { name: "Peanut Butter Shake", price: 140 },
-        { name: "Vanilla Shake", price: 110 },
-        { name: "Chocolate Shake", price: 110 },
-        { name: "Strawberry Shake", price: 110 },
-        { name: "Butterscotch Shake", price: 110 },
-        { name: "Mango Shake", price: 110 },
-      ],
-    },
-    coffee: {
-      icon: <Coffee className="w-6 h-6" />,
-      title: "Coffee",
-      items: [
-        { name: "Espresso", price: 80 },
-        { name: "Americano", price: 100 },
-        { name: "Cappuccino", price: 120 },
-        { name: "Latte", price: 130 },
-        { name: "Cold Coffee", price: 130 },
-        { name: "Hazelnut Coffee", price: 150 },
-        { name: "Caramel Coffee", price: 150 },
-        { name: "Vanilla Coffee", price: 140 },
-      ],
-    },
-    desserts: {
-      icon: <IceCream className="w-6 h-6" />,
-      title: "Desserts",
-      items: [
-        { name: "Brownie with Ice Cream", price: 140 },
-        { name: "Waffle with Ice Cream", price: 150 },
-        { name: "Nutella Waffle", price: 160 },
-        { name: "Oreo Waffle", price: 150 },
-        { name: "Pancakes", price: 130 },
-        { name: "Nutella Pancakes", price: 150 },
-      ],
-    },
-    sandwich: {
-      icon: <Sandwich className="w-6 h-6" />,
-      title: "Sandwiches & Toast",
-      items: [
-        { name: "Veg Grilled Sandwich", price: 100 },
-        { name: "Cheese Grilled Sandwich", price: 120 },
-        { name: "Veg Club Sandwich", price: 140 },
-        { name: "Paneer Tikka Sandwich", price: 150 },
-        { name: "Corn Cheese Toast", price: 120 },
-        { name: "Garlic Bread", price: 100 },
-      ],
-    },
-    maggi: {
-      icon: <Pizza className="w-6 h-6" />,
-      title: "Maggi & Pasta",
-      items: [
-        { name: "Classic Maggi", price: 60 },
-        { name: "Cheese Maggi", price: 80 },
-        { name: "Veg Maggi", price: 80 },
-        { name: "White Sauce Pasta", price: 140 },
-        { name: "Red Sauce Pasta", price: 140 },
-        { name: "Pink Sauce Pasta", price: 150 },
-      ],
-    },
-    fries: {
-      icon: <Cookie className="w-6 h-6" />,
-      title: "Fries & Snacks",
-      items: [
-        { name: "Classic Fries", price: 80 },
-        { name: "Peri Peri Fries", price: 100 },
-        { name: "Cheese Fries", price: 120 },
-        { name: "Loaded Fries", price: 150 },
-        { name: "Veg Nuggets", price: 120 },
-        { name: "Cheese Balls", price: 100 },
-      ],
-    },
-  };
-
-  const categories = Object.keys(menuData);
+  const categories = Object.keys(menuData) as MenuCategory[];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
@@ -168,8 +170,21 @@ const HighOnShakesMenu = () => {
           <p className="text-lg font-semibold">
             Thank you for choosing High on Shakes! 💜
           </p>
+
           <p className="text-sm opacity-90 mt-2">
             All prices are inclusive of taxes
+          </p>
+
+          <p className="text-sm mt-2">
+            © 2025 High on Shakes — Powered by{" "}
+            <a
+              href="https://taplab.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-yellow-200 font-semibold hover:underline"
+            >
+              TapLab
+            </a>
           </p>
         </div>
       </div>
