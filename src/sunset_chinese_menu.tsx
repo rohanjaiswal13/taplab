@@ -394,9 +394,20 @@ const SunsetMenu = () => {
 
       {/* Footer */}
       <div className="bg-gray-900 text-white py-6 mt-12">
-        <div className="max-w-6xl mx-auto px-4 text-center">
+        <div className="max-w-6xl mx-auto px-4 text-center space-y-1">
           <p className="text-sm">
-            © 2024 Sunset Chinese / Snack Bar. All rights reserved.
+            © 2025 Sunset Chinese / Snack Bar. All rights reserved.
+          </p>
+          <p className="text-sm">
+            Powered by{" "}
+            <a
+              href="https://taplab.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 font-semibold hover:underline"
+            >
+              TapLab
+            </a>
           </p>
         </div>
       </div>
