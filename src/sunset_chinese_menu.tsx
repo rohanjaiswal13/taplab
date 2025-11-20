@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
-import { Search, Phone, Home } from 'lucide-react';
+import { useState } from "react";
+import { Search, Phone, Home } from "lucide-react";
+
+// Define interfaces for the menu data structure
+interface MenuItem {
+  name: string;
+  price: string;
+}
+
+interface MenuCategory {
+  title: string;
+  items: MenuItem[];
+}
+
+type MenuData = Record<string, MenuCategory>;
 
 const SunsetMenu = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const menuData = {
+  const menuData: MenuData = {
     vegSoup: {
       title: "VEG SOUP",
       items: [
@@ -16,8 +29,8 @@ const SunsetMenu = () => {
         { name: "Veg Talumein Soup", price: "170 / 130" },
         { name: "Veg Tum Yum Soup", price: "170 / 130" },
         { name: "Veg Noodle Soup", price: "170 / 130" },
-        { name: "Veg Wanton Soup", price: "170 / 130" }
-      ]
+        { name: "Veg Wanton Soup", price: "170 / 130" },
+      ],
     },
     nonVegSoup: {
       title: "NON-VEG SOUP",
@@ -31,8 +44,8 @@ const SunsetMenu = () => {
         { name: "Chicken Tum Yum Soup", price: "170 / 130" },
         { name: "Chicken Noodle Soup", price: "170 / 130" },
         { name: "Chicken Lung Fung Soup", price: "170 / 130" },
-        { name: "Chicken Wanton Soup", price: "170 / 130" }
-      ]
+        { name: "Chicken Wanton Soup", price: "170 / 130" },
+      ],
     },
     vegStarters: {
       title: "VEG STARTERS",
@@ -52,8 +65,8 @@ const SunsetMenu = () => {
         { name: "Paneer Hong Kong Dry", price: "250 / ---" },
         { name: "Paneer Ginger", price: "250 / ---" },
         { name: "Veg Spring Roll", price: "240 / ---" },
-        { name: "Veg Fried Wanton", price: "240 / ---" }
-      ]
+        { name: "Veg Fried Wanton", price: "240 / ---" },
+      ],
     },
     nonVegStarters: {
       title: "NON-VEG STARTERS",
@@ -78,8 +91,8 @@ const SunsetMenu = () => {
         { name: "Chicken Spring Roll", price: "270 / ---" },
         { name: "Chicken Dragon Roll", price: "270 / ---" },
         { name: "Chicken Fried Wanton", price: "270 / ---" },
-        { name: "Chicken Steam Wanton", price: "270 / ---" }
-      ]
+        { name: "Chicken Steam Wanton", price: "270 / ---" },
+      ],
     },
     fishStarters: {
       title: "FISH STARTERS",
@@ -91,8 +104,8 @@ const SunsetMenu = () => {
         { name: "Fish Manchurian Dry", price: "280" },
         { name: "Fish Schezwan Dry", price: "280" },
         { name: "Fish Garlic Dry", price: "280" },
-        { name: "Fish Shanghai Dry", price: "280" }
-      ]
+        { name: "Fish Shanghai Dry", price: "280" },
+      ],
     },
     prawnsStarters: {
       title: "PRAWNS STARTERS",
@@ -105,8 +118,8 @@ const SunsetMenu = () => {
         { name: "Prawns Garlic Dry", price: "280 / ---" },
         { name: "Prawns Sweet 'N' Sour Dry", price: "280 / ---" },
         { name: "Prawns Oyster Sauce Dry", price: "300 / ---" },
-        { name: "Prawns Schezwan Dry", price: "280 / ---" }
-      ]
+        { name: "Prawns Schezwan Dry", price: "280 / ---" },
+      ],
     },
     vegRice: {
       title: "VEG RICE",
@@ -120,8 +133,8 @@ const SunsetMenu = () => {
         { name: "Veg Stewed Rice", price: "280 / ---" },
         { name: "Veg Triple Rice", price: "280 / ---" },
         { name: "Veg Pot Rice", price: "310 / ---" },
-        { name: "Veg Korean Rice", price: "310 / ---" }
-      ]
+        { name: "Veg Korean Rice", price: "310 / ---" },
+      ],
     },
     nonVegRice: {
       title: "NON-VEG RICE",
@@ -142,8 +155,8 @@ const SunsetMenu = () => {
         { name: "Prawns Fried Rice", price: "230 / 190" },
         { name: "Prawns Schezwan Rice", price: "240 / 200" },
         { name: "Prawns Singapore Rice", price: "240 / 200" },
-        { name: "Prawns Hong Kong Rice", price: "240 / 200" }
-      ]
+        { name: "Prawns Hong Kong Rice", price: "240 / 200" },
+      ],
     },
     vegNoodles: {
       title: "VEG NOODLES",
@@ -155,8 +168,8 @@ const SunsetMenu = () => {
         { name: "Veg Burnt Garlic Noodles", price: "240 / ---" },
         { name: "Veg Triple Noodles", price: "280 / ---" },
         { name: "Veg Pot Noodles", price: "310 / ---" },
-        { name: "Veg Korean Noodles", price: "310 / ---" }
-      ]
+        { name: "Veg Korean Noodles", price: "310 / ---" },
+      ],
     },
     nonVegNoodles: {
       title: "NON-VEG NOODLES",
@@ -176,8 +189,8 @@ const SunsetMenu = () => {
         { name: "Prawns Fried Noodles", price: "230 / 190" },
         { name: "Prawns Schezwan Noodles", price: "240 / 200" },
         { name: "Prawns Singapore Noodles", price: "240 / 200" },
-        { name: "Prawns Hong Kong Noodles", price: "240 / 200" }
-      ]
+        { name: "Prawns Hong Kong Noodles", price: "240 / 200" },
+      ],
     },
     vegGravy: {
       title: "VEG GRAVY",
@@ -189,8 +202,8 @@ const SunsetMenu = () => {
         { name: "Veg Hong Kong Gravy", price: "230 / 180" },
         { name: "Mushroom Chilly Gravy", price: "250 / ---" },
         { name: "Mushroom Manchurian Gravy", price: "250 / ---" },
-        { name: "Mushroom Schezwan Gravy", price: "250 / ---" }
-      ]
+        { name: "Mushroom Schezwan Gravy", price: "250 / ---" },
+      ],
     },
     paneerGravy: {
       title: "PANEER GRAVY",
@@ -200,8 +213,8 @@ const SunsetMenu = () => {
         { name: "Paneer Hunan Gravy", price: "250 / ---" },
         { name: "Paneer Garlic Gravy", price: "250 / ---" },
         { name: "Paneer Green Gravy", price: "250 / ---" },
-        { name: "Paneer Oyster Gravy", price: "250 / ---" }
-      ]
+        { name: "Paneer Oyster Gravy", price: "250 / ---" },
+      ],
     },
     chickenGravy: {
       title: "CHICKEN GRAVY",
@@ -215,8 +228,8 @@ const SunsetMenu = () => {
         { name: "Chicken Hong Kong Gravy", price: "250 / 190" },
         { name: "Chicken Sweet 'N' Sour Gravy", price: "250 / 190" },
         { name: "Chicken Oyster Gravy", price: "250 / 190" },
-        { name: "Chicken Schezwan Gravy", price: "250 / 190" }
-      ]
+        { name: "Chicken Schezwan Gravy", price: "250 / 190" },
+      ],
     },
     prawnsGravy: {
       title: "PRAWNS GRAVY",
@@ -225,8 +238,8 @@ const SunsetMenu = () => {
         { name: "Prawns Manchurian Gravy", price: "280 / ---" },
         { name: "Prawns Sweet 'N' Sour Gravy", price: "280 / ---" },
         { name: "Prawns Hot Garlic Gravy", price: "280 / ---" },
-        { name: "Prawns Hong Kong Gravy", price: "280 / ---" }
-      ]
+        { name: "Prawns Hong Kong Gravy", price: "280 / ---" },
+      ],
     },
     fishGravy: {
       title: "FISH GRAVY",
@@ -237,36 +250,36 @@ const SunsetMenu = () => {
         { name: "Fish Sweet 'N' Sour Gravy", price: "280 / ---" },
         { name: "Fish Chilly Gravy", price: "280 / ---" },
         { name: "Fish Hong Kong Gravy", price: "280 / ---" },
-        { name: "Fish Green Garlic Gravy", price: "280 / ---" }
-      ]
-    }
+        { name: "Fish Green Garlic Gravy", price: "280 / ---" },
+      ],
+    },
   };
 
   const categories = [
-    { id: 'all', name: 'All Items' },
-    { id: 'vegSoup', name: 'Veg Soup' },
-    { id: 'nonVegSoup', name: 'Non-Veg Soup' },
-    { id: 'vegStarters', name: 'Veg Starters' },
-    { id: 'nonVegStarters', name: 'Non-Veg Starters' },
-    { id: 'fishStarters', name: 'Fish Starters' },
-    { id: 'prawnsStarters', name: 'Prawns Starters' },
-    { id: 'vegRice', name: 'Veg Rice' },
-    { id: 'nonVegRice', name: 'Non-Veg Rice' },
-    { id: 'vegNoodles', name: 'Veg Noodles' },
-    { id: 'nonVegNoodles', name: 'Non-Veg Noodles' },
-    { id: 'vegGravy', name: 'Veg Gravy' },
-    { id: 'paneerGravy', name: 'Paneer Gravy' },
-    { id: 'chickenGravy', name: 'Chicken Gravy' },
-    { id: 'prawnsGravy', name: 'Prawns Gravy' },
-    { id: 'fishGravy', name: 'Fish Gravy' }
+    { id: "all", name: "All Items" },
+    { id: "vegSoup", name: "Veg Soup" },
+    { id: "nonVegSoup", name: "Non-Veg Soup" },
+    { id: "vegStarters", name: "Veg Starters" },
+    { id: "nonVegStarters", name: "Non-Veg Starters" },
+    { id: "fishStarters", name: "Fish Starters" },
+    { id: "prawnsStarters", name: "Prawns Starters" },
+    { id: "vegRice", name: "Veg Rice" },
+    { id: "nonVegRice", name: "Non-Veg Rice" },
+    { id: "vegNoodles", name: "Veg Noodles" },
+    { id: "nonVegNoodles", name: "Non-Veg Noodles" },
+    { id: "vegGravy", name: "Veg Gravy" },
+    { id: "paneerGravy", name: "Paneer Gravy" },
+    { id: "chickenGravy", name: "Chicken Gravy" },
+    { id: "prawnsGravy", name: "Prawns Gravy" },
+    { id: "fishGravy", name: "Fish Gravy" },
   ];
 
   const filterItems = () => {
-    let filtered = {};
-    
+    const filtered: MenuData = {};
+
     Object.entries(menuData).forEach(([key, category]) => {
-      if (selectedCategory === 'all' || selectedCategory === key) {
-        const filteredItems = category.items.filter(item =>
+      if (selectedCategory === "all" || selectedCategory === key) {
+        const filteredItems = category.items.filter((item) =>
           item.name.toLowerCase().includes(searchTerm.toLowerCase())
         );
         if (filteredItems.length > 0) {
@@ -274,7 +287,7 @@ const SunsetMenu = () => {
         }
       }
     });
-    
+
     return filtered;
   };
 
@@ -286,9 +299,13 @@ const SunsetMenu = () => {
       <div className="bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <h1 className="text-4xl font-bold text-center mb-2">SUNSET</h1>
-          <p className="text-center text-red-100 text-sm mb-4">Chinese / Snack Bar</p>
-          <p className="text-center text-xs text-red-100 mb-4">Shop No 1, 222 V.S Marg Mahim, Mumbai-16</p>
-          
+          <p className="text-center text-red-100 text-sm mb-4">
+            Chinese / Snack Bar
+          </p>
+          <p className="text-center text-xs text-red-100 mb-4">
+            Shop No 1, 222 V.S Marg Mahim, Mumbai-16
+          </p>
+
           <div className="flex flex-wrap gap-3 justify-center items-center">
             <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg backdrop-blur">
               <Phone className="w-4 h-4" />
@@ -317,14 +334,14 @@ const SunsetMenu = () => {
           </div>
 
           <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-hide">
-            {categories.map(cat => (
+            {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm font-medium transition-all ${
                   selectedCategory === cat.id
-                    ? 'bg-red-600 text-white shadow-md'
-                    : 'bg-white text-gray-700 hover:bg-red-50 border border-gray-200'
+                    ? "bg-red-600 text-white shadow-md"
+                    : "bg-white text-gray-700 hover:bg-red-50 border border-gray-200"
                 }`}
               >
                 {cat.name}
@@ -336,20 +353,29 @@ const SunsetMenu = () => {
         {/* Menu Items */}
         <div className="space-y-8">
           {Object.entries(filteredMenu).map(([key, category]) => (
-            <div key={key} className="bg-white rounded-2xl shadow-md overflow-hidden">
+            <div
+              key={key}
+              className="bg-white rounded-2xl shadow-md overflow-hidden"
+            >
               <div className="bg-gradient-to-r from-red-600 to-red-700 px-6 py-4">
-                <h2 className="text-2xl font-bold text-white">{category.title}</h2>
+                <h2 className="text-2xl font-bold text-white">
+                  {category.title}
+                </h2>
                 <p className="text-red-100 text-sm mt-1">Large / Small</p>
               </div>
-              
+
               <div className="divide-y divide-gray-100">
                 {category.items.map((item, index) => (
                   <div
                     key={index}
                     className="px-6 py-4 hover:bg-red-50 transition-colors flex justify-between items-center"
                   >
-                    <span className="text-gray-800 font-medium">{item.name}</span>
-                    <span className="text-red-600 font-bold ml-4 whitespace-nowrap">₹{item.price}</span>
+                    <span className="text-gray-800 font-medium">
+                      {item.name}
+                    </span>
+                    <span className="text-red-600 font-bold ml-4 whitespace-nowrap">
+                      ₹{item.price}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -359,7 +385,9 @@ const SunsetMenu = () => {
 
         {Object.keys(filteredMenu).length === 0 && (
           <div className="text-center py-16">
-            <p className="text-gray-500 text-lg">No dishes found matching your search.</p>
+            <p className="text-gray-500 text-lg">
+              No dishes found matching your search.
+            </p>
           </div>
         )}
       </div>
@@ -367,7 +395,9 @@ const SunsetMenu = () => {
       {/* Footer */}
       <div className="bg-gray-900 text-white py-6 mt-12">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="text-sm">© 2024 Sunset Chinese / Snack Bar. All rights reserved.</p>
+          <p className="text-sm">
+            © 2024 Sunset Chinese / Snack Bar. All rights reserved.
+          </p>
         </div>
       </div>
     </div>
