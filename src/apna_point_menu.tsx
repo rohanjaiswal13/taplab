@@ -1,7 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ArrowUp } from "lucide-react";
 
 export default function BurgerJunctionMenu() {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // --- Scroll Logic ---
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const categories = [
     "All",
@@ -280,7 +303,7 @@ export default function BurgerJunctionMenu() {
       : allItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-4 md:p-8">
+    <div className="min-h-screen bg-gray-950 text-white p-4 md:p-8 relative">
       {/* Header */}
       <div className="max-w-7xl mx-auto mb-10">
         <div className="bg-gradient-to-r from-amber-900 to-red-900 rounded-xl p-8 mb-8 text-center shadow-2xl">
@@ -383,6 +406,17 @@ export default function BurgerJunctionMenu() {
           </a>
         </p>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-purple-600 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 z-50 border-2 border-white/20"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 }

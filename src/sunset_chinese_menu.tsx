@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Search, Phone, Home } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Phone, Home, ArrowUp } from "lucide-react";
 
 // Define interfaces for the menu data structure
 interface MenuItem {
@@ -15,8 +15,30 @@ interface MenuCategory {
 type MenuData = Record<string, MenuCategory>;
 
 const SunsetMenu = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Handle scroll visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   const menuData: MenuData = {
     vegSoup: {
@@ -294,7 +316,7 @@ const SunsetMenu = () => {
   const filteredMenu = filterItems();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-red-50 relative">
       {/* Header */}
       <div className="bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-6">
@@ -321,18 +343,7 @@ const SunsetMenu = () => {
 
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Search and Filter */}
-        <div className="mb-8 space-y-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search dishes..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none"
-            />
-          </div>
-
+        <div className="mb-4 space-y-4">
           <div className="flex overflow-x-auto gap-2 pb-2 scrollbar-hide">
             {categories.map((cat) => (
               <button
@@ -411,6 +422,17 @@ const SunsetMenu = () => {
           </p>
         </div>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-red-600 text-white p-3 rounded-full shadow-xl hover:bg-red-700 transition-all duration-300 z-50 border-2 border-white"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 };

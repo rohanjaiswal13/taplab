@@ -1,5 +1,12 @@
-import { useState } from "react";
-import { Phone, MapPin, ChevronDown, ChevronUp, Pizza } from "lucide-react";
+import { useState, useEffect } from "react";
+import {
+  Phone,
+  MapPin,
+  ChevronDown,
+  ChevronUp,
+  Pizza,
+  ArrowUp,
+} from "lucide-react";
 
 // --- Interfaces ---
 
@@ -29,6 +36,28 @@ const PizzaCaprinaMenu = () => {
   const [searchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [showLocations, setShowLocations] = useState(true);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // --- Scroll Logic ---
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   // --- Data: Locations ---
   const locations: LocationInfo[] = [
@@ -650,7 +679,7 @@ const PizzaCaprinaMenu = () => {
   const filteredMenu = filterItems();
 
   return (
-    <div className="min-h-screen bg-[#fcfaf2] font-sans text-gray-800">
+    <div className="min-h-screen bg-[#fcfaf2] font-sans text-gray-800 relative">
       {/* Top Banner */}
       <div className="bg-white shadow-lg sticky top-0 z-50 border-b-4 border-[#D62828]">
         {/* Italian Stripes */}
@@ -888,6 +917,17 @@ const PizzaCaprinaMenu = () => {
           </div>
         </div>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-[#D62828] text-white p-3 rounded-full shadow-xl hover:bg-red-700 transition-all duration-300 z-50 border-2 border-white"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 };

@@ -1,5 +1,12 @@
-import { useState } from "react";
-import { Search, Phone, MapPin, Utensils, Sparkles } from "lucide-react";
+import { useState, useEffect } from "react";
+import {
+  Search,
+  Phone,
+  MapPin,
+  Utensils,
+  Sparkles,
+  ArrowUp,
+} from "lucide-react";
 
 // --- Types ---
 interface MenuItem {
@@ -17,6 +24,28 @@ interface MenuCategory {
 const HighOnShakesMenu = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // --- Scroll Logic ---
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   // --- Data Source ---
   const categories: MenuCategory[] = [
@@ -323,7 +352,7 @@ const HighOnShakesMenu = () => {
         `}
       </style>
 
-      <div className="min-h-screen bg-[#FAFAFA] text-zinc-900 font-sans selection:bg-orange-100 selection:text-orange-900">
+      <div className="min-h-screen bg-[#FAFAFA] text-zinc-900 font-sans selection:bg-orange-100 selection:text-orange-900 relative">
         {/* --- Header --- */}
         <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-xl">
           <div className="container max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -530,6 +559,17 @@ const HighOnShakesMenu = () => {
             </div>
           </div>
         </footer>
+
+        {/* --- Scroll to Top Button --- */}
+        {showScrollTop && (
+          <button
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 bg-orange-500 text-white p-3 rounded-full shadow-xl hover:bg-orange-600 hover:-translate-y-1 transition-all duration-300 z-50 border-2 border-white"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp className="w-6 h-6" />
+          </button>
+        )}
       </div>
     </>
   );
