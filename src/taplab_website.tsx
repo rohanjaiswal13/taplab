@@ -375,19 +375,19 @@ const HomePage = ({
     rating: number;
   }[] = [
       {
-        name: "Rahul Sharma",
-        role: "Entrepreneur",
+        name: "Pizza Caprina",
+        role: "Cafe Owner",
         text: "TapLab cards are a game-changer. Clients are always impressed!",
         rating: 5,
       },
       {
-        name: "Priya Patel",
-        role: "Designer",
+        name: "High On Shakes",
+        role: "Cafe Owner",
         text: "Premium quality and super easy to use. Highly recommend!",
         rating: 5,
       },
       {
-        name: "Arjun Mehta",
+        name: "Seby D'costa",
         role: "Restaurant Owner",
         text: "Table tags revolutionized our customer experience.",
         rating: 5,
