@@ -1248,10 +1248,6 @@ const ContactPage = (): React.ReactElement => {
       a: "No app needed! NFC works natively on all modern smartphones (iPhone and Android). Recipients just tap and view your profile in their browser.",
     },
     {
-      q: "Can I update my profile information?",
-      a: "Yes! You can update your digital profile anytime through our web dashboard. Changes are reflected instantly.",
-    },
-    {
       q: "What is the delivery time?",
       a: "Standard delivery takes 7-10 business days. Express delivery options are available at checkout.",
     },
@@ -1353,7 +1349,7 @@ const ContactPage = (): React.ReactElement => {
 
               <div className="space-y-6">
                 <motion.a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/919867145439"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
@@ -1367,7 +1363,7 @@ const ContactPage = (): React.ReactElement => {
                       WhatsApp Support
                     </div>
                     <div className="text-white font-semibold">
-                      +91 98765 43210
+                      +91 98671 45439
                     </div>
                   </div>
                 </motion.a>
@@ -1379,7 +1375,7 @@ const ContactPage = (): React.ReactElement => {
                   <div>
                     <div className="text-gray-400 text-sm">Email</div>
                     <div className="text-white font-semibold">
-                      support@taplab.in
+                      contact@taplab.in
                     </div>
                   </div>
                 </div>
