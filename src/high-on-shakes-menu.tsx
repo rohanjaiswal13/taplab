@@ -35,11 +35,7 @@ const HighOnShakesMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // --- Carousel Data ---
-  const slides = [
-    "../public/HOS1.jpg",
-    "../public/HOS2.jpg",
-    "../public/HOS3.jpg",
-  ];
+  const slides = ["/HOS1.jpg", "/HOS2.jpg", "/HOS3.jpg"];
 
   // --- Scroll Logic ---
   useEffect(() => {
@@ -411,7 +407,7 @@ const HighOnShakesMenu = () => {
             {/* Brand */}
             <div className="flex items-center gap-3">
               <img
-                src="../public/logo_extracted.png"
+                src="/logo_extracted.png"
                 alt="Logo"
                 className="w-12 h-12 object-contain"
               />
@@ -506,7 +502,7 @@ const HighOnShakesMenu = () => {
               aria-label="Chat on WhatsApp"
             >
               <img
-                src="../public/whatsapp.webp"
+                src="/whatsapp.webp"
                 alt="WhatsApp"
                 className="h-10 w-auto md:h-12 object-contain"
               />
@@ -519,7 +515,7 @@ const HighOnShakesMenu = () => {
               aria-label="Order on Swiggy"
             >
               <img
-                src="../public/swiggy.png"
+                src="/swiggy.png"
                 alt="Swiggy"
                 className="h-10 w-auto md:h-12 object-contain"
               />
@@ -532,7 +528,7 @@ const HighOnShakesMenu = () => {
               aria-label="Order on Zomato"
             >
               <img
-                src="../public/zomato.webp"
+                src="/zomato.webp"
                 alt="Zomato"
                 className="h-10 w-auto md:h-12 object-contain"
               />
