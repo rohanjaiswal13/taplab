@@ -124,9 +124,8 @@ const Navbar = ({
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/90 backdrop-blur-md shadow-lg" : "bg-transparent"
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-black/90 backdrop-blur-md shadow-lg" : "bg-transparent"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <motion.div
@@ -144,11 +143,10 @@ const Navbar = ({
               key={item.id}
               whileHover={{ scale: 1.1 }}
               onClick={() => setCurrentPage(item.id)}
-              className={`text-sm font-medium transition-colors ${
-                currentPage === item.id
-                  ? "text-blue-400"
-                  : "text-gray-300 hover:text-white"
-              }`}
+              className={`text-sm font-medium transition-colors ${currentPage === item.id
+                ? "text-blue-400"
+                : "text-gray-300 hover:text-white"
+                }`}
             >
               {item.name}
             </motion.button>
@@ -184,9 +182,8 @@ const Navbar = ({
                     setCurrentPage(item.id);
                     setIsOpen(false);
                   }}
-                  className={`block w-full text-left py-2 ${
-                    currentPage === item.id ? "text-blue-400" : "text-gray-300"
-                  }`}
+                  className={`block w-full text-left py-2 ${currentPage === item.id ? "text-blue-400" : "text-gray-300"
+                    }`}
                 >
                   {item.name}
                 </button>
@@ -333,43 +330,43 @@ const HomePage = ({
     image?: string;
     features: string[];
   }[] = [
-    {
-      id: "business-card",
-      title: "NFC Business Card",
-      price: "499",
-      image: "💳",
-      features: [
-        "Premium metal finish",
-        "Instant profile sharing",
-        "Customizable design",
-        "Lock-protected NFC",
-      ],
-    },
-    {
-      id: "smart-tag",
-      title: "NFC Circular Tag",
-      price: "299",
-      image: "⭕",
-      features: [
-        "Compact & portable",
-        "Works on all phones",
-        "Reusable & durable",
-        "Easy to program",
-      ],
-    },
-    {
-      id: "restaurant-tag",
-      title: "Restaurant Table Tag",
-      price: "399",
-      image: "🍽️",
-      features: [
-        "Menu QR integration",
-        "Digital ordering",
-        "Contact-free service",
-        "Brand customization",
-      ],
-    },
-  ];
+      {
+        id: "business-card",
+        title: "NFC Business Card",
+        price: "499",
+        image: "💳",
+        features: [
+          "Premium metal finish",
+          "Instant profile sharing",
+          "Customizable design",
+          "Lock-protected NFC",
+        ],
+      },
+      {
+        id: "smart-tag",
+        title: "NFC Circular Tag",
+        price: "299",
+        image: "⭕",
+        features: [
+          "Compact & portable",
+          "Works on all phones",
+          "Reusable & durable",
+          "Easy to program",
+        ],
+      },
+      {
+        id: "restaurant-tag",
+        title: "Restaurant Table Tag",
+        price: "399",
+        image: "🍽️",
+        features: [
+          "Menu QR integration",
+          "Digital ordering",
+          "Contact-free service",
+          "Brand customization",
+        ],
+      },
+    ];
 
   const testimonials: {
     name: string;
@@ -377,25 +374,25 @@ const HomePage = ({
     text: string;
     rating: number;
   }[] = [
-    {
-      name: "Rahul Sharma",
-      role: "Entrepreneur",
-      text: "TapLab cards are a game-changer. Clients are always impressed!",
-      rating: 5,
-    },
-    {
-      name: "Priya Patel",
-      role: "Designer",
-      text: "Premium quality and super easy to use. Highly recommend!",
-      rating: 5,
-    },
-    {
-      name: "Arjun Mehta",
-      role: "Restaurant Owner",
-      text: "Table tags revolutionized our customer experience.",
-      rating: 5,
-    },
-  ];
+      {
+        name: "Pizza Caprina",
+        role: "Cafe Owner",
+        text: "TapLab cards are a game-changer. Clients are always impressed!",
+        rating: 5,
+      },
+      {
+        name: "High On Shakes",
+        role: "Cafe Owner",
+        text: "Premium quality and super easy to use. Highly recommend!",
+        rating: 5,
+      },
+      {
+        name: "Seby D'costa",
+        role: "Restaurant Owner",
+        text: "Table tags revolutionized our customer experience.",
+        rating: 5,
+      },
+    ];
 
   return (
     <div className="min-h-screen">
@@ -665,10 +662,8 @@ const ProductsPage = ({
         "Instant digital profile sharing with one tap",
         "Lock-protected NFC chip for security",
         "Works with all NFC-enabled smartphones",
-        "Lifetime chip warranty",
       ],
       howItWorks: [
-        "Design your card with our customization tool",
         "We manufacture with premium materials",
         "Program your digital profile",
         "Tap to share with anyone, instantly",
@@ -686,13 +681,11 @@ const ProductsPage = ({
         "Ultra-compact circular design",
         "Durable waterproof construction",
         "Attach to phone case or wallet",
-        "Reusable and reprogrammable",
         "Works on all NFC phones",
         "Multiple color options",
       ],
       howItWorks: [
         "Receive your NFC tag",
-        "Program using our mobile app",
         "Attach to your phone or accessories",
         "Share your profile with a tap",
       ],
@@ -707,17 +700,13 @@ const ProductsPage = ({
         "Transform your restaurant with contactless table ordering and digital menus.",
       features: [
         "Custom branded table stands",
-        "Integrated menu and ordering system",
         "Contact-free customer experience",
-        "Real-time order notifications",
-        "Analytics and insights dashboard",
         "Easy menu updates anytime",
       ],
       howItWorks: [
         "Install tags on your tables",
         "Upload your digital menu",
         "Customers tap to view and order",
-        "Receive orders instantly on your system",
       ],
       specs: "Size: Custom • Material: Acrylic Stand + NFC • Chip: NTAG215",
     },
@@ -1171,7 +1160,7 @@ const AboutPage = (): React.ReactElement => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          {/*<div className="grid md:grid-cols-3 gap-6">
             {[
               { num: "10,000+", label: "Happy Customers" },
               { num: "50,000+", label: "Cards Delivered" },
@@ -1190,7 +1179,7 @@ const AboutPage = (): React.ReactElement => {
                 <div className="text-gray-300">{stat.label}</div>
               </motion.div>
             ))}
-          </div>
+          </div>*/}
 
           <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-white/10">
             <h2 className="text-3xl font-bold text-white mb-4">Our Values</h2>
@@ -1257,10 +1246,6 @@ const ContactPage = (): React.ReactElement => {
     {
       q: "Do I need an app?",
       a: "No app needed! NFC works natively on all modern smartphones (iPhone and Android). Recipients just tap and view your profile in their browser.",
-    },
-    {
-      q: "Can I update my profile information?",
-      a: "Yes! You can update your digital profile anytime through our web dashboard. Changes are reflected instantly.",
     },
     {
       q: "What is the delivery time?",
@@ -1364,7 +1349,7 @@ const ContactPage = (): React.ReactElement => {
 
               <div className="space-y-6">
                 <motion.a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/919867145439"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
@@ -1378,7 +1363,7 @@ const ContactPage = (): React.ReactElement => {
                       WhatsApp Support
                     </div>
                     <div className="text-white font-semibold">
-                      +91 98765 43210
+                      +91 98671 45439
                     </div>
                   </div>
                 </motion.a>
@@ -1390,7 +1375,7 @@ const ContactPage = (): React.ReactElement => {
                   <div>
                     <div className="text-gray-400 text-sm">Email</div>
                     <div className="text-white font-semibold">
-                      support@taplab.in
+                      contact@taplab.in
                     </div>
                   </div>
                 </div>
