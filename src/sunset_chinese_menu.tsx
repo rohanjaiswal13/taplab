@@ -321,9 +321,7 @@ const SunsetMenu = () => {
       <div className="bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <h1 className="text-4xl font-bold text-center mb-2">SUNSET</h1>
-          <p className="text-center text-red-100 text-sm mb-4">
-            Chinese / Snack Bar
-          </p>
+          <p className="text-center text-red-100 text-sm mb-4">Chinese</p>
           <p className="text-center text-xs text-red-100 mb-4">
             Shop No 1, 222 V.S Marg Mahim, Mumbai-16
           </p>
@@ -406,9 +404,7 @@ const SunsetMenu = () => {
       {/* Footer */}
       <div className="bg-gray-900 text-white py-6 mt-12">
         <div className="max-w-6xl mx-auto px-4 text-center space-y-1">
-          <p className="text-sm">
-            © 2025 Sunset Chinese / Snack Bar. All rights reserved.
-          </p>
+          <p className="text-sm">© 2025 Sunset Chinese. All rights reserved.</p>
           <p className="text-sm">
             Powered by{" "}
             <a

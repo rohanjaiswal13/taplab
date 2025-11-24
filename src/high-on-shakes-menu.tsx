@@ -119,7 +119,7 @@ const HighOnShakesMenu = () => {
         { name: "Veg Club", price: "130" },
         { name: "Nutella Sandwich", price: "150" },
         { name: "Chicken Club", price: "150" },
-        { name: "Chicken Bhuna", price: "160" },
+        { name: "Chicken Bhuna", price: "170" },
         {
           name: "Cheesy BBQ",
           price: "160 / 170",
@@ -181,6 +181,17 @@ const HighOnShakesMenu = () => {
           price: "100 / 130 / 150",
           details: "Veg / Chicken / Fish",
         },
+      ],
+    },
+    {
+      id: "blitz-bucket",
+      label: "Blitz Bucket",
+      items: [
+        { name: "Korean Bucket", price: "150" },
+        { name: "American Bucket", price: "150" },
+        { name: "Hindustani Bucket", price: "150" },
+        { name: "Zest Bucket", price: "150" },
+        { name: "Tex Mex Bucket", price: "150" },
       ],
     },
     {
