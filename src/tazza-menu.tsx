@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Phone, Clock } from "lucide-react";
+import { Phone, Clock } from "lucide-react"; // Search is no longer needed
 
 // 1. Define Types
 type PriceObject = {
@@ -30,7 +30,7 @@ interface FilteredItem extends MenuItem {
 }
 
 const TazzaMenu = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  // Removed [searchTerm, setSearchTerm] state
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   // 2. Apply Type to menuData
@@ -338,14 +338,13 @@ const TazzaMenu = () => {
     // 3. Fix array type and initialization
     const items: FilteredItem[] = [];
 
-    // Fix implicit any on categoryKey using keyof typeof menuData is not strictly needed if menuData is Typed Record<string, Category>
+    // Removed searchTerm logic, only filtering by selectedCategory now
     Object.keys(menuData).forEach((categoryKey) => {
       if (selectedCategory === "all" || selectedCategory === categoryKey) {
         const category = menuData[categoryKey];
         category.items.forEach((item) => {
-          if (item.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-            items.push({ ...item, category: category.title, categoryKey });
-          }
+          // Push all items in the selected category
+          items.push({ ...item, category: category.title, categoryKey });
         });
       }
     });
@@ -432,21 +431,8 @@ const TazzaMenu = () => {
         </div>
       </div>
 
-      {/* Search and Filter */}
+      {/* Filter only (Search removed) */}
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="mb-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-3 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search for dishes..."
-              className="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-amber-200 focus:border-amber-500 focus:outline-none bg-white shadow-sm"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-        </div>
-
         {/* Category Filter */}
         <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
           {categories.map((cat) => (
@@ -513,7 +499,7 @@ const TazzaMenu = () => {
         {filteredMenu().length === 0 && (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">
-              No items found matching your search.
+              No items found matching your filter selection.
             </p>
           </div>
         )}
