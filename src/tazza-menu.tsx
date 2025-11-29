@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Phone, Clock, MapPin } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Phone, Clock, MapPin, ArrowUp } from "lucide-react";
 
 // 1. Define Types
 type PriceObject = {
   half?: number;
   full?: number;
   veg?: number;
-  paneer?: number; // Added Paneer as a specific price tier
+  paneer?: number;
   non_veg?: number;
   egg?: number;
 };
@@ -16,9 +16,9 @@ type Price = number | PriceObject;
 interface MenuItem {
   name: string;
   price: Price;
-  veg?: boolean; // True if STRICTLY veg/paneer. False if N.Veg. Undefined if it has options.
+  veg?: boolean;
   description?: string;
-  isEgg?: boolean; // Helper to distinguish Egg items if needed
+  isEgg?: boolean;
 }
 
 interface Category {
@@ -34,8 +34,32 @@ interface FilteredItem extends MenuItem {
 
 const TazzaMenu = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // 2. Updated Menu Data based on images
+  // Handle Scroll to Top visibility
+  useEffect(() => {
+    const checkScrollTop = () => {
+      if (!showScrollTop && window.pageYOffset > 400) {
+        setShowScrollTop(true);
+      } else if (showScrollTop && window.pageYOffset <= 400) {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", checkScrollTop);
+    return () => {
+      window.removeEventListener("scroll", checkScrollTop);
+    };
+  }, [showScrollTop]);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  // 2. Menu Data
   const menuData: Record<string, Category> = {
     soups: {
       title: "Soups",
@@ -185,7 +209,7 @@ const TazzaMenu = () => {
       ],
     },
     chaat: {
-      title: "Chaat (Time: 3:30 PM - 10:30 PM)",
+      title: "Chaat (3:30 PM - 10:30 PM)",
       icon: "🥣",
       items: [
         { name: "Pani Puri", veg: true, price: 60 },
@@ -458,7 +482,6 @@ const TazzaMenu = () => {
     return items;
   };
 
-  // 4. Updated Price Rendering for Veg/Paneer/Non-Veg
   const renderPrice = (price: Price) => {
     if (typeof price === "number") {
       return `₹${price}`;
@@ -508,7 +531,6 @@ const TazzaMenu = () => {
 
   // Helper to render Veg/Non-Veg icons
   const renderIcon = (item: MenuItem) => {
-    // If it has multiple options (e.g. PriceObject with both veg and non_veg), show both icons
     if (
       typeof item.price === "object" &&
       "veg" in item.price &&
@@ -526,7 +548,6 @@ const TazzaMenu = () => {
       );
     }
 
-    // Strict Veg
     if (item.veg === true) {
       return (
         <span className="w-5 h-5 border-2 border-green-600 flex items-center justify-center bg-white">
@@ -535,7 +556,6 @@ const TazzaMenu = () => {
       );
     }
 
-    // Strict Non-Veg (veg is false) or Egg
     if (item.veg === false) {
       return (
         <span className="w-5 h-5 border-2 border-red-600 flex items-center justify-center bg-white">
@@ -544,23 +564,22 @@ const TazzaMenu = () => {
       );
     }
 
-    // Fallback if undefined (usually means implicit non-veg or mixed, but we try to cover all above)
     return null;
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-amber-800 via-orange-700 to-red-800 text-white shadow-2xl relative overflow-hidden">
+      {/* FIXED HEADER Section */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-amber-800 via-orange-700 to-red-800 text-white shadow-2xl overflow-hidden">
         {/* Decorative background circle */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
 
-        <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
-          <div className="text-center mb-6">
-            <h1 className="text-6xl font-extrabold mb-2 tracking-wide font-serif text-yellow-100 drop-shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 py-3 md:py-4 relative z-10">
+          <div className="text-center mb-4">
+            <h1 className="text-5xl font-extrabold mb-1 tracking-wide font-serif text-yellow-100 drop-shadow-lg">
               TAZZA
             </h1>
-            <p className="text-2xl italic opacity-90 font-light tracking-wider">
+            <p className="text-xl italic opacity-90 font-light tracking-wider">
               Fast Food & means Fresh
             </p>
             <div className="flex justify-center gap-4 mt-2 text-sm font-bold tracking-widest uppercase">
@@ -575,12 +594,12 @@ const TazzaMenu = () => {
           </div>
 
           {/* Contact Info Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm bg-black/20 p-4 rounded-xl backdrop-blur-sm border border-white/10">
-            <div className="flex flex-col items-center md:items-start gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs md:text-sm bg-black/20 p-3 rounded-xl backdrop-blur-sm border border-white/10">
+            <div className="flex flex-col items-center md:items-start gap-1">
               <div className="flex items-center gap-2 font-bold text-yellow-200 uppercase tracking-wider mb-1">
-                <Phone className="w-4 h-4" /> Order Now
+                <Phone className="w-3 h-3 md:w-4 md:h-4" /> Order Now
               </div>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                 <div>022 2447 2222</div>
                 <div>022 2445 2333</div>
                 <div>9892 31 83 15</div>
@@ -588,39 +607,43 @@ const TazzaMenu = () => {
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-center text-center">
-              <div className="bg-white/90 text-red-800 font-bold px-4 py-2 rounded-full shadow-lg transform -rotate-1">
+            <div className="flex flex-col items-center justify-center text-center hidden md:flex">
+              <div className="bg-white/90 text-red-800 font-bold px-4 py-1 rounded-full shadow-lg transform -rotate-1">
                 HOME DELIVERY
               </div>
-              <p className="text-xs mt-2 opacity-90">
+              <p className="text-[10px] mt-1 opacity-90">
                 12:00 PM to 11:00 PM (Above ₹150)
               </p>
             </div>
 
-            <div className="flex flex-col items-center md:items-end gap-2 text-right">
+            <div className="flex flex-col items-center md:items-end gap-1 text-right">
               <div className="flex items-center gap-2 font-bold text-yellow-200 uppercase tracking-wider mb-1">
-                <Clock className="w-4 h-4" /> Timings
+                <Clock className="w-3 h-3 md:w-4 md:h-4" /> Timings
               </div>
               <div>11:00 AM - 11:30 PM</div>
-              <div className="text-xs text-yellow-100 bg-red-900/50 px-2 py-0.5 rounded">
-                Closed Friday 12:45 PM - 2:00 PM
+              <div className="text-[10px] text-yellow-100 bg-red-900/50 px-2 py-0.5 rounded">
+                Closed Fri 12:45 PM - 2:00 PM
               </div>
             </div>
           </div>
 
-          <div className="mt-4 flex justify-center text-xs opacity-80 gap-2">
+          <div className="mt-2 flex justify-center text-[10px] md:text-xs opacity-80 gap-2">
             <MapPin className="w-3 h-3" />
-            <p>
+            <p className="truncate max-w-xs md:max-w-none">
               59, Rehmat Manzil, Lady Jamshedji Road, Mahim, Mumbai - 400 016
             </p>
           </div>
         </div>
       </div>
 
+      {/* Placeholder div to prevent content from hiding behind fixed header */}
+      {/* Height is approximate based on header size on mobile/desktop */}
+      <div className="h-[350px] md:h-[300px] w-full bg-transparent"></div>
+
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Category Filter */}
-        <div className="sticky top-0 z-30 bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 py-4 -mx-4 px-4 mb-4 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 pt-0 py-8">
+        {/* Category Filter - No longer sticky */}
+        <div className="py-4 -mx-4 px-4 mb-4">
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
             {categories.map((cat) => (
               <button
@@ -708,6 +731,17 @@ const TazzaMenu = () => {
           </p>
         </div>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 p-4 bg-amber-700 text-white rounded-full shadow-2xl hover:bg-amber-800 transition-all duration-300 z-50 hover:-translate-y-1"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 };
