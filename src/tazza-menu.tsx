@@ -511,7 +511,20 @@ const TazzaMenu = () => {
           <p className="text-sm opacity-90">
             59, Rehmat Manzil, Lady Jamshedji Road, Mahim, Mumbai - 400 016
           </p>
-          <p className="text-xs mt-2 opacity-75">tazzafastfood@gmail.com</p>
+          <p className="text-xs mt-2 opacity-75">
+            @ 2025 Tazza. All Rights Reserved.
+          </p>
+          <p className="text-sm">
+            Powered by{" "}
+            <a
+              href="https://taplab.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 font-semibold hover:underline"
+            >
+              TapLab
+            </a>
+          </p>
         </div>
       </div>
     </div>
