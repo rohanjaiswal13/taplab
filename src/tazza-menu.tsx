@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Phone, Clock } from "lucide-react"; // Search is no longer needed
+import { Phone, Clock, MapPin } from "lucide-react";
 
 // 1. Define Types
 type PriceObject = {
   half?: number;
   full?: number;
   veg?: number;
+  paneer?: number; // Added Paneer as a specific price tier
   non_veg?: number;
+  egg?: number;
 };
 
 type Price = number | PriceObject;
@@ -14,8 +16,9 @@ type Price = number | PriceObject;
 interface MenuItem {
   name: string;
   price: Price;
-  veg?: boolean;
+  veg?: boolean; // True if STRICTLY veg/paneer. False if N.Veg. Undefined if it has options.
   description?: string;
+  isEgg?: boolean; // Helper to distinguish Egg items if needed
 }
 
 interface Category {
@@ -30,48 +33,24 @@ interface FilteredItem extends MenuItem {
 }
 
 const TazzaMenu = () => {
-  // Removed [searchTerm, setSearchTerm] state
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  // 2. Apply Type to menuData
+  // 2. Updated Menu Data based on images
   const menuData: Record<string, Category> = {
     soups: {
       title: "Soups",
       icon: "🍲",
       items: [
-        { name: "Sweet Corn", veg: true, price: { half: 130, full: 150 } },
-        { name: "Manchow", veg: true, price: { half: 130, full: 150 } },
-        { name: "Hot & Sour", veg: true, price: { half: 130, full: 150 } },
-        { name: "Tomato", veg: true, price: { half: 130, full: 150 } },
-        { name: "Clear or Veg", veg: true, price: { half: 130, full: 180 } },
+        { name: "Sweet Corn", price: { veg: 130, non_veg: 150 } },
+        { name: "Manchow", price: { veg: 130, non_veg: 150 } },
+        { name: "Hot & Sour", price: { veg: 130, non_veg: 150 } },
+        { name: "Tomato", veg: true, price: 120 },
+        { name: "Cream of Veg.", veg: true, price: 120 },
+        { name: "Cream of Chicken", veg: false, price: 150 },
       ],
     },
-    chinese: {
-      title: "Chinese",
-      icon: "🥢",
-      items: [
-        { name: "Chicken Peri-Peri", price: 270 },
-        { name: "Chicken Schezwan Lollypop", price: 270 },
-        { name: "Chicken Tikka", price: 270 },
-        { name: "Schezwan Trio Chilly", price: 550 },
-        { name: "Garlic Chicken", price: 550 },
-        { name: "Chicken Manchurian", price: 550 },
-        { name: "Chicken Chilly", price: 270 },
-        { name: "Dragon Chicken Roll", price: 180 },
-        { name: "Chicken Spring Roll", price: 300 },
-        { name: "Chicken Lollypop (6 Pcs)", price: 370 },
-        { name: "Threaded Chicken", price: 370 },
-        { name: "Red Chilly Pepper Chicken", price: 370 },
-        { name: "Crispy Chicken", price: 380 },
-        { name: "Chicken Chasseur", price: 380 },
-        { name: "Crispy Arouser", price: 380 },
-        { name: "Chicken Hasin", price: 380 },
-        { name: "Chicken Black Pepper", price: 390 },
-        { name: "Chicken Black Bean", price: 390 },
-      ],
-    },
-    starter_chinese: {
-      title: "Starter (Chinese)",
+    chinese_starter_veg: {
+      title: "Starters (Veg/Paneer)",
       icon: "🌶️",
       items: [
         { name: "Veg. Spring Roll", veg: true, price: 100 },
@@ -79,47 +58,103 @@ const TazzaMenu = () => {
         { name: "Veg. Chilly", veg: true, price: 180 },
         { name: "Veg. Manchurian", veg: true, price: 180 },
         { name: "Crispy Veg.", veg: true, price: 200 },
+        { name: "Veg. Schezwan", veg: true, price: 190 },
         { name: "Mushroom Chilly", veg: true, price: 200 },
-      ],
-    },
-    starter_non_veg: {
-      title: "Starter (Non Veg.)",
-      icon: "🍗",
-      items: [
         { name: "Paneer Chilly (Dry)", veg: true, price: 250 },
         { name: "Paneer Manchurian", veg: true, price: 250 },
-        { name: "Threaded Kolhapuri Cheese", veg: true, price: 250 },
-        { name: "Paneer Piri-Piri", veg: true, price: 250 },
-        { name: "Crispy Paneer", veg: true, price: 250 },
-        { name: "Paneer Streeteon", veg: true, price: 250 },
+        { name: "Threaded Cottage Cheese", veg: true, price: 250 },
+        { name: "Paneer Peri-Peri", veg: true, price: 260 },
+        { name: "Crispy Paneer", veg: true, price: 260 },
+        { name: "Crispy Pepper Paneer", veg: true, price: 260 },
+        { name: "Paneer Schezwan", veg: true, price: 250 },
+      ],
+    },
+    chinese_starter_non_veg: {
+      title: "Starters (Non Veg)",
+      icon: "🍗",
+      items: [
+        { name: "Chicken Black Pepper", veg: false, price: 280 },
+        { name: "Chicken Black Bean", veg: false, price: 280 },
+        { name: "Chicken Hoisin", veg: false, price: 280 },
+        { name: "Chicken Oyster", veg: false, price: 280 },
+        { name: "Crispy Chicken", veg: false, price: 270 },
+        { name: "Syboo Chicken", veg: false, price: 270 },
+        { name: "Red Chilly Pepper Chicken", veg: false, price: 270 },
+        { name: "Threaded Chicken", veg: false, price: 270 },
+        { name: "Chicken Lollypop (6 Pcs)", veg: false, price: 200 },
+        { name: "Chicken Spring Roll", veg: false, price: 120 },
+        { name: "Dragon Chicken", veg: false, price: 270 },
+        { name: "Chicken Chilly", veg: false, price: 250 },
+        { name: "Chicken Manchurian", veg: false, price: 250 },
+        { name: "Garlic Chicken", veg: false, price: 250 },
+        { name: "Schezwan Chicken", veg: false, price: 250 },
+        { name: "Chicken Tikka Chilly", veg: false, price: 270 },
+        { name: "Chicken Schezwan Lollypop", veg: false, price: 270 },
+        { name: "Chicken Peri-Peri", veg: false, price: 270 },
       ],
     },
     main_course: {
       title: "Main Course",
       icon: "🍛",
       items: [
-        { name: "Tazza Special Chilly", price: { veg: 160, non_veg: 190 } },
-        { name: "Manchurian", price: { veg: 160, non_veg: 190 } },
-        { name: "Schezwan", price: { veg: 170, non_veg: 190 } },
-        { name: "Hong Kong", price: { veg: 170, non_veg: 190 } },
+        {
+          name: "TAZZA Special Chilly",
+          veg: false,
+          price: 200,
+        },
+        { name: "Chilly", price: { veg: 160, paneer: 190, non_veg: 180 } },
+        { name: "Manchurian", price: { veg: 160, paneer: 190, non_veg: 180 } },
+        { name: "Garlic", price: { veg: 160, paneer: 190, non_veg: 180 } },
+        { name: "Shanghai", price: { veg: 170, paneer: 190, non_veg: 180 } },
+        { name: "Schezwan", price: { veg: 170, paneer: 190, non_veg: 180 } },
+        { name: "Hong Kong", price: { veg: 170, paneer: 190, non_veg: 180 } },
         { name: "Mushroom Chilly", veg: true, price: 170 },
       ],
     },
     rice_noodles: {
-      title: "Rice/Noodles",
+      title: "Rice & Noodles",
       icon: "🍜",
       items: [
-        { name: "Fried Rice", veg: true, price: 160 },
-        { name: "Chef Fried Rice", price: 170 },
-        { name: "Schezwan Rice", price: 170 },
-        { name: "Hong Kong Rice", price: 170 },
-        { name: "Hakka Noodles", price: 170 },
-        { name: "American Chopsuey", price: 180 },
-        { name: "Burnt Chilly Fried Rice", price: 180 },
-        { name: "Triple Schezwan Rice", veg: true, price: 250 },
-        { name: "Combination Fried Rice", price: 300 },
-        { name: "Chicken (Fried)", price: 300 },
-        { name: "Golden Noodles", price: 300 },
+        { name: "Fried Rice", price: { veg: 160, paneer: 190, non_veg: 180 } },
+        { name: "Egg Fried Rice", veg: false, isEgg: true, price: 180 },
+        {
+          name: "Garlic Fried Rice",
+          price: { veg: 170, paneer: 200, non_veg: 190 },
+        },
+        {
+          name: "Schezwan Rice",
+          price: { veg: 170, paneer: 210, non_veg: 210 },
+        },
+        {
+          name: "Hong Kong Rice",
+          price: { veg: 170, paneer: 210, non_veg: 210 },
+        },
+        {
+          name: "Shanghai Rice",
+          price: { veg: 170, paneer: 210, non_veg: 210 },
+        },
+        {
+          name: "Hakka Noodles",
+          price: { veg: 170, non_veg: 190 },
+        },
+        { name: "Egg Hakka Noodles", veg: false, isEgg: true, price: 190 },
+        {
+          name: "Malaysian Noodles",
+          price: { veg: 170, non_veg: 200 },
+        },
+        {
+          name: "Schezwan Noodles",
+          price: { veg: 180, non_veg: 210 },
+        },
+        {
+          name: "Hong Kong Noodles",
+          price: { veg: 170, non_veg: 210 },
+        },
+        {
+          name: "American Chopsuey",
+          price: { veg: 200, non_veg: 210 },
+        },
+        { name: "Burnt Chilly Fried Rice", price: { veg: 200, non_veg: 220 } },
       ],
     },
     combination: {
@@ -127,184 +162,262 @@ const TazzaMenu = () => {
       icon: "🍱",
       items: [
         {
-          name: "Notes",
-          description: "Note: ask place to be served in one box",
-          price: 300,
+          name: "Triple Schezwan F. Rice",
+          price: { veg: 250, paneer: 300, non_veg: 300 },
         },
-        { name: "Curry Fried Rice w/ Pulao + Schezwan", price: 300 },
-        { name: "Rice alone", price: 300 },
-        { name: "Triple Schezwan Rice", veg: true, price: 250 },
-        { name: "Triple Special Rice", price: 300 },
-        { name: "Golden Red Rice", price: 300 },
+        {
+          name: "TAZZA Special Rice",
+          price: { veg: 250, non_veg: 300 },
+        },
+        {
+          name: "Chilly Fried Rice",
+          price: { veg: 250, paneer: 300, non_veg: 300 },
+        },
+        {
+          name: "Manchurian Fried Rice",
+          price: { veg: 250, paneer: 300, non_veg: 300 },
+        },
+        {
+          name: "Combination Noodles",
+          price: { veg: 250, non_veg: 300 },
+        },
+        { name: "Chicken Crispy Packing Rice", veg: false, price: 300 },
       ],
     },
-    falooda: {
-      title: "Falooda",
-      icon: "🍨",
+    chaat: {
+      title: "Chaat (Time: 3:30 PM - 10:30 PM)",
+      icon: "🥣",
       items: [
-        { name: "Royal Falooda", veg: true, price: 150 },
-        { name: "Mawa Milk Falooda", veg: true, price: 160 },
-        { name: "Special Kulfi Falooda", veg: true, price: 160 },
+        { name: "Pani Puri", veg: true, price: 60 },
+        { name: "Bhel Puri", veg: true, price: 70 },
+        { name: "Sev Puri", veg: true, price: 70 },
+        { name: "Dahi Puri", veg: true, price: 90 },
+        { name: "Dahi Wada", veg: true, price: 90 },
+        { name: "Ragda Pattice", veg: true, price: 70 },
+        { name: "Kachori Chaat", veg: true, price: 90 },
+        { name: "Dahi Pakoda Chaat", veg: true, price: 90 },
+        { name: "Papdi Chaat", veg: true, price: 90 },
+        { name: "Ragda Puri", veg: true, price: 70 },
+      ],
+    },
+    pizza: {
+      title: "Pizza",
+      icon: "🍕",
+      items: [
+        {
+          name: "Paneer Tikka",
+          veg: true,
+          description: "Tandoor Paneer, Coriander, G. Chilly, Cheese",
+          price: 300,
+        },
+        {
+          name: "Spicy Schezwan",
+          veg: true,
+          description:
+            "Chopped Onion, Capsicum, Baby Corn, Hot Schezwan Sauce, Cheese",
+          price: 250,
+        },
+        {
+          name: "Classic Veg Pizza",
+          veg: true,
+          description: "Onion, Capsicum, Tomato, American Corn, Olives, Cheese",
+          price: 260,
+        },
+        {
+          name: "Corn Pizza",
+          veg: true,
+          description: "American Corn, Cheese",
+          price: 220,
+        },
+        {
+          name: "Cheese Pizza",
+          veg: true,
+          description: "Only Cheese",
+          price: 200,
+        },
+        {
+          name: "TAZZA's Pizza",
+          veg: false,
+          description:
+            "Mushroom, Smoked Chicken, Baby Corn, Black Olives, Roasted Capsicum, Cheese",
+          price: 330,
+        },
+        {
+          name: "Chicken Chilly Pizza",
+          veg: false,
+          description: "Chicken, Capsicum, Chilly, Cheese",
+          price: 300,
+        },
+        {
+          name: "Chicken Manchurian Pizza",
+          veg: false,
+          description: "Chicken, Garlic, Ginger, Soya Sauce, Cheese",
+          price: 300,
+        },
+        {
+          name: "Barbeque Chicken Pizza",
+          veg: false,
+          description: "BBQ Chicken, Onion, Mushroom, Capsicum, Cheese",
+          price: 300,
+        },
+        {
+          name: "Mexican Pizza",
+          veg: false,
+          description: "Hot Chicken, American Corn, Capsicum, Mushroom, Cheese",
+          price: 300,
+        },
+        {
+          name: "Chicken Tikka Pizza",
+          veg: false,
+          description: "Chicken Tikka, Coriander, G. Chilly, Cheese",
+          price: 300,
+        },
+        { name: "Chicken Double Cheese Pizza", veg: false, price: 330 },
+      ],
+    },
+    burger: {
+      title: "Burgers",
+      icon: "🍔",
+      items: [
+        { name: "Chi. Burger with Cheese", veg: false, price: 150 },
+        { name: "Chi. Steak Burger with Cheese", veg: false, price: 150 },
+        { name: "Chi. Burger", veg: false, price: 130 },
+        { name: "Chi. Steak Burger", veg: false, price: 130 },
+        { name: "Veg. Burger with Cheese", veg: true, price: 120 },
+        { name: "Veg. Burger", veg: true, price: 110 },
+      ],
+    },
+    sandwich: {
+      title: "Sandwiches",
+      icon: "🥪",
+      items: [
+        { name: "Veg. Club Sandwich", veg: true, price: 130 },
+        { name: "Paneer Tikka Sandwich", veg: true, price: 120 },
+        { name: "Veg. Cheese Sandwich", veg: true, price: 110 },
+        { name: "Cheese Toast Sandwich", veg: true, price: 100 },
+        { name: "Veg. Sandwich", veg: true, price: 90 },
+        { name: "TAZZA Special Sandwich", veg: false, price: 160 },
+        { name: "Chicken Tikka Sandwich", veg: false, price: 130 },
+        { name: "Chicken Chilli Sandwich", veg: false, price: 130 },
+        { name: "Chicken Manchurian Sandwich", veg: false, price: 130 },
+        { name: "Chicken Club Sandwich", veg: false, price: 150 },
+        { name: "Chicken Cheese Sandwich", veg: false, price: 120 },
+        { name: "Chicken Sandwich", veg: false, price: 110 },
+        { name: "Eggo Macho Sandwich", veg: false, price: 100 },
+        { name: "Omelet Cheese Sandwich", veg: false, price: 110 },
+        { name: "Omelet Sandwich", veg: false, price: 100 },
+        { name: "Double Melting TAZZA Sandwich", veg: false, price: 130 },
+      ],
+    },
+    wraps: {
+      title: "Wraps & Paranthas",
+      icon: "🌯",
+      items: [
+        { name: "Chi. Reshmi Roll", veg: false, price: 130 },
+        { name: "Chi. Tandoori Roll", veg: false, price: 130 },
+        { name: "Butter Parantha", veg: true, price: 30 },
+        { name: "Aloo Parantha", veg: true, price: 70 },
+        { name: "Methi Parantha", veg: true, price: 50 },
+        { name: "Paneer Parantha", veg: true, price: 80 },
+      ],
+    },
+    sub_roll: {
+      title: "Sub Rolls",
+      icon: "🥖",
+      items: [
+        { name: "Paneer Tikka Roll", veg: true, price: 130 },
+        { name: "Chi. Mayonnaise Roll", veg: false, price: 130 },
+        { name: "Chi. Tikka Roll", veg: false, price: 130 },
+        { name: "Chi. BBQ Roll", veg: false, price: 130 },
+        { name: "Chi. Chilly Roll", veg: false, price: 130 },
+        { name: "Chi. Manchurian Roll", veg: false, price: 130 },
+        { name: "Veg. Roll with Cheese", veg: false, price: 100 },
+        { name: "Veg. Roll", veg: false, price: 80 },
+      ],
+    },
+    snacks: {
+      title: "Snacks",
+      icon: "🍟",
+      items: [
+        { name: "Chinese Bhel", veg: true, price: 100 },
+        { name: "French Fries", veg: true, price: 100 },
+        { name: "Garlic Bread (4 sticks)", veg: true, price: 60 },
+        { name: "Cheese Garlic Bread (4 pcs)", veg: true, price: 80 },
+        { name: "Tomato Cheese Bruschetta (4 pcs)", veg: true, price: 90 },
+        { name: "Cory Cheese Garlic Bread (4 pcs)", veg: true, price: 90 },
+        { name: "Peri Peri French Fries", veg: true, price: 120 },
+      ],
+    },
+    kababs_biryani: {
+      title: "Kababs & Pulao",
+      icon: "🍚",
+      items: [
+        { name: "Chicken Tikka (6 pcs)", veg: false, price: 200 },
+        { name: "Reshmi Kabab (6 pcs)", veg: false, price: 200 },
+        { name: "Chicken Leg/Breast", veg: false, price: 140 },
+        {
+          name: "Chicken Tandoori",
+          veg: false,
+          price: { half: 240, full: 400 },
+        },
+        {
+          name: "Chicken Shez. Tandoori",
+          veg: false,
+          price: { half: 260, full: 450 },
+        },
+        { name: "Chicken Shez. Leg/Breast", veg: false, price: 170 },
+        { name: "Chicken Shez. Tikka", veg: false, price: 240 },
+        { name: "Chicken Pulao", veg: false, price: 180 },
+        { name: "Veg Pulao", veg: true, price: 160 },
+        { name: "Paneer Pulao", veg: true, price: 200 },
       ],
     },
     fresh_fruit_juices: {
       title: "Fresh Fruit Juices",
       icon: "🧃",
       items: [
-        { name: "Mosambi Orange", veg: true, price: 100 },
-        { name: "Ganga Jumana", veg: true, price: 100 },
+        { name: "Mosambi / Orange", veg: true, price: 100 },
+        { name: "Ganga Jamuna", veg: true, price: 100 },
+        { name: "Watermelon", veg: true, price: 100 },
         { name: "Pineapple", veg: true, price: 100 },
         { name: "Grapes", veg: true, price: 100 },
-        { name: "Apple / Cocktail", veg: true, price: 100 },
-        { name: "Fruit Salad", veg: true, price: 100 },
+        { name: "Apple / Cocktail", veg: true, price: 120 },
+        { name: "Pomegranate", veg: true, price: 140 },
         { name: "Fresh Lime", veg: true, price: 60 },
       ],
     },
     milk_shakes: {
-      title: "Milk Shakes",
+      title: "Milk Shakes & Falooda",
       icon: "🥤",
       items: [
-        { name: "Banana Strawberry Rose", veg: true, price: 130 },
-        { name: "Chocolate / Butter Scotch", veg: true, price: 130 },
-        { name: "Mango", veg: true, price: 130 },
-        { name: "Cold Coffee", veg: true, price: 130 },
-        { name: "Custard", veg: true, price: 140 },
-        { name: "Pista/Vanilla Ice Cream", veg: true, price: 60 },
+        { name: "Banana / Chickoo", veg: true, price: 120 },
+        { name: "Chickoo", veg: true, price: 120 },
+        { name: "Apple", veg: true, price: 130 },
+        { name: "Vanilla / Strawberry / Rose", veg: true, price: 120 },
+        { name: "Chocolate / Butter Scotch", veg: true, price: 120 },
+        { name: "Cold Coffee", veg: true, price: 120 },
+        { name: "Cold Coffee with Ice Cream", veg: true, price: 140 },
+        { name: "Mango / Kesar Pista", veg: true, price: 140 },
         { name: "Dry Fruit", veg: true, price: 150 },
-        { name: "Elaichi Matka", veg: true, price: 60 },
-        { name: "Masala Matka", veg: true, price: 80 },
-        { name: "Fresh Matka", veg: true, price: 100 },
-      ],
-    },
-    tea_pizza: {
-      title: "Tazza Pizza",
-      icon: "🍕",
-      items: [
-        { name: "Paneer Tikka", veg: true, price: 250 },
-        { name: "Cheese Pizza (Indian Masala)", veg: true, price: 250 },
-        { name: "Mushroom Tandoori Pizza", veg: true, price: 300 },
-        { name: "Chicken Tandoori Pizza", price: 300 },
-        { name: "Chicken Tikka Pizza", price: 300 },
-        { name: "Meat Cheesy Pizza", price: 300 },
-        { name: "Chicken Double Cheese Pizza", price: 350 },
+        { name: "Butter Milk", veg: true, price: 60 },
+        { name: "Lassi Sweet/Salted", veg: true, price: 80 },
+        { name: "Fruit Salad with Ice Cream", veg: true, price: 120 },
+        { name: "Malai Kulfi Milkshake", veg: true, price: 150 },
+        { name: "Kesar Kulfi Milkshake", veg: true, price: 170 },
+        { name: "Royal Falooda", veg: true, price: 130 },
+        { name: "Kesar Falooda", veg: true, price: 140 },
+        { name: "TAZZA Special Falooda", veg: true, price: 160 },
+        { name: "Malai Kulfi Falooda", veg: true, price: 160 },
+        { name: "TAZZA Special Kulfi Falooda", veg: true, price: 180 },
       ],
     },
     ice_cream: {
       title: "Ice Cream",
       icon: "🍦",
       items: [
-        { name: "Vanilla / Strawberry", veg: true, price: 60 },
-        { name: "Mixed Fruit", veg: true, price: 60 },
-        { name: "Kesar Pista / Butter Scotch", veg: true, price: 60 },
-      ],
-    },
-    veg_pizza: {
-      title: "Veg. Pizza",
-      icon: "🍕",
-      items: [
-        { name: "Paneer Tikka", price: { veg: 250, non_veg: 250 } },
-        { name: "Chilly Garlic (Veg.)", veg: true, price: 250 },
-        { name: "Corn Scramble", veg: true, price: 90 },
-        { name: "Cheese Pizza", veg: true, price: 90 },
-        { name: "Barbeque", veg: true, price: 70 },
-      ],
-    },
-    paneer: {
-      title: "Paneer",
-      icon: "🧈",
-      items: [
-        { name: "Roti Paneer", veg: true, price: 70 },
-        { name: "Dal Fry", veg: true, price: 90 },
-        { name: "Kadai Khoya", veg: true, price: 70 },
-        { name: "Rogan Khoya", veg: true, price: 70 },
-        { name: "Roti Khoya", veg: true, price: 60 },
-        { name: "Paneer Pasanda", veg: true, price: 90 },
-      ],
-    },
-    grilled_sandwich: {
-      title: "Grilled Sandwich",
-      icon: "🥪",
-      items: [
-        { name: "Burger with Cheese", veg: true, price: 150 },
-        { name: "Chicken Steak Burger with Cheese", price: 150 },
-        { name: "Chicken Burger with Cheese", price: 150 },
-        { name: "Veg. Burger", veg: true, price: 120 },
-        { name: "Veg. Club Sandwich", veg: true, price: 150 },
-        { name: "Paneer Sandwich", veg: true, price: 150 },
-        { name: "Veg. Cheese Sandwich", veg: true, price: 110 },
-        { name: "Cheese Toast Sandwich", veg: true, price: 110 },
-        { name: "Cheese Grill Sandwich", veg: true, price: 60 },
-      ],
-    },
-    burger: {
-      title: "Burger",
-      icon: "🍔",
-      items: [
-        { name: "Burger with Cheese", veg: true, price: 150 },
-        { name: "Chicken Steak Burger with Cheese", price: 150 },
-        { name: "Chicken Burger with Cheese", price: 150 },
-        { name: "Veg. Burger", veg: true, price: 120 },
-      ],
-    },
-    uthaps: {
-      title: "Uthaps/Rolls",
-      icon: "🫓",
-      items: [
-        { name: "Chicken Uthap (Roll)", price: 150 },
-        { name: "Chicken BBQ Roll", price: 130 },
-        { name: "Chicken Tikka Roll", price: 130 },
-        { name: "Chicken Stick (Nos.)", price: 170 },
-        { name: "Gidcha Stick (Traditional Roll)", price: 455 },
-        { name: "Golden Smaz. (Anda Roll)", price: 200 },
-        { name: "Omelette Cheese Sandwich", price: 100 },
-        { name: "Grill Chicken Sandwich", price: 110 },
-        { name: "Double Rolling", price: 300 },
-        { name: "Grill Health Sandwich", price: 100 },
-      ],
-    },
-    perambos: {
-      title: "Parathas",
-      icon: "🥙",
-      items: [
-        { name: "Chicken Parotha", price: 80 },
-        { name: "Egg Parotha", price: 70 },
-        { name: "Butter Parotha", veg: true, price: 30 },
-      ],
-    },
-    kachho: {
-      title: "Kebabs & Grill",
-      icon: "🍢",
-      items: [
-        { name: "Chicken Tikka (Pcs.)", price: 200 },
-        { name: "Grill Kebab", price: 200 },
-        { name: "Reshmi Kebab (6 Pcs.)", price: 300 },
-        { name: "Corn Cheese Grill (mixed) (4 Pcs.)", veg: true, price: 180 },
-        { name: "Chicken Handi (mixed) (4 Pcs.)", price: 90 },
-        { name: "Course Grill Mix (special) (6 Pcs.)", price: 90 },
-        { name: "Grill mixed (6 special) Pcs.", price: 90 },
-        { name: "Paneer Tikka (Front) Pcs.", veg: true, price: 180 },
-      ],
-    },
-    biryani_pulao: {
-      title: "Biryani Pulao",
-      icon: "🍚",
-      items: [
-        { name: "Chicken Handi", price: 200 },
-        { name: "Chicken Hundi", price: 160 },
-        { name: "Paneer Khoya", veg: true, price: 160 },
-      ],
-    },
-    sub_roll: {
-      title: "Sub Roll",
-      icon: "🌯",
-      items: [
-        { name: "Paneer Mini Roll", veg: true, price: 150 },
-        { name: "Chicken BBQ Roll", price: 130 },
-        { name: "Chicken Tikka Roll", price: 130 },
-        { name: "Chicken Stick (Nos.)", price: 150 },
-        { name: "Cheese Roll", veg: true, price: 100 },
-        { name: "Chicken Fries", price: 60 },
-        { name: "French Fries", veg: true, price: 60 },
+        { name: "Vanilla / Strawberry", veg: true, price: 50 },
+        { name: "Chocolate / Butter Scotch", veg: true, price: 60 },
+        { name: "Kesar Pista", veg: true, price: 60 },
       ],
     },
   };
@@ -312,38 +425,31 @@ const TazzaMenu = () => {
   const categories = [
     { id: "all", name: "All Items", icon: "🍽️" },
     { id: "soups", name: "Soups", icon: "🍲" },
-    { id: "chinese", name: "Chinese", icon: "🥢" },
-    { id: "starter_chinese", name: "Starters (Chi)", icon: "🌶️" },
-    { id: "starter_non_veg", name: "Starters (Non-Veg)", icon: "🍗" },
+    { id: "chinese_starter_veg", name: "Starters (Veg)", icon: "🥦" },
+    { id: "chinese_starter_non_veg", name: "Starters (Non-Veg)", icon: "🍗" },
     { id: "main_course", name: "Main Course", icon: "🍛" },
     { id: "rice_noodles", name: "Rice & Noodles", icon: "🍜" },
     { id: "combination", name: "Combination", icon: "🍱" },
-    { id: "grilled_sandwich", name: "Sandwiches", icon: "🥪" },
+    { id: "chaat", name: "Chaat", icon: "🥣" },
+    { id: "pizza", name: "Pizza", icon: "🍕" },
     { id: "burger", name: "Burgers", icon: "🍔" },
-    { id: "tea_pizza", name: "Tazza Pizza", icon: "🍕" },
-    { id: "veg_pizza", name: "Veg Pizza", icon: "🍕" },
-    { id: "paneer", name: "Paneer", icon: "🧈" },
-    { id: "kachho", name: "Kebabs", icon: "🍢" },
-    { id: "biryani_pulao", name: "Biryani", icon: "🍚" },
-    { id: "uthaps", name: "Uthaps/Rolls", icon: "🫓" },
-    { id: "sub_roll", name: "Sub Rolls", icon: "🌯" },
-    { id: "perambos", name: "Parathas", icon: "🥙" },
+    { id: "sandwich", name: "Sandwiches", icon: "🥪" },
+    { id: "wraps", name: "Wraps/Paranthas", icon: "🌯" },
+    { id: "sub_roll", name: "Sub Rolls", icon: "🥖" },
+    { id: "kababs_biryani", name: "Kababs & Biryani", icon: "🍚" },
+    { id: "snacks", name: "Snacks", icon: "🍟" },
     { id: "fresh_fruit_juices", name: "Juices", icon: "🧃" },
-    { id: "milk_shakes", name: "Shakes", icon: "🥤" },
-    { id: "falooda", name: "Falooda", icon: "🍨" },
+    { id: "milk_shakes", name: "Shakes & Falooda", icon: "🥤" },
     { id: "ice_cream", name: "Ice Cream", icon: "🍦" },
   ];
 
   const filteredMenu = () => {
-    // 3. Fix array type and initialization
     const items: FilteredItem[] = [];
 
-    // Removed searchTerm logic, only filtering by selectedCategory now
     Object.keys(menuData).forEach((categoryKey) => {
       if (selectedCategory === "all" || selectedCategory === categoryKey) {
         const category = menuData[categoryKey];
         category.items.forEach((item) => {
-          // Push all items in the selected category
           items.push({ ...item, category: category.title, categoryKey });
         });
       }
@@ -352,144 +458,218 @@ const TazzaMenu = () => {
     return items;
   };
 
-  // 4. Fix implicit any on price parameter
+  // 4. Updated Price Rendering for Veg/Paneer/Non-Veg
   const renderPrice = (price: Price) => {
     if (typeof price === "number") {
       return `₹${price}`;
     } else if (typeof price === "object") {
-      // Use 'in' operator check or property check to satisfy TS
+      // Half / Full logic
       if ("half" in price && "full" in price) {
         return (
-          <div className="text-sm">
-            <span className="text-amber-700">Half: ₹{price.half}</span>
-            <span className="mx-2">|</span>
-            <span className="text-amber-800">Full: ₹{price.full}</span>
+          <div className="flex flex-col gap-1 text-sm">
+            <span className="text-amber-700 font-bold">
+              Half: ₹{price.half}
+            </span>
+            <span className="text-amber-900 font-bold">
+              Full: ₹{price.full}
+            </span>
           </div>
         );
       }
-      if ("veg" in price || "non_veg" in price) {
+
+      // Veg / Paneer / Non-Veg logic
+      if ("veg" in price || "non_veg" in price || "paneer" in price) {
         return (
-          <div className="text-sm">
+          <div className="flex flex-col gap-1 text-sm mt-1">
             {price.veg && (
-              <span className="text-green-700">Veg: ₹{price.veg}</span>
+              <div className="flex justify-between items-center w-full max-w-[140px]">
+                <span className="text-green-700 font-medium">Veg</span>
+                <span className="font-bold">₹{price.veg}</span>
+              </div>
             )}
-            {price.veg && price.non_veg && <span className="mx-2">|</span>}
+            {price.paneer && (
+              <div className="flex justify-between items-center w-full max-w-[140px]">
+                <span className="text-orange-600 font-medium">Paneer</span>
+                <span className="font-bold">₹{price.paneer}</span>
+              </div>
+            )}
             {price.non_veg && (
-              <span className="text-red-700">Non-Veg: ₹{price.non_veg}</span>
+              <div className="flex justify-between items-center w-full max-w-[140px]">
+                <span className="text-red-700 font-medium">N.Veg</span>
+                <span className="font-bold">₹{price.non_veg}</span>
+              </div>
             )}
           </div>
         );
       }
     }
-    // Fallback
     return `₹${price}`;
+  };
+
+  // Helper to render Veg/Non-Veg icons
+  const renderIcon = (item: MenuItem) => {
+    // If it has multiple options (e.g. PriceObject with both veg and non_veg), show both icons
+    if (
+      typeof item.price === "object" &&
+      "veg" in item.price &&
+      "non_veg" in item.price
+    ) {
+      return (
+        <div className="flex gap-1">
+          <span className="w-5 h-5 border-2 border-green-600 flex items-center justify-center bg-white">
+            <span className="w-2.5 h-2.5 bg-green-600 rounded-full"></span>
+          </span>
+          <span className="w-5 h-5 border-2 border-red-600 flex items-center justify-center bg-white">
+            <span className="w-2.5 h-2.5 bg-red-600 rounded-full"></span>
+          </span>
+        </div>
+      );
+    }
+
+    // Strict Veg
+    if (item.veg === true) {
+      return (
+        <span className="w-5 h-5 border-2 border-green-600 flex items-center justify-center bg-white">
+          <span className="w-2.5 h-2.5 bg-green-600 rounded-full"></span>
+        </span>
+      );
+    }
+
+    // Strict Non-Veg (veg is false) or Egg
+    if (item.veg === false) {
+      return (
+        <span className="w-5 h-5 border-2 border-red-600 flex items-center justify-center bg-white">
+          <span className="w-2.5 h-2.5 bg-red-600 rounded-full"></span>
+        </span>
+      );
+    }
+
+    // Fallback if undefined (usually means implicit non-veg or mixed, but we try to cover all above)
+    return null;
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-amber-800 via-orange-700 to-red-800 text-white shadow-2xl">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="text-center">
-            <h1 className="text-5xl font-bold mb-2 tracking-wide">TAZZA</h1>
-            <p className="text-xl italic opacity-90">Fast Food - means Fresh</p>
-            <p className="text-sm mt-2 opacity-80">Veg & Non Veg</p>
+      <div className="bg-gradient-to-r from-amber-800 via-orange-700 to-red-800 text-white shadow-2xl relative overflow-hidden">
+        {/* Decorative background circle */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
+
+        <div className="max-w-7xl mx-auto px-4 py-8 relative z-10">
+          <div className="text-center mb-6">
+            <h1 className="text-6xl font-extrabold mb-2 tracking-wide font-serif text-yellow-100 drop-shadow-lg">
+              TAZZA
+            </h1>
+            <p className="text-2xl italic opacity-90 font-light tracking-wider">
+              Fast Food & means Fresh
+            </p>
+            <div className="flex justify-center gap-4 mt-2 text-sm font-bold tracking-widest uppercase">
+              <span className="bg-green-700 px-2 py-0.5 rounded text-white">
+                Veg
+              </span>
+              <span className="text-white opacity-60">&</span>
+              <span className="bg-red-700 px-2 py-0.5 rounded text-white">
+                Non Veg
+              </span>
+            </div>
           </div>
 
-          {/* Contact Info */}
-          <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm">
-            <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4" />
-              <div>
+          {/* Contact Info Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm bg-black/20 p-4 rounded-xl backdrop-blur-sm border border-white/10">
+            <div className="flex flex-col items-center md:items-start gap-2">
+              <div className="flex items-center gap-2 font-bold text-yellow-200 uppercase tracking-wider mb-1">
+                <Phone className="w-4 h-4" /> Order Now
+              </div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-1">
                 <div>022 2447 2222</div>
                 <div>022 2445 2333</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4" />
-              <div>
                 <div>9892 31 83 15</div>
                 <div>9167 77 04 61</div>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4" />
-              <div>
-                <div>11:00 AM - 11:30 PM</div>
-                <div className="text-xs opacity-80">Closed Fri 12:45-2 PM</div>
+
+            <div className="flex flex-col items-center justify-center text-center">
+              <div className="bg-white/90 text-red-800 font-bold px-4 py-2 rounded-full shadow-lg transform -rotate-1">
+                HOME DELIVERY
+              </div>
+              <p className="text-xs mt-2 opacity-90">
+                12:00 PM to 11:00 PM (Above ₹150)
+              </p>
+            </div>
+
+            <div className="flex flex-col items-center md:items-end gap-2 text-right">
+              <div className="flex items-center gap-2 font-bold text-yellow-200 uppercase tracking-wider mb-1">
+                <Clock className="w-4 h-4" /> Timings
+              </div>
+              <div>11:00 AM - 11:30 PM</div>
+              <div className="text-xs text-yellow-100 bg-red-900/50 px-2 py-0.5 rounded">
+                Closed Friday 12:45 PM - 2:00 PM
               </div>
             </div>
           </div>
 
-          {/* Delivery Info */}
-          <div className="mt-4 text-center bg-white/10 rounded-lg py-3 px-4">
-            <p className="font-semibold text-lg">HOME DELIVERY</p>
-            <p className="text-sm">
-              Between 12 noon to 11 pm (Above Rs. 150/-)
+          <div className="mt-4 flex justify-center text-xs opacity-80 gap-2">
+            <MapPin className="w-3 h-3" />
+            <p>
+              59, Rehmat Manzil, Lady Jamshedji Road, Mahim, Mumbai - 400 016
             </p>
           </div>
         </div>
       </div>
 
-      {/* Filter only (Search removed) */}
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Category Filter */}
-        <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-full whitespace-nowrap transition-all ${
-                selectedCategory === cat.id
-                  ? "bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg scale-105"
-                  : "bg-white text-gray-700 hover:bg-amber-100 border border-amber-200"
-              }`}
-            >
-              <span className="mr-2">{cat.icon}</span>
-              {cat.name}
-            </button>
-          ))}
+        <div className="sticky top-0 z-30 bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 py-4 -mx-4 px-4 mb-4 shadow-sm">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-full whitespace-nowrap transition-all duration-300 font-medium ${
+                  selectedCategory === cat.id
+                    ? "bg-amber-700 text-white shadow-lg scale-105 ring-2 ring-amber-200 ring-offset-1"
+                    : "bg-white text-gray-700 hover:bg-amber-100 border border-amber-200 hover:border-amber-400 shadow-sm"
+                }`}
+              >
+                <span className="text-lg">{cat.icon}</span>
+                {cat.name}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Menu Grid */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           {filteredMenu().map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-amber-100 hover:border-amber-300 transform hover:-translate-y-1"
+              className="bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-amber-100 group"
             >
-              <div className="p-5">
-                <div className="flex justify-between items-start mb-3">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      {item.veg && (
-                        <span className="w-5 h-5 border-2 border-green-600 flex items-center justify-center">
-                          <span className="w-2.5 h-2.5 bg-green-600 rounded-full"></span>
-                        </span>
-                      )}
-                      {!item.veg && (
-                        <span className="w-5 h-5 border-2 border-red-600 flex items-center justify-center">
-                          <span className="w-2.5 h-2.5 bg-red-600 rounded-full"></span>
-                        </span>
-                      )}
-                      <h3 className="font-semibold text-gray-800 text-lg">
-                        {item.name}
-                      </h3>
+              <div className="p-5 h-full flex flex-col justify-between">
+                <div>
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="flex-1 pr-2">
+                      <div className="flex items-center gap-2 mb-1">
+                        {renderIcon(item)}
+                        <h3 className="font-bold text-gray-800 text-lg leading-tight group-hover:text-amber-800 transition-colors">
+                          {item.name}
+                        </h3>
+                      </div>
+                      <p className="text-xs font-semibold text-amber-600 uppercase tracking-wide">
+                        {item.category}
+                      </p>
                     </div>
-                    <p className="text-xs text-amber-600 font-medium">
-                      {item.category}
+                  </div>
+                  {item.description && (
+                    <p className="text-xs text-gray-500 mb-4 italic leading-relaxed border-l-2 border-amber-200 pl-2">
+                      {item.description}
                     </p>
-                  </div>
+                  )}
                 </div>
-                {item.description && (
-                  <p className="text-xs text-gray-600 mb-3 italic">
-                    {item.description}
-                  </p>
-                )}
-                <div className="pt-3 border-t border-amber-100">
-                  <div className="font-bold text-amber-700 text-lg">
-                    {renderPrice(item.price)}
-                  </div>
+
+                <div className="pt-3 border-t border-dashed border-gray-200 mt-2 font-bold">
+                  {renderPrice(item.price)}
                 </div>
               </div>
             </div>
@@ -497,33 +677,34 @@ const TazzaMenu = () => {
         </div>
 
         {filteredMenu().length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">
-              No items found matching your filter selection.
+          <div className="text-center py-20 bg-white rounded-2xl shadow-inner border border-amber-100">
+            <div className="text-6xl mb-4">🍽️</div>
+            <p className="text-gray-500 text-xl font-medium">
+              No items found in this category.
             </p>
+            <button
+              onClick={() => setSelectedCategory("all")}
+              className="mt-4 text-amber-700 font-bold hover:underline"
+            >
+              View Full Menu
+            </button>
           </div>
         )}
       </div>
 
       {/* Footer */}
-      <div className="bg-gradient-to-r from-amber-800 via-orange-700 to-red-800 text-white mt-12 py-6">
+      <div className="bg-gray-900 text-white mt-12 py-12 border-t-4 border-amber-600">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-sm opacity-90">
-            59, Rehmat Manzil, Lady Jamshedji Road, Mahim, Mumbai - 400 016
+          <h2 className="text-3xl font-bold mb-4 font-serif text-yellow-500">
+            TAZZA
+          </h2>
+          <p className="text-gray-400 mb-6 max-w-md mx-auto">
+            Experience the authentic taste of fresh fast food. Serving Veg &
+            Non-Veg delicacies with passion.
           </p>
-          <p className="text-xs mt-2 opacity-75">
-            @ 2025 Tazza. All Rights Reserved.
-          </p>
-          <p className="text-sm">
-            Powered by{" "}
-            <a
-              href="https://taplab.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 font-semibold hover:underline"
-            >
-              TapLab
-            </a>
+          <div className="w-16 h-1 bg-amber-600 mx-auto mb-6 rounded-full"></div>
+          <p className="text-sm text-gray-500">
+            © {new Date().getFullYear()} Tazza Fast Food. All rights reserved.
           </p>
         </div>
       </div>
