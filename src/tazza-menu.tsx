@@ -569,8 +569,8 @@ const TazzaMenu = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
-      {/* FIXED HEADER Section */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-amber-800 via-orange-700 to-red-800 text-white shadow-2xl overflow-hidden">
+      {/* HEADER Section (Relative, not Fixed) */}
+      <div className="relative bg-gradient-to-r from-amber-800 via-orange-700 to-red-800 text-white shadow-2xl overflow-hidden">
         {/* Decorative background circle */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
 
@@ -636,13 +636,9 @@ const TazzaMenu = () => {
         </div>
       </div>
 
-      {/* Placeholder div to prevent content from hiding behind fixed header */}
-      {/* Height is approximate based on header size on mobile/desktop */}
-      <div className="h-[350px] md:h-[300px] w-full bg-transparent"></div>
-
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 pt-0 py-8">
-        {/* Category Filter - No longer sticky */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Category Filter */}
         <div className="py-4 -mx-4 px-4 mb-4">
           <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
             {categories.map((cat) => (
