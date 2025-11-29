@@ -721,13 +721,28 @@ const TazzaMenu = () => {
           <h2 className="text-3xl font-bold mb-4 font-serif text-yellow-500">
             TAZZA
           </h2>
+
           <p className="text-gray-400 mb-6 max-w-md mx-auto">
             Experience the authentic taste of fresh fast food. Serving Veg &
             Non-Veg delicacies with passion.
           </p>
+
           <div className="w-16 h-1 bg-amber-600 mx-auto mb-6 rounded-full"></div>
-          <p className="text-sm text-gray-500">
+
+          <p className="text-sm text-gray-500 mb-2">
             © {new Date().getFullYear()} Tazza Fast Food. All rights reserved.
+          </p>
+
+          <p className="text-xs text-gray-400">
+            Powered by{" "}
+            <a
+              href="https://taplab.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-amber-500 font-semibold hover:underline"
+            >
+              TapLab
+            </a>
           </p>
         </div>
       </div>
