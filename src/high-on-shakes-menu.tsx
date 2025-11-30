@@ -137,6 +137,12 @@ const HighOnShakesMenu = () => {
           details: "Paneer / Chicken",
           bestseller: true,
         },
+        {
+          name: "Makhani",
+          price: "160 / 170",
+          details: "Paneer / Chicken",
+          bestseller: true,
+        },
       ],
     },
     {
@@ -584,7 +590,10 @@ const HighOnShakesMenu = () => {
                       const isBestseller = item.bestseller;
                       const isNonVeg =
                         item.details?.toLowerCase().includes("chicken") ||
-                        item.details?.toLowerCase().includes("fish");
+                        item.details?.toLowerCase().includes("fish") ||
+                        item.name?.toLowerCase().includes("chicken") ||
+                        item.name?.toLowerCase().includes("bucket") ||
+                        item.name?.toLowerCase().includes("fish");
 
                       return (
                         <div
