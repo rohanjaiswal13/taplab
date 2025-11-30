@@ -141,7 +141,6 @@ const HighOnShakesMenu = () => {
           name: "Makhani",
           price: "160 / 170",
           details: "Paneer / Chicken",
-          bestseller: true,
         },
       ],
     },
