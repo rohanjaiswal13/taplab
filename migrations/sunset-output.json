@@ -1,0 +1,1292 @@
+{
+  "slug": "sunsetchinese",
+  "name": "Sunset Chinese",
+  "isActive": true,
+  "menuConfig": {
+    "layout": "list",
+    "enableSearch": true,
+    "enableCategoryFilter": true,
+    "showVegIndicators": false,
+    "enableScrollToTop": true,
+    "sections": [
+      {
+        "id": "vegSoup",
+        "title": "VEG SOUP",
+        "displayOrder": 0,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Veg Sweet Corn Soup",
+            "price": {
+              "type": "multi",
+              "values": "160 | 120"
+            }
+          },
+          {
+            "name": "Veg Manchow Soup",
+            "price": {
+              "type": "multi",
+              "values": "160 | 120"
+            }
+          },
+          {
+            "name": "Veg Hot 'N' Sour",
+            "price": {
+              "type": "multi",
+              "values": "160 | 120"
+            }
+          },
+          {
+            "name": "Veg Talumein Soup",
+            "price": {
+              "type": "multi",
+              "values": "160 | 120"
+            }
+          },
+          {
+            "name": "Veg Tum Yum Soup",
+            "price": {
+              "type": "multi",
+              "values": "160 | 120"
+            }
+          },
+          {
+            "name": "Veg Noodle Soup",
+            "price": {
+              "type": "multi",
+              "values": "160 | 120"
+            }
+          },
+          {
+            "name": "Veg Wanton Soup",
+            "price": {
+              "type": "multi",
+              "values": "180 | 130"
+            }
+          },
+          {
+            "name": "Veg Lemon Coriander",
+            "price": {
+              "type": "multi",
+              "values": "160 | 120"
+            }
+          }
+        ]
+      },
+      {
+        "id": "nonVegSoup",
+        "title": "NON-VEG SOUP",
+        "displayOrder": 1,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Chicken Sweet Corn Soup",
+            "price": {
+              "type": "multi",
+              "values": "170 | 130"
+            }
+          },
+          {
+            "name": "Chicken Manchow Soup",
+            "price": {
+              "type": "multi",
+              "values": "170 | 130"
+            }
+          },
+          {
+            "name": "Chicken Hot 'n' Sour",
+            "price": {
+              "type": "multi",
+              "values": "170 | 130"
+            }
+          },
+          {
+            "name": "Chicken Lemon Coriander Soup",
+            "price": {
+              "type": "multi",
+              "values": "170 | 130"
+            }
+          },
+          {
+            "name": "Chicken Talumein Soup",
+            "price": {
+              "type": "multi",
+              "values": "170 | 130"
+            }
+          },
+          {
+            "name": "Chicken Clear Soup",
+            "price": {
+              "type": "multi",
+              "values": "170 | 130"
+            }
+          },
+          {
+            "name": "Chicken Tum Yum Soup",
+            "price": {
+              "type": "multi",
+              "values": "170 | 130"
+            }
+          },
+          {
+            "name": "Chicken Noodle Soup",
+            "price": {
+              "type": "multi",
+              "values": "170 | 130"
+            }
+          },
+          {
+            "name": "Chicken Lung Fung Soup",
+            "price": {
+              "type": "multi",
+              "values": "190"
+            }
+          },
+          {
+            "name": "Chicken Wanton Soup",
+            "price": {
+              "type": "multi",
+              "values": "190"
+            }
+          }
+        ]
+      },
+      {
+        "id": "vegStarters",
+        "title": "VEG STARTERS",
+        "displayOrder": 2,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Veg Hunan Dry",
+            "price": {
+              "type": "multi",
+              "values": "220 | 170"
+            }
+          },
+          {
+            "name": "Veg Manchurian Dry",
+            "price": {
+              "type": "multi",
+              "values": "220 | 170"
+            }
+          },
+          {
+            "name": "Veg Schezwan Dry",
+            "price": {
+              "type": "multi",
+              "values": "220 | 170"
+            }
+          },
+          {
+            "name": "Veg Chilly Dry",
+            "price": {
+              "type": "multi",
+              "values": "220 | 170"
+            }
+          },
+          {
+            "name": "Shanghai Potatoes",
+            "price": {
+              "type": "multi",
+              "values": "240"
+            }
+          },
+          {
+            "name": "Kung Pao Potatoes",
+            "price": {
+              "type": "multi",
+              "values": "240"
+            }
+          },
+          {
+            "name": "Crispy Potatoes",
+            "price": {
+              "type": "multi",
+              "values": "240"
+            }
+          },
+          {
+            "name": "Mushroom Manchurian",
+            "price": {
+              "type": "multi",
+              "values": "240"
+            }
+          },
+          {
+            "name": "Mushroom Schezwan",
+            "price": {
+              "type": "multi",
+              "values": "240"
+            }
+          },
+          {
+            "name": "Paneer Chilly Dry",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Paneer Whole Garlic",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Paneer Shanghai",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Paneer Hong Kong Dry",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Paneer Ginger",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Veg Spring Roll",
+            "price": {
+              "type": "multi",
+              "values": "240"
+            }
+          },
+          {
+            "name": "Veg Fried Wanton",
+            "price": {
+              "type": "multi",
+              "values": "240"
+            }
+          }
+        ]
+      },
+      {
+        "id": "nonVegStarters",
+        "title": "NON-VEG STARTERS",
+        "displayOrder": 3,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Hunan Chicken Dry",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Chilly Dry",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Manchurian Dry",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Schezwan Chicken Dry",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Shanghai Chicken Dry",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Lolipop",
+            "price": {
+              "type": "multi",
+              "values": "230 | 170"
+            }
+          },
+          {
+            "name": "Lolipop Masala",
+            "price": {
+              "type": "multi",
+              "values": "260 | 200"
+            }
+          },
+          {
+            "name": "Drums of Heaven",
+            "price": {
+              "type": "multi",
+              "values": "280 | 220"
+            }
+          },
+          {
+            "name": "Mongolian Chicken",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Red Pepper Chicken",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Butter Garlic Chicken",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Thread Chicken",
+            "price": {
+              "type": "multi",
+              "values": "310"
+            }
+          },
+          {
+            "name": "Spicy Crispy Chicken",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Grilled Barbeque Chicken",
+            "price": {
+              "type": "multi",
+              "values": "340"
+            }
+          },
+          {
+            "name": "Shredded Chilly Basil Chicken",
+            "price": {
+              "type": "multi",
+              "values": "300"
+            }
+          },
+          {
+            "name": "Roasted Chilly Chicken",
+            "price": {
+              "type": "multi",
+              "values": "320"
+            }
+          },
+          {
+            "name": "Dragon Chicken",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Chicken Spring Roll",
+            "price": {
+              "type": "multi",
+              "values": "270"
+            }
+          },
+          {
+            "name": "Chicken Dragon Roll",
+            "price": {
+              "type": "multi",
+              "values": "270"
+            }
+          },
+          {
+            "name": "Chicken Fried Wanton",
+            "price": {
+              "type": "multi",
+              "values": "270"
+            }
+          },
+          {
+            "name": "Chicken Steam Wanton",
+            "price": {
+              "type": "multi",
+              "values": "270"
+            }
+          }
+        ]
+      },
+      {
+        "id": "fishStarters",
+        "title": "FISH STARTERS",
+        "displayOrder": 4,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Fish Chilly Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Hunan Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Hong Kong Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Oyster Sauce",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Manchurian Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Schezwan Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Garlic Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Shanghai Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          }
+        ]
+      },
+      {
+        "id": "prawnsStarters",
+        "title": "PRAWNS STARTERS",
+        "displayOrder": 5,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Prawns Butter Garlic",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Prawns Barbeque",
+            "price": {
+              "type": "multi",
+              "values": "300"
+            }
+          },
+          {
+            "name": "Prawns Golden Fried",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Prawns Red Pepper",
+            "price": {
+              "type": "multi",
+              "values": "300"
+            }
+          },
+          {
+            "name": "Prawns Chilly Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Prawns Garlic Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Prawns Sweet 'N' Sour Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Prawns Oyster Sauce Dry",
+            "price": {
+              "type": "multi",
+              "values": "300"
+            }
+          },
+          {
+            "name": "Prawns Schezwan Dry",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          }
+        ]
+      },
+      {
+        "id": "vegRice",
+        "title": "VEG RICE",
+        "displayOrder": 6,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Veg Fried Rice",
+            "price": {
+              "type": "multi",
+              "values": "210 | 170"
+            }
+          },
+          {
+            "name": "Veg Schezwan Rice",
+            "price": {
+              "type": "multi",
+              "values": "220 | 180"
+            }
+          },
+          {
+            "name": "Veg Hong Kong Rice",
+            "price": {
+              "type": "multi",
+              "values": "220 | 180"
+            }
+          },
+          {
+            "name": "Veg Singapore Rice",
+            "price": {
+              "type": "multi",
+              "values": "220 | 180"
+            }
+          },
+          {
+            "name": "Veg Combination Rice",
+            "price": {
+              "type": "multi",
+              "values": "220 | 180"
+            }
+          },
+          {
+            "name": "Veg Burnt Garlic Rice",
+            "price": {
+              "type": "multi",
+              "values": "240 | 200"
+            }
+          },
+          {
+            "name": "Veg Stewed Rice",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Veg Triple Rice",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Veg Pot Rice",
+            "price": {
+              "type": "multi",
+              "values": "310"
+            }
+          },
+          {
+            "name": "Veg Korean Rice",
+            "price": {
+              "type": "multi",
+              "values": "310"
+            }
+          }
+        ]
+      },
+      {
+        "id": "nonVegRice",
+        "title": "NON-VEG RICE",
+        "displayOrder": 7,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Egg Fried Rice",
+            "price": {
+              "type": "multi",
+              "values": "210 | 150"
+            }
+          },
+          {
+            "name": "Egg Schezwan Rice",
+            "price": {
+              "type": "multi",
+              "values": "220 | 160"
+            }
+          },
+          {
+            "name": "Chicken Fried Rice",
+            "price": {
+              "type": "multi",
+              "values": "220 | 180"
+            }
+          },
+          {
+            "name": "Chicken Schezwan Rice",
+            "price": {
+              "type": "multi",
+              "values": "230 | 190"
+            }
+          },
+          {
+            "name": "Chicken Hong Kong Rice",
+            "price": {
+              "type": "multi",
+              "values": "230 | 190"
+            }
+          },
+          {
+            "name": "Chicken Singapore Rice",
+            "price": {
+              "type": "multi",
+              "values": "230 | 190"
+            }
+          },
+          {
+            "name": "Chicken Burnt Garlic Rice",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Chicken Triple Rice",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Chicken Stewed Rice",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Chicken Pot Rice",
+            "price": {
+              "type": "multi",
+              "values": "320"
+            }
+          },
+          {
+            "name": "Chicken Chopper Rice",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Chicken Korean Rice",
+            "price": {
+              "type": "multi",
+              "values": "320"
+            }
+          },
+          {
+            "name": "Chicken Chilly Basil Rice",
+            "price": {
+              "type": "multi",
+              "values": "320"
+            }
+          },
+          {
+            "name": "Prawns Fried Rice",
+            "price": {
+              "type": "multi",
+              "values": "230 | 190"
+            }
+          },
+          {
+            "name": "Prawns Schezwan Rice",
+            "price": {
+              "type": "multi",
+              "values": "240 | 200"
+            }
+          },
+          {
+            "name": "Prawns Singapore Rice",
+            "price": {
+              "type": "multi",
+              "values": "240 | 200"
+            }
+          },
+          {
+            "name": "Prawns Hong Kong Rice",
+            "price": {
+              "type": "multi",
+              "values": "240 | 200"
+            }
+          }
+        ]
+      },
+      {
+        "id": "vegNoodles",
+        "title": "VEG NOODLES",
+        "displayOrder": 8,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Veg Hakka Noodles",
+            "price": {
+              "type": "multi",
+              "values": "210 | 170"
+            }
+          },
+          {
+            "name": "Veg Schezwan Noodles",
+            "price": {
+              "type": "multi",
+              "values": "220 | 180"
+            }
+          },
+          {
+            "name": "Veg Singapore Noodles",
+            "price": {
+              "type": "multi",
+              "values": "220 | 180"
+            }
+          },
+          {
+            "name": "Veg Hong Kong Noodles",
+            "price": {
+              "type": "multi",
+              "values": "220 | 180"
+            }
+          },
+          {
+            "name": "Veg Burnt Garlic Noodles",
+            "price": {
+              "type": "multi",
+              "values": "240"
+            }
+          },
+          {
+            "name": "Veg Triple Noodles",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Veg Pot Noodles",
+            "price": {
+              "type": "multi",
+              "values": "310"
+            }
+          },
+          {
+            "name": "Veg Korean Noodles",
+            "price": {
+              "type": "multi",
+              "values": "310"
+            }
+          }
+        ]
+      },
+      {
+        "id": "nonVegNoodles",
+        "title": "NON-VEG NOODLES",
+        "displayOrder": 9,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Egg Hakka Noodles",
+            "price": {
+              "type": "multi",
+              "values": "210 | 150"
+            }
+          },
+          {
+            "name": "Egg Schezwan Noodles",
+            "price": {
+              "type": "multi",
+              "values": "220 | 160"
+            }
+          },
+          {
+            "name": "Chicken Hakka Noodles",
+            "price": {
+              "type": "multi",
+              "values": "220 | 180"
+            }
+          },
+          {
+            "name": "Chicken Schezwan Noodles",
+            "price": {
+              "type": "multi",
+              "values": "230 | 190"
+            }
+          },
+          {
+            "name": "Chicken Hong Kong Noodles",
+            "price": {
+              "type": "multi",
+              "values": "230 | 190"
+            }
+          },
+          {
+            "name": "Chicken Burnt Garlic Noodles",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Triple Noodles",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Chicken Stewed Noodles",
+            "price": {
+              "type": "multi",
+              "values": "290"
+            }
+          },
+          {
+            "name": "Chicken Pot Noodles",
+            "price": {
+              "type": "multi",
+              "values": "320"
+            }
+          },
+          {
+            "name": "Chicken Chopper Noodles",
+            "price": {
+              "type": "multi",
+              "values": "320"
+            }
+          },
+          {
+            "name": "Chicken Korean Noodles",
+            "price": {
+              "type": "multi",
+              "values": "320"
+            }
+          },
+          {
+            "name": "Chicken Chilly Basil Noodles",
+            "price": {
+              "type": "multi",
+              "values": "320"
+            }
+          },
+          {
+            "name": "Prawns Fried Noodles",
+            "price": {
+              "type": "multi",
+              "values": "230 | 190"
+            }
+          },
+          {
+            "name": "Prawns Schezwan Noodles",
+            "price": {
+              "type": "multi",
+              "values": "240 | 200"
+            }
+          },
+          {
+            "name": "Prawns Singapore Noodles",
+            "price": {
+              "type": "multi",
+              "values": "240 | 200"
+            }
+          },
+          {
+            "name": "Prawns Hong Kong Noodles",
+            "price": {
+              "type": "multi",
+              "values": "240 | 200"
+            }
+          }
+        ]
+      },
+      {
+        "id": "vegGravy",
+        "title": "VEG GRAVY",
+        "displayOrder": 10,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Veg Chilly Gravy",
+            "price": {
+              "type": "multi",
+              "values": "230 | 180"
+            }
+          },
+          {
+            "name": "Veg Manchurian Gravy",
+            "price": {
+              "type": "multi",
+              "values": "230 | 180"
+            }
+          },
+          {
+            "name": "Veg Garlic Gravy",
+            "price": {
+              "type": "multi",
+              "values": "230 | 180"
+            }
+          },
+          {
+            "name": "Veg Hunan Gravy",
+            "price": {
+              "type": "multi",
+              "values": "230 | 180"
+            }
+          },
+          {
+            "name": "Veg Hong Kong Gravy",
+            "price": {
+              "type": "multi",
+              "values": "230 | 180"
+            }
+          },
+          {
+            "name": "Mushroom Chilly Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Mushroom Manchurian Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Mushroom Schezwan Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          }
+        ]
+      },
+      {
+        "id": "paneerGravy",
+        "title": "PANEER GRAVY",
+        "displayOrder": 11,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Paneer Hot Garlic Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Paneer Chilly Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Paneer Hunan Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Paneer Garlic Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Paneer Green Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          },
+          {
+            "name": "Paneer Oyster Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250"
+            }
+          }
+        ]
+      },
+      {
+        "id": "chickenGravy",
+        "title": "CHICKEN GRAVY",
+        "displayOrder": 12,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Chicken Chilly Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Manchurian Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Hunan Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Garlic Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Hot Garlic Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Green Sauce Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Hong Kong Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Sweet 'N' Sour Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Oyster Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          },
+          {
+            "name": "Chicken Schezwan Gravy",
+            "price": {
+              "type": "multi",
+              "values": "250 | 190"
+            }
+          }
+        ]
+      },
+      {
+        "id": "prawnsGravy",
+        "title": "PRAWNS GRAVY",
+        "displayOrder": 13,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Prawns Chilly Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Prawns Manchurian Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Prawns Sweet 'N' Sour Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Prawns Hot Garlic Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Prawns Hong Kong Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          }
+        ]
+      },
+      {
+        "id": "fishGravy",
+        "title": "FISH GRAVY",
+        "displayOrder": 14,
+        "note": "Large | Small",
+        "items": [
+          {
+            "name": "Fish Garlic Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Schezwan Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Manchurian Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Sweet 'N' Sour Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Chilly Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Hong Kong Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          },
+          {
+            "name": "Fish Green Garlic Gravy",
+            "price": {
+              "type": "multi",
+              "values": "280"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "branding": {
+    "colors": {
+      "primary": "red-700",
+      "secondary": "red-600",
+      "accent": "red-800",
+      "text": "gray-800",
+      "background": "red-50"
+    },
+    "gradients": {
+      "header": "red-gradient",
+      "background": "red-bg"
+    },
+    "fonts": {
+      "heading": "font-sans",
+      "body": "font-sans"
+    },
+    "header": {
+      "title": "SUNSET",
+      "subtitle": "Chinese",
+      "badges": [
+        "Veg",
+        "Non Veg"
+      ]
+    },
+    "footer": {
+      "description": "Authentic Chinese cuisine in Mumbai",
+      "copyright": "© 2025 Sunset Chinese. All rights reserved."
+    }
+  },
+  "subscription": {
+    "plan": "trial",
+    "price": 999,
+    "status": "trial",
+    "currentPeriodStart": "2025-01-01T00:00:00.000Z",
+    "currentPeriodEnd": "2025-12-31T00:00:00.000Z",
+    "trialEnd": "2025-12-31T00:00:00.000Z"
+  },
+  "contact": {
+    "phones": [
+      "7208662363",
+      "8104707025"
+    ],
+    "address": "Shop No 1, 222 V.S Marg Mahim, Mumbai-16",
+    "deliveryInfo": "Free Home Delivery"
+  }
+}
