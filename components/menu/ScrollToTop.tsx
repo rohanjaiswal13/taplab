@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { ArrowUp } from "lucide-react";
 
 interface ScrollToTopProps {
   threshold?: number; // Scroll threshold in pixels (default: 400)
@@ -12,7 +12,10 @@ interface ScrollToTopProps {
  * ScrollToTop - Floating button that appears after scrolling
  * Shows after threshold (default 400px) and scrolls to top on click
  */
-export function ScrollToTop({ threshold = 400, className = '' }: ScrollToTopProps) {
+export function ScrollToTop({
+  threshold = 400,
+  className = "",
+}: ScrollToTopProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -24,18 +27,18 @@ export function ScrollToTop({ threshold = 400, className = '' }: ScrollToTopProp
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     // Check initial scroll position
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [threshold]);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 

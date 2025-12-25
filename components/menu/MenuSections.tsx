@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { MenuSection } from '@/lib/types/menu';
-import { MenuItemCard } from './MenuItemCard';
-import { CategoryFilter } from './CategoryFilter';
+import { useState } from "react";
+import { MenuSection } from "@/lib/types/menu";
+import { MenuItemCard } from "./MenuItemCard";
+import { CategoryFilter } from "./CategoryFilter";
 
 interface MenuSectionsProps {
   sections: MenuSection[];
@@ -20,13 +20,13 @@ export function MenuSections({
   sections,
   showCategoryFilter = true,
   showVegIndicators = true,
-  className = '',
+  className = "",
 }: MenuSectionsProps) {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   // Filter sections based on selected category
   const filteredSections =
-    selectedCategory === 'all'
+    selectedCategory === "all"
       ? sections
       : sections.filter((section) => section.id === selectedCategory);
 
@@ -51,12 +51,18 @@ export function MenuSections({
         {sortedSections.map((section, sectionIndex) => (
           <div
             key={section.id}
-            className={`mb-16 ${sectionIndex !== sortedSections.length - 1 ? 'border-b-2 border-gray-200 pb-12' : ''}`}
+            className={`mb-16 ${
+              sectionIndex !== sortedSections.length - 1
+                ? "border-b-2 border-gray-200 pb-12"
+                : ""
+            }`}
           >
             {/* Section Header */}
             <div className="mb-8 text-center">
               <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-amber-50 to-orange-50 rounded-full border border-amber-200">
-                {section.icon && <span className="text-4xl">{section.icon}</span>}
+                {section.icon && (
+                  <span className="text-4xl">{section.icon}</span>
+                )}
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
                   {section.title}
                 </h2>

@@ -1,6 +1,5 @@
-import React from 'react';
-import { Phone, MapPin } from 'lucide-react';
-import { Branding, ContactInfo, Location } from '@/lib/types/restaurant';
+import { Phone, MapPin } from "lucide-react";
+import { Branding, ContactInfo, Location } from "@/lib/types/restaurant";
 
 interface MenuFooterProps {
   branding: Branding;
@@ -11,7 +10,11 @@ interface MenuFooterProps {
 /**
  * MenuFooter - Footer with contact info and branding
  */
-export function MenuFooter({ branding, contact, className = '' }: MenuFooterProps) {
+export function MenuFooter({
+  branding,
+  contact,
+  className = "",
+}: MenuFooterProps) {
   return (
     <footer className={`bg-gray-900 text-white py-8 mt-12 ${className}`}>
       <div className="max-w-7xl mx-auto px-4">
@@ -99,7 +102,7 @@ export function MenuFooter({ branding, contact, className = '' }: MenuFooterProp
         <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
           <p>{branding.footer.copyright}</p>
           <p className="mt-2">
-            Powered by{' '}
+            Powered by{" "}
             <a
               href="https://taplab.in"
               target="_blank"

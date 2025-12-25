@@ -1,7 +1,6 @@
-import React from 'react';
-import { Phone, MapPin, Clock } from 'lucide-react';
-import { Branding, ContactInfo } from '@/lib/types/restaurant';
-import { getSafeGradient, getSafeTextColor } from '@/lib/utils/theme';
+import { Phone, MapPin, Clock } from "lucide-react";
+import { Branding, ContactInfo } from "@/lib/types/restaurant";
+import { getSafeGradient } from "@/lib/utils/theme";
 
 interface MenuHeaderProps {
   branding: Branding;
@@ -13,11 +12,17 @@ interface MenuHeaderProps {
  * MenuHeader - Sticky header with restaurant branding
  * Displays logo, name, contact info, and badges
  */
-export function MenuHeader({ branding, contact, className = '' }: MenuHeaderProps) {
+export function MenuHeader({
+  branding,
+  contact,
+  className = "",
+}: MenuHeaderProps) {
   const headerGradient = getSafeGradient(branding.gradients.header);
 
   return (
-    <header className={`sticky top-0 z-50 ${headerGradient} text-white shadow-lg ${className}`}>
+    <header
+      className={`sticky top-0 z-50 ${headerGradient} text-white shadow-lg ${className}`}
+    >
       <div className="max-w-7xl mx-auto px-4 py-6">
         {/* Logo and Title */}
         <div className="flex items-center justify-between mb-4">
@@ -62,11 +67,7 @@ export function MenuHeader({ branding, contact, className = '' }: MenuHeaderProp
               <Phone className="w-4 h-4 flex-shrink-0" />
               <div className="flex flex-wrap gap-2">
                 {contact.phones.map((phone, i) => (
-                  <a
-                    key={i}
-                    href={`tel:${phone}`}
-                    className="hover:underline"
-                  >
+                  <a key={i} href={`tel:${phone}`} className="hover:underline">
                     {phone}
                   </a>
                 ))}

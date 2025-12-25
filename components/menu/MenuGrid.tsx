@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { MenuSection } from '@/lib/types/menu';
-import { MenuItemCard } from './MenuItemCard';
-import { CategoryFilter } from './CategoryFilter';
+import { useState } from "react";
+import { MenuSection } from "@/lib/types/menu";
+import { MenuItemCard } from "./MenuItemCard";
+import { CategoryFilter } from "./CategoryFilter";
 
 interface MenuGridProps {
   sections: MenuSection[];
@@ -20,13 +20,13 @@ export function MenuGrid({
   sections,
   showCategoryFilter = true,
   showVegIndicators = true,
-  className = '',
+  className = "",
 }: MenuGridProps) {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   // Filter sections based on selected category
   const filteredSections =
-    selectedCategory === 'all'
+    selectedCategory === "all"
       ? sections
       : sections.filter((section) => section.id === selectedCategory);
 
@@ -53,7 +53,9 @@ export function MenuGrid({
             {/* Section Header */}
             <div className="mb-6">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 flex items-center gap-3">
-                {section.icon && <span className="text-3xl">{section.icon}</span>}
+                {section.icon && (
+                  <span className="text-3xl">{section.icon}</span>
+                )}
                 {section.title}
               </h2>
               {section.note && (

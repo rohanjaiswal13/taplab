@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { MenuSection } from '@/lib/types/menu';
-import { MenuItemRow } from './MenuItemRow';
-import { CategoryFilter } from './CategoryFilter';
+import { useState } from "react";
+import { MenuSection } from "@/lib/types/menu";
+import { MenuItemRow } from "./MenuItemRow";
+import { CategoryFilter } from "./CategoryFilter";
 
 interface MenuListProps {
   sections: MenuSection[];
@@ -20,13 +20,13 @@ export function MenuList({
   sections,
   showCategoryFilter = true,
   showVegIndicators = true,
-  className = '',
+  className = "",
 }: MenuListProps) {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   // Filter sections based on selected category
   const filteredSections =
-    selectedCategory === 'all'
+    selectedCategory === "all"
       ? sections
       : sections.filter((section) => section.id === selectedCategory);
 

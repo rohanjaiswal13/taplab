@@ -1,8 +1,7 @@
-import React from 'react';
-import { AlertCircle, Lock, Calendar } from 'lucide-react';
+import { AlertCircle, Lock, Calendar } from "lucide-react";
 
 interface SubscriptionBannerProps {
-  type: 'trial' | 'suspended';
+  type: "trial" | "suspended";
   trialDaysRemaining?: number;
   restaurantName?: string;
 }
@@ -15,10 +14,10 @@ interface SubscriptionBannerProps {
 export function SubscriptionBanner({
   type,
   trialDaysRemaining,
-  restaurantName = 'This restaurant',
+  restaurantName = "This restaurant",
 }: SubscriptionBannerProps) {
   // Trial banner (top of page)
-  if (type === 'trial') {
+  if (type === "trial") {
     const daysLeft = trialDaysRemaining || 0;
 
     return (
@@ -28,8 +27,10 @@ export function SubscriptionBanner({
           <div>
             <p className="font-bold text-yellow-900">
               {daysLeft > 0
-                ? `🎉 Trial Period: ${daysLeft} day${daysLeft !== 1 ? 's' : ''} remaining`
-                : '🎉 Trial Period Active'}
+                ? `🎉 Trial Period: ${daysLeft} day${
+                    daysLeft !== 1 ? "s" : ""
+                  } remaining`
+                : "🎉 Trial Period Active"}
             </p>
             {daysLeft > 0 && daysLeft <= 3 && (
               <p className="text-sm text-yellow-800 mt-0.5">
@@ -43,7 +44,7 @@ export function SubscriptionBanner({
   }
 
   // Suspended page (full page)
-  if (type === 'suspended') {
+  if (type === "suspended") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4">
         <div className="max-w-md w-full text-center p-8 bg-white rounded-2xl shadow-2xl border border-gray-200">
@@ -61,8 +62,8 @@ export function SubscriptionBanner({
 
           {/* Message */}
           <p className="text-gray-600 mb-6 leading-relaxed">
-            {restaurantName}'s subscription has expired. Please contact support to
-            reactivate your menu.
+            {restaurantName}'s subscription has expired. Please contact support
+            to reactivate your menu.
           </p>
 
           {/* Notice */}
@@ -86,7 +87,7 @@ export function SubscriptionBanner({
 
           {/* Footer */}
           <p className="text-gray-500 text-sm mt-6">
-            Powered by{' '}
+            Powered by{" "}
             <a
               href="https://taplab.in"
               target="_blank"

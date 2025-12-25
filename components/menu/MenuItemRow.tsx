@@ -1,7 +1,6 @@
-import React from 'react';
-import { MenuItem } from '@/lib/types/menu';
-import { VegIndicator } from './VegIndicator';
-import { PriceDisplay } from './PriceDisplay';
+import { MenuItem } from "@/lib/types/menu";
+import { VegIndicator } from "./VegIndicator";
+import { PriceDisplay } from "./PriceDisplay";
 
 interface MenuItemRowProps {
   item: MenuItem;
@@ -16,7 +15,7 @@ interface MenuItemRowProps {
 export function MenuItemRow({
   item,
   showVegIndicator = true,
-  className = '',
+  className = "",
 }: MenuItemRowProps) {
   return (
     <div

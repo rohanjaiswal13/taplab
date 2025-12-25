@@ -1,11 +1,10 @@
-import React from 'react';
-import { RestaurantDocument } from '@/lib/types/restaurant';
-import { MenuHeader } from './MenuHeader';
-import { MenuFooter } from './MenuFooter';
-import { MenuGrid } from './MenuGrid';
-import { MenuList } from './MenuList';
-import { MenuSections } from './MenuSections';
-import { ScrollToTop } from './ScrollToTop';
+import { RestaurantDocument } from "@/lib/types/restaurant";
+import { MenuHeader } from "./MenuHeader";
+import { MenuFooter } from "./MenuFooter";
+import { MenuGrid } from "./MenuGrid";
+import { MenuList } from "./MenuList";
+import { MenuSections } from "./MenuSections";
+import { ScrollToTop } from "./ScrollToTop";
 
 interface MenuRendererProps {
   restaurant: RestaurantDocument;
@@ -17,13 +16,16 @@ interface MenuRendererProps {
  * Switches between different layout types (grid/list/sections)
  * Handles all branding, contact info, and menu configuration
  */
-export function MenuRenderer({ restaurant, className = '' }: MenuRendererProps) {
+export function MenuRenderer({
+  restaurant,
+  className = "",
+}: MenuRendererProps) {
   const { menuConfig, branding, contact } = restaurant;
 
   // Determine which layout component to use
   const renderMenuContent = () => {
     switch (menuConfig.layout) {
-      case 'grid':
+      case "grid":
         return (
           <MenuGrid
             sections={menuConfig.sections}
@@ -32,7 +34,7 @@ export function MenuRenderer({ restaurant, className = '' }: MenuRendererProps) 
           />
         );
 
-      case 'list':
+      case "list":
         return (
           <MenuList
             sections={menuConfig.sections}
@@ -41,7 +43,7 @@ export function MenuRenderer({ restaurant, className = '' }: MenuRendererProps) 
           />
         );
 
-      case 'sections':
+      case "sections":
         return (
           <MenuSections
             sections={menuConfig.sections}
