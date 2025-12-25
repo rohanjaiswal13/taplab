@@ -1,0 +1,1647 @@
+{
+  "slug": "tazza",
+  "name": "Tazza Fast Food",
+  "isActive": true,
+  "menuConfig": {
+    "layout": "grid",
+    "enableSearch": false,
+    "enableCategoryFilter": true,
+    "showVegIndicators": true,
+    "enableScrollToTop": true,
+    "sections": [
+      {
+        "id": "soups",
+        "title": "Soups",
+        "icon": "🍲",
+        "displayOrder": 0,
+        "items": [
+          {
+            "name": "Sweet Corn",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 130,
+                "nonVeg": 150
+              }
+            }
+          },
+          {
+            "name": "Manchow",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 130,
+                "nonVeg": 150
+              }
+            }
+          },
+          {
+            "name": "Hot & Sour",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 130,
+                "nonVeg": 150
+              }
+            }
+          },
+          {
+            "name": "Tomato",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Cream of Veg.",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Cream of Chicken",
+            "price": {
+              "type": "simple",
+              "value": 150
+            },
+            "veg": false
+          }
+        ]
+      },
+      {
+        "id": "chinese_starter_veg",
+        "title": "Starters (Veg/Paneer)",
+        "icon": "🌶️",
+        "displayOrder": 1,
+        "items": [
+          {
+            "name": "Veg. Spring Roll",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": true
+          },
+          {
+            "name": "Paneer Spring Roll",
+            "price": {
+              "type": "simple",
+              "value": 140
+            },
+            "veg": true
+          },
+          {
+            "name": "Veg. Chilly",
+            "price": {
+              "type": "simple",
+              "value": 180
+            },
+            "veg": true
+          },
+          {
+            "name": "Veg. Manchurian",
+            "price": {
+              "type": "simple",
+              "value": 180
+            },
+            "veg": true
+          },
+          {
+            "name": "Crispy Veg.",
+            "price": {
+              "type": "simple",
+              "value": 200
+            },
+            "veg": true
+          },
+          {
+            "name": "Veg. Schezwan",
+            "price": {
+              "type": "simple",
+              "value": 190
+            },
+            "veg": true
+          },
+          {
+            "name": "Mushroom Chilly",
+            "price": {
+              "type": "simple",
+              "value": 200
+            },
+            "veg": true
+          },
+          {
+            "name": "Paneer Chilly (Dry)",
+            "price": {
+              "type": "simple",
+              "value": 250
+            },
+            "veg": true
+          },
+          {
+            "name": "Paneer Manchurian",
+            "price": {
+              "type": "simple",
+              "value": 250
+            },
+            "veg": true
+          },
+          {
+            "name": "Threaded Cottage Cheese",
+            "price": {
+              "type": "simple",
+              "value": 250
+            },
+            "veg": true
+          },
+          {
+            "name": "Paneer Peri-Peri",
+            "price": {
+              "type": "simple",
+              "value": 260
+            },
+            "veg": true
+          },
+          {
+            "name": "Crispy Paneer",
+            "price": {
+              "type": "simple",
+              "value": 260
+            },
+            "veg": true
+          },
+          {
+            "name": "Crispy Pepper Paneer",
+            "price": {
+              "type": "simple",
+              "value": 260
+            },
+            "veg": true
+          },
+          {
+            "name": "Paneer Schezwan",
+            "price": {
+              "type": "simple",
+              "value": 250
+            },
+            "veg": true
+          }
+        ]
+      },
+      {
+        "id": "chinese_starter_non_veg",
+        "title": "Starters (Non Veg)",
+        "icon": "🍗",
+        "displayOrder": 2,
+        "items": [
+          {
+            "name": "Chicken Black Pepper",
+            "price": {
+              "type": "simple",
+              "value": 280
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Black Bean",
+            "price": {
+              "type": "simple",
+              "value": 280
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Hoisin",
+            "price": {
+              "type": "simple",
+              "value": 280
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Oyster",
+            "price": {
+              "type": "simple",
+              "value": 280
+            },
+            "veg": false
+          },
+          {
+            "name": "Crispy Chicken",
+            "price": {
+              "type": "simple",
+              "value": 270
+            },
+            "veg": false
+          },
+          {
+            "name": "Syboo Chicken",
+            "price": {
+              "type": "simple",
+              "value": 270
+            },
+            "veg": false
+          },
+          {
+            "name": "Red Chilly Pepper Chicken",
+            "price": {
+              "type": "simple",
+              "value": 270
+            },
+            "veg": false
+          },
+          {
+            "name": "Threaded Chicken",
+            "price": {
+              "type": "simple",
+              "value": 270
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Lollypop (6 Pcs)",
+            "price": {
+              "type": "simple",
+              "value": 200
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Spring Roll",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": false
+          },
+          {
+            "name": "Dragon Chicken",
+            "price": {
+              "type": "simple",
+              "value": 270
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Chilly",
+            "price": {
+              "type": "simple",
+              "value": 250
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Manchurian",
+            "price": {
+              "type": "simple",
+              "value": 250
+            },
+            "veg": false
+          },
+          {
+            "name": "Garlic Chicken",
+            "price": {
+              "type": "simple",
+              "value": 250
+            },
+            "veg": false
+          },
+          {
+            "name": "Schezwan Chicken",
+            "price": {
+              "type": "simple",
+              "value": 250
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Tikka Chilly",
+            "price": {
+              "type": "simple",
+              "value": 270
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Schezwan Lollypop",
+            "price": {
+              "type": "simple",
+              "value": 270
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Peri-Peri",
+            "price": {
+              "type": "simple",
+              "value": 270
+            },
+            "veg": false
+          }
+        ]
+      },
+      {
+        "id": "main_course",
+        "title": "Main Course",
+        "icon": "🍛",
+        "displayOrder": 3,
+        "items": [
+          {
+            "name": "TAZZA Special Chilly",
+            "price": {
+              "type": "simple",
+              "value": 200
+            },
+            "veg": false
+          },
+          {
+            "name": "Chilly",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 160,
+                "paneer": 190,
+                "nonVeg": 180
+              }
+            }
+          },
+          {
+            "name": "Manchurian",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 160,
+                "paneer": 190,
+                "nonVeg": 180
+              }
+            }
+          },
+          {
+            "name": "Garlic",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 160,
+                "paneer": 190,
+                "nonVeg": 180
+              }
+            }
+          },
+          {
+            "name": "Shanghai",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "paneer": 190,
+                "nonVeg": 180
+              }
+            }
+          },
+          {
+            "name": "Schezwan",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "paneer": 190,
+                "nonVeg": 180
+              }
+            }
+          },
+          {
+            "name": "Hong Kong",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "paneer": 190,
+                "nonVeg": 180
+              }
+            }
+          },
+          {
+            "name": "Mushroom Chilly",
+            "price": {
+              "type": "simple",
+              "value": 170
+            },
+            "veg": true
+          }
+        ]
+      },
+      {
+        "id": "rice_noodles",
+        "title": "Rice & Noodles",
+        "icon": "🍜",
+        "displayOrder": 4,
+        "items": [
+          {
+            "name": "Fried Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 160,
+                "paneer": 190,
+                "nonVeg": 180
+              }
+            }
+          },
+          {
+            "name": "Egg Fried Rice",
+            "price": {
+              "type": "simple",
+              "value": 180
+            },
+            "veg": false,
+            "isEgg": true
+          },
+          {
+            "name": "Garlic Fried Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "paneer": 200,
+                "nonVeg": 190
+              }
+            }
+          },
+          {
+            "name": "Schezwan Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "paneer": 210,
+                "nonVeg": 210
+              }
+            }
+          },
+          {
+            "name": "Hong Kong Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "paneer": 210,
+                "nonVeg": 210
+              }
+            }
+          },
+          {
+            "name": "Shanghai Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "paneer": 210,
+                "nonVeg": 210
+              }
+            }
+          },
+          {
+            "name": "Hakka Noodles",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "nonVeg": 190
+              }
+            }
+          },
+          {
+            "name": "Egg Hakka Noodles",
+            "price": {
+              "type": "simple",
+              "value": 190
+            },
+            "veg": false,
+            "isEgg": true
+          },
+          {
+            "name": "Malaysian Noodles",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "nonVeg": 200
+              }
+            }
+          },
+          {
+            "name": "Schezwan Noodles",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 180,
+                "nonVeg": 210
+              }
+            }
+          },
+          {
+            "name": "Hong Kong Noodles",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 170,
+                "nonVeg": 210
+              }
+            }
+          },
+          {
+            "name": "American Chopsuey",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 200,
+                "nonVeg": 210
+              }
+            }
+          },
+          {
+            "name": "Burnt Chilly Fried Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 200,
+                "nonVeg": 220
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "combination",
+        "title": "Combination",
+        "icon": "🍱",
+        "displayOrder": 5,
+        "items": [
+          {
+            "name": "Triple Schezwan F. Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 250,
+                "paneer": 300,
+                "nonVeg": 300
+              }
+            }
+          },
+          {
+            "name": "TAZZA Special Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 250,
+                "nonVeg": 300
+              }
+            }
+          },
+          {
+            "name": "Chilly Fried Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 250,
+                "paneer": 300,
+                "nonVeg": 300
+              }
+            }
+          },
+          {
+            "name": "Manchurian Fried Rice",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 250,
+                "paneer": 300,
+                "nonVeg": 300
+              }
+            }
+          },
+          {
+            "name": "Combination Noodles",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "veg": 250,
+                "nonVeg": 300
+              }
+            }
+          },
+          {
+            "name": "Chicken Crispy Packing Rice",
+            "price": {
+              "type": "simple",
+              "value": 300
+            },
+            "veg": false
+          }
+        ]
+      },
+      {
+        "id": "chaat",
+        "title": "Chaat (3:30 PM - 10:30 PM)",
+        "icon": "🥣",
+        "displayOrder": 6,
+        "items": [
+          {
+            "name": "Pani Puri",
+            "price": {
+              "type": "simple",
+              "value": 60
+            },
+            "veg": true
+          },
+          {
+            "name": "Bhel Puri",
+            "price": {
+              "type": "simple",
+              "value": 70
+            },
+            "veg": true
+          },
+          {
+            "name": "Sev Puri",
+            "price": {
+              "type": "simple",
+              "value": 70
+            },
+            "veg": true
+          },
+          {
+            "name": "Dahi Puri",
+            "price": {
+              "type": "simple",
+              "value": 90
+            },
+            "veg": true
+          },
+          {
+            "name": "Dahi Wada",
+            "price": {
+              "type": "simple",
+              "value": 90
+            },
+            "veg": true
+          },
+          {
+            "name": "Ragda Pattice",
+            "price": {
+              "type": "simple",
+              "value": 70
+            },
+            "veg": true
+          },
+          {
+            "name": "Kachori Chaat",
+            "price": {
+              "type": "simple",
+              "value": 90
+            },
+            "veg": true
+          },
+          {
+            "name": "Dahi Pakoda Chaat",
+            "price": {
+              "type": "simple",
+              "value": 90
+            },
+            "veg": true
+          },
+          {
+            "name": "Papdi Chaat",
+            "price": {
+              "type": "simple",
+              "value": 90
+            },
+            "veg": true
+          },
+          {
+            "name": "Ragda Puri",
+            "price": {
+              "type": "simple",
+              "value": 70
+            },
+            "veg": true
+          }
+        ]
+      },
+      {
+        "id": "pizza",
+        "title": "Pizza",
+        "icon": "🍕",
+        "displayOrder": 7,
+        "items": [
+          {
+            "name": "Paneer Tikka",
+            "price": {
+              "type": "simple",
+              "value": 300
+            },
+            "veg": true,
+            "description": "Tandoor Paneer, Coriander, G. Chilly, Cheese"
+          },
+          {
+            "name": "Spicy Schezwan",
+            "price": {
+              "type": "simple",
+              "value": 250
+            },
+            "veg": true,
+            "description": "Chopped Onion, Capsicum, Baby Corn, Hot Schezwan Sauce, Cheese"
+          },
+          {
+            "name": "Classic Veg Pizza",
+            "price": {
+              "type": "simple",
+              "value": 260
+            },
+            "veg": true,
+            "description": "Onion, Capsicum, Tomato, American Corn, Olives, Cheese"
+          },
+          {
+            "name": "Corn Pizza",
+            "price": {
+              "type": "simple",
+              "value": 220
+            },
+            "veg": true,
+            "description": "American Corn, Cheese"
+          },
+          {
+            "name": "Cheese Pizza",
+            "price": {
+              "type": "simple",
+              "value": 200
+            },
+            "veg": true,
+            "description": "Only Cheese"
+          },
+          {
+            "name": "TAZZA's Pizza",
+            "price": {
+              "type": "simple",
+              "value": 330
+            },
+            "veg": false,
+            "description": "Mushroom, Smoked Chicken, Baby Corn, Black Olives, Roasted Capsicum, Cheese"
+          },
+          {
+            "name": "Chicken Chilly Pizza",
+            "price": {
+              "type": "simple",
+              "value": 300
+            },
+            "veg": false,
+            "description": "Chicken, Capsicum, Chilly, Cheese"
+          },
+          {
+            "name": "Chicken Manchurian Pizza",
+            "price": {
+              "type": "simple",
+              "value": 300
+            },
+            "veg": false,
+            "description": "Chicken, Garlic, Ginger, Soya Sauce, Cheese"
+          },
+          {
+            "name": "Barbeque Chicken Pizza",
+            "price": {
+              "type": "simple",
+              "value": 300
+            },
+            "veg": false,
+            "description": "BBQ Chicken, Onion, Mushroom, Capsicum, Cheese"
+          },
+          {
+            "name": "Mexican Pizza",
+            "price": {
+              "type": "simple",
+              "value": 300
+            },
+            "veg": false,
+            "description": "Hot Chicken, American Corn, Capsicum, Mushroom, Cheese"
+          },
+          {
+            "name": "Chicken Tikka Pizza",
+            "price": {
+              "type": "simple",
+              "value": 300
+            },
+            "veg": false,
+            "description": "Chicken Tikka, Coriander, G. Chilly, Cheese"
+          },
+          {
+            "name": "Chicken Double Cheese Pizza",
+            "price": {
+              "type": "simple",
+              "value": 330
+            },
+            "veg": false
+          }
+        ]
+      },
+      {
+        "id": "burger",
+        "title": "Burgers",
+        "icon": "🍔",
+        "displayOrder": 8,
+        "items": [
+          {
+            "name": "Chi. Burger with Cheese",
+            "price": {
+              "type": "simple",
+              "value": 150
+            },
+            "veg": false
+          },
+          {
+            "name": "Chi. Steak Burger with Cheese",
+            "price": {
+              "type": "simple",
+              "value": 150
+            },
+            "veg": false
+          },
+          {
+            "name": "Chi. Burger",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Chi. Steak Burger",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Veg. Burger with Cheese",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Veg. Burger",
+            "price": {
+              "type": "simple",
+              "value": 110
+            },
+            "veg": true
+          }
+        ]
+      },
+      {
+        "id": "sandwich",
+        "title": "Sandwiches",
+        "icon": "🥪",
+        "displayOrder": 9,
+        "items": [
+          {
+            "name": "Veg. Club Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": true
+          },
+          {
+            "name": "Paneer Tikka Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Veg. Cheese Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 110
+            },
+            "veg": true
+          },
+          {
+            "name": "Cheese Toast Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": true
+          },
+          {
+            "name": "Veg. Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 90
+            },
+            "veg": true
+          },
+          {
+            "name": "TAZZA Special Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 160
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Tikka Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Chilli Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Manchurian Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Club Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 150
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Cheese Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 110
+            },
+            "veg": false
+          },
+          {
+            "name": "Eggo Macho Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": false
+          },
+          {
+            "name": "Omelet Cheese Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 110
+            },
+            "veg": false
+          },
+          {
+            "name": "Omelet Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": false
+          },
+          {
+            "name": "Double Melting TAZZA Sandwich",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          }
+        ]
+      },
+      {
+        "id": "wraps",
+        "title": "Wraps & Paranthas",
+        "icon": "🌯",
+        "displayOrder": 10,
+        "items": [
+          {
+            "name": "Chi. Reshmi Roll",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Chi. Tandoori Roll",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Butter Parantha",
+            "price": {
+              "type": "simple",
+              "value": 30
+            },
+            "veg": true
+          },
+          {
+            "name": "Aloo Parantha",
+            "price": {
+              "type": "simple",
+              "value": 70
+            },
+            "veg": true
+          },
+          {
+            "name": "Methi Parantha",
+            "price": {
+              "type": "simple",
+              "value": 50
+            },
+            "veg": true
+          },
+          {
+            "name": "Paneer Parantha",
+            "price": {
+              "type": "simple",
+              "value": 80
+            },
+            "veg": true
+          }
+        ]
+      },
+      {
+        "id": "sub_roll",
+        "title": "Sub Rolls",
+        "icon": "🥖",
+        "displayOrder": 11,
+        "items": [
+          {
+            "name": "Paneer Tikka Roll",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": true
+          },
+          {
+            "name": "Chi. Mayonnaise Roll",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Chi. Tikka Roll",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Chi. BBQ Roll",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Chi. Chilly Roll",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Chi. Manchurian Roll",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": false
+          },
+          {
+            "name": "Veg. Roll with Cheese",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": false
+          },
+          {
+            "name": "Veg. Roll",
+            "price": {
+              "type": "simple",
+              "value": 80
+            },
+            "veg": false
+          }
+        ]
+      },
+      {
+        "id": "snacks",
+        "title": "Snacks",
+        "icon": "🍟",
+        "displayOrder": 12,
+        "items": [
+          {
+            "name": "Chinese Bhel",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": true
+          },
+          {
+            "name": "French Fries",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": true
+          },
+          {
+            "name": "Garlic Bread (4 sticks)",
+            "price": {
+              "type": "simple",
+              "value": 60
+            },
+            "veg": true
+          },
+          {
+            "name": "Cheese Garlic Bread (4 pcs)",
+            "price": {
+              "type": "simple",
+              "value": 80
+            },
+            "veg": true
+          },
+          {
+            "name": "Tomato Cheese Bruschetta (4 pcs)",
+            "price": {
+              "type": "simple",
+              "value": 90
+            },
+            "veg": true
+          },
+          {
+            "name": "Cory Cheese Garlic Bread (4 pcs)",
+            "price": {
+              "type": "simple",
+              "value": 90
+            },
+            "veg": true
+          },
+          {
+            "name": "Peri Peri French Fries",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          }
+        ]
+      },
+      {
+        "id": "kababs_biryani",
+        "title": "Kababs & Pulao",
+        "icon": "🍚",
+        "displayOrder": 13,
+        "items": [
+          {
+            "name": "Chicken Tikka (6 pcs)",
+            "price": {
+              "type": "simple",
+              "value": 200
+            },
+            "veg": false
+          },
+          {
+            "name": "Reshmi Kabab (6 pcs)",
+            "price": {
+              "type": "simple",
+              "value": 200
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Leg/Breast",
+            "price": {
+              "type": "simple",
+              "value": 140
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Tandoori",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "half": 240,
+                "full": 400
+              }
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Shez. Tandoori",
+            "price": {
+              "type": "variants",
+              "variants": {
+                "half": 260,
+                "full": 450
+              }
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Shez. Leg/Breast",
+            "price": {
+              "type": "simple",
+              "value": 170
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Shez. Tikka",
+            "price": {
+              "type": "simple",
+              "value": 240
+            },
+            "veg": false
+          },
+          {
+            "name": "Chicken Pulao",
+            "price": {
+              "type": "simple",
+              "value": 180
+            },
+            "veg": false
+          },
+          {
+            "name": "Veg Pulao",
+            "price": {
+              "type": "simple",
+              "value": 160
+            },
+            "veg": true
+          },
+          {
+            "name": "Paneer Pulao",
+            "price": {
+              "type": "simple",
+              "value": 200
+            },
+            "veg": true
+          }
+        ]
+      },
+      {
+        "id": "fresh_fruit_juices",
+        "title": "Fresh Fruit Juices",
+        "icon": "🧃",
+        "displayOrder": 14,
+        "items": [
+          {
+            "name": "Mosambi / Orange",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": true
+          },
+          {
+            "name": "Ganga Jamuna",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": true
+          },
+          {
+            "name": "Watermelon",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": true
+          },
+          {
+            "name": "Pineapple",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": true
+          },
+          {
+            "name": "Grapes",
+            "price": {
+              "type": "simple",
+              "value": 100
+            },
+            "veg": true
+          },
+          {
+            "name": "Apple / Cocktail",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Pomegranate",
+            "price": {
+              "type": "simple",
+              "value": 140
+            },
+            "veg": true
+          },
+          {
+            "name": "Fresh Lime",
+            "price": {
+              "type": "simple",
+              "value": 60
+            },
+            "veg": true
+          }
+        ]
+      },
+      {
+        "id": "milk_shakes",
+        "title": "Milk Shakes & Falooda",
+        "icon": "🥤",
+        "displayOrder": 15,
+        "items": [
+          {
+            "name": "Banana / Chickoo",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Chickoo",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Apple",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": true
+          },
+          {
+            "name": "Vanilla / Strawberry / Rose",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Chocolate / Butter Scotch",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Cold Coffee",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Cold Coffee with Ice Cream",
+            "price": {
+              "type": "simple",
+              "value": 140
+            },
+            "veg": true
+          },
+          {
+            "name": "Mango / Kesar Pista",
+            "price": {
+              "type": "simple",
+              "value": 140
+            },
+            "veg": true
+          },
+          {
+            "name": "Dry Fruit",
+            "price": {
+              "type": "simple",
+              "value": 150
+            },
+            "veg": true
+          },
+          {
+            "name": "Butter Milk",
+            "price": {
+              "type": "simple",
+              "value": 60
+            },
+            "veg": true
+          },
+          {
+            "name": "Lassi Sweet/Salted",
+            "price": {
+              "type": "simple",
+              "value": 80
+            },
+            "veg": true
+          },
+          {
+            "name": "Fruit Salad with Ice Cream",
+            "price": {
+              "type": "simple",
+              "value": 120
+            },
+            "veg": true
+          },
+          {
+            "name": "Malai Kulfi Milkshake",
+            "price": {
+              "type": "simple",
+              "value": 150
+            },
+            "veg": true
+          },
+          {
+            "name": "Kesar Kulfi Milkshake",
+            "price": {
+              "type": "simple",
+              "value": 170
+            },
+            "veg": true
+          },
+          {
+            "name": "Royal Falooda",
+            "price": {
+              "type": "simple",
+              "value": 130
+            },
+            "veg": true
+          },
+          {
+            "name": "Kesar Falooda",
+            "price": {
+              "type": "simple",
+              "value": 140
+            },
+            "veg": true
+          },
+          {
+            "name": "TAZZA Special Falooda",
+            "price": {
+              "type": "simple",
+              "value": 160
+            },
+            "veg": true
+          },
+          {
+            "name": "Malai Kulfi Falooda",
+            "price": {
+              "type": "simple",
+              "value": 160
+            },
+            "veg": true
+          },
+          {
+            "name": "TAZZA Special Kulfi Falooda",
+            "price": {
+              "type": "simple",
+              "value": 180
+            },
+            "veg": true
+          }
+        ]
+      },
+      {
+        "id": "ice_cream",
+        "title": "Ice Cream",
+        "icon": "🍦",
+        "displayOrder": 16,
+        "items": [
+          {
+            "name": "Vanilla / Strawberry",
+            "price": {
+              "type": "simple",
+              "value": 50
+            },
+            "veg": true
+          },
+          {
+            "name": "Chocolate / Butter Scotch",
+            "price": {
+              "type": "simple",
+              "value": 60
+            },
+            "veg": true
+          },
+          {
+            "name": "Kesar Pista",
+            "price": {
+              "type": "simple",
+              "value": 60
+            },
+            "veg": true
+          }
+        ]
+      }
+    ]
+  },
+  "branding": {
+    "colors": {
+      "primary": "amber-700",
+      "secondary": "orange-700",
+      "accent": "red-700",
+      "background": "amber-50",
+      "text": "gray-900",
+      "muted": "gray-600"
+    },
+    "gradients": {
+      "header": "from-amber-800 via-orange-700 to-red-800",
+      "background": "from-amber-50 via-orange-50 to-red-50"
+    },
+    "fonts": {
+      "heading": "font-serif",
+      "body": "font-sans",
+      "accent": "font-serif"
+    },
+    "header": {
+      "title": "TAZZA",
+      "subtitle": "Fast Food & means Fresh",
+      "badges": [
+        "Veg",
+        "Non Veg"
+      ]
+    },
+    "footer": {
+      "title": "TAZZA",
+      "description": "Experience the authentic taste of fresh fast food. Serving Veg & Non-Veg delicacies with passion.",
+      "copyright": "© 2025 Tazza Fast Food. All rights reserved.",
+      "poweredBy": "TapLab",
+      "poweredByUrl": "https://taplab.in"
+    }
+  },
+  "subscription": {
+    "plan": "trial",
+    "price": 0,
+    "status": "trial",
+    "currentPeriodStart": "2025-01-01T00:00:00.000Z",
+    "currentPeriodEnd": "2025-02-01T00:00:00.000Z",
+    "trialEnd": "2025-12-31T00:00:00.000Z"
+  },
+  "contact": {
+    "phones": [
+      "022 2447 2222",
+      "022 2445 2333",
+      "9892 31 83 15",
+      "9167 77 04 61"
+    ],
+    "address": "59, Rehmat Manzil, Lady Jamshedji Road, Mahim, Mumbai - 400 016",
+    "timings": "11:00 AM - 11:30 PM",
+    "deliveryInfo": "Home Delivery: 12:00 PM to 11:00 PM (Above ₹150)",
+    "closedTiming": "Closed Fri 12:45 PM - 2:00 PM"
+  }
+}
