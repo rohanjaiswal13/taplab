@@ -1,3 +1,4 @@
+// restaurant.ts
 import { MenuConfig } from './menu';
 import { Subscription } from './subscription';
 
@@ -14,34 +15,37 @@ export interface ContactInfo {
   timings?: string;
   deliveryInfo?: string;
   locations?: Location[];
+  closedTiming?: string; // FIXED: Added this property
 }
 
 // Branding interface
 export interface Branding {
   // Colors (Tailwind class names only)
   colors: {
-    primary: string; // e.g., "amber-700"
-    secondary: string; // e.g., "orange-700"
-    accent?: string; // e.g., "red-800"
-    text?: string; // e.g., "gray-800"
-    background?: string; // e.g., "amber-50"
+    primary: string; 
+    secondary: string; 
+    accent?: string; 
+    text?: string; 
+    background?: string;
+    muted?: string; // FIXED: Added this property
   };
 
   // Gradients (predefined Tailwind classes)
   gradients: {
-    header: string; // e.g., "from-amber-800 via-orange-700 to-red-800"
-    background?: string; // e.g., "from-amber-50 via-orange-50 to-red-50"
+    header: string; 
+    background?: string; 
   };
 
   // Typography
   fonts?: {
-    heading: string; // e.g., "font-serif"
-    body: string; // e.g., "font-sans"
+    heading: string; 
+    body: string;
+    accent?: string; // FIXED: Added this property
   };
 
   // Logo
   logo?: {
-    url: string; // Image URL
+    url: string; 
     alt: string;
   };
 
@@ -49,34 +53,28 @@ export interface Branding {
   header: {
     title: string;
     subtitle?: string;
-    badges?: string[]; // e.g., ["Veg", "Non Veg"]
+    badges?: string[]; 
   };
 
   // Footer
   footer: {
+    title?: string;       // FIXED: Added this property
     description?: string;
     copyright: string;
+    poweredBy?: string;    // ADDED: Noticed this in your script too
+    poweredByUrl?: string; // ADDED: Noticed this in your script too
   };
 }
 
 // Main restaurant document interface
 export interface RestaurantDocument {
-  // Identity
-  slug: string; // e.g., "tazza", "pizzacaprina"
-  name: string; // e.g., "Tazza Restaurant"
+  slug: string; 
+  name: string; 
   isActive: boolean;
   createdAt: Date | string;
   updatedAt: Date | string;
-
-  // Menu Configuration
   menuConfig: MenuConfig;
-
-  // Branding
   branding: Branding;
-
-  // Subscription
   subscription: Subscription;
-
-  // Contact & Info
   contact: ContactInfo;
 }
