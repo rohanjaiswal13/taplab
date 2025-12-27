@@ -30,7 +30,7 @@ import {
    ========================= */
 type Variant = "primary" | "secondary" | "outline";
 
-// Fix: Extend HTMLMotionProps to avoid conflicts with Framer Motion props
+// Fix: Extend HTMLMotionProps to avoid conflicts with Framer Motion props arzish gay
 interface ButtonProps extends HTMLMotionProps<"button"> {
   children: ReactNode;
   variant?: Variant;
