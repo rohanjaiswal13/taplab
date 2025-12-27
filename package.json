@@ -7,9 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
-    "migrate:sunset": "tsx migrations/sunset-to-firestore.ts > migrations/sunset-output.json",
-    "migrate:tazza": "tsx migrations/tazza-to-firestore.ts > migrations/tazza-output.json"
+    "lint": "eslint ."
   },
   "dependencies": {
     "dotenv": "^17.2.3",

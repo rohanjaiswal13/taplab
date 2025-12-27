@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getRestaurant, isSubscriptionActive, getTrialDaysRemaining } from '@/lib/firebase/firestore';
+import { getRestaurant, isSubscriptionActive } from '@/lib/firebase/firestore';
 import { MenuRenderer } from '@/components/menu/MenuRenderer';
 import { SubscriptionBanner } from '@/components/subscription/SubscriptionBanner';
 import type { Metadata } from 'next';
@@ -52,31 +52,13 @@ export default async function RestaurantPage({ params }: PageProps) {
 
   // Check subscription status
   const isActive = isSubscriptionActive(restaurant);
-  const isTrial = restaurant.subscription.status === 'trial';
-  const daysRemaining = isTrial ? getTrialDaysRemaining(restaurant) : 0;
 
-  // If subscription is suspended, show suspended page
+  // If subscription is not active, show unavailable message
+  // No pricing, no trial banners - all billing handled in admin app
   if (!isActive) {
-    return (
-      <SubscriptionBanner
-        type="suspended"
-        restaurantName={restaurant.name}
-      />
-    );
+    return <SubscriptionBanner restaurantName={restaurant.name} />;
   }
 
-  return (
-    <>
-      {/* Show trial banner if in trial */}
-      {isTrial && (
-        <SubscriptionBanner
-          type="trial"
-          trialDaysRemaining={daysRemaining}
-        />
-      )}
-
-      {/* Render the menu */}
-      <MenuRenderer restaurant={restaurant} />
-    </>
-  );
+  // Render the menu (no banners, clean UX)
+  return <MenuRenderer restaurant={restaurant} />;
 }

@@ -6,7 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+/_deprecated
 /.claude
+/slop
 /.next
 node_modules
 dist
