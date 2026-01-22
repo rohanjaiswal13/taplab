@@ -1,8 +1,78 @@
 import { adminDb } from './admin';
 import { RestaurantDocument } from '../types/restaurant';
+import { SubscriptionStatus } from '../types/subscription';
+
+/**
+ * Check and update subscription status if expired
+ * This runs on every page load to ensure real-time status updates
+ * @param slug - Restaurant slug
+ * @param restaurant - Restaurant document
+ * @returns Updated status if changed, null if no update needed
+ */
+async function checkAndUpdateSubscriptionStatus(
+  slug: string,
+  restaurant: RestaurantDocument
+): Promise<SubscriptionStatus | null> {
+  const now = new Date();
+  const { status, trialEnd, currentPeriodEnd } = restaurant.subscription;
+
+  let newStatus: SubscriptionStatus | null = null;
+
+  // Check 1: Trial expired → suspend
+  if (status === 'trial' && trialEnd) {
+    const trialEndDate = trialEnd instanceof Date ? trialEnd : new Date(trialEnd);
+    if (now > trialEndDate) {
+      newStatus = 'suspended';
+      console.log(`[Subscription Check] Trial expired for ${slug}, suspending...`);
+    }
+  }
+
+  // Check 2: Paid subscription expired → past_due (grace period)
+  if (status === 'active') {
+    const periodEndDate = currentPeriodEnd instanceof Date
+      ? currentPeriodEnd
+      : new Date(currentPeriodEnd);
+    if (now > periodEndDate) {
+      newStatus = 'past_due';
+      console.log(`[Subscription Check] Subscription expired for ${slug}, marking as past_due...`);
+    }
+  }
+
+  // Check 3: Grace period ended (3 days after expiry) → suspend
+  if (status === 'past_due') {
+    const periodEndDate = currentPeriodEnd instanceof Date
+      ? currentPeriodEnd
+      : new Date(currentPeriodEnd);
+    const gracePeriodEnd = new Date(periodEndDate);
+    gracePeriodEnd.setDate(gracePeriodEnd.getDate() + 3); // 3 day grace period
+
+    if (now > gracePeriodEnd) {
+      newStatus = 'suspended';
+      console.log(`[Subscription Check] Grace period ended for ${slug}, suspending...`);
+    }
+  }
+
+  // Update Firestore if status changed
+  if (newStatus && newStatus !== status) {
+    try {
+      await adminDb.collection('restaurants').doc(slug).update({
+        'subscription.status': newStatus,
+        updatedAt: now,
+      });
+      console.log(`[Subscription Check] Updated ${slug} status: ${status} → ${newStatus}`);
+      return newStatus;
+    } catch (error) {
+      console.error(`[Subscription Check] Error updating ${slug}:`, error);
+      return null;
+    }
+  }
+
+  return null; // No update needed
+}
 
 /**
  * Get a restaurant by slug from Firestore (server-side)
+ * Automatically checks and updates subscription status on every page load
  * @param slug - Restaurant slug (e.g., "tazza", "pizzacaprina")
  * @returns Restaurant document or null if not found
  */
@@ -20,7 +90,7 @@ export async function getRestaurant(
     const data = docSnap.data() as RestaurantDocument;
 
     // Convert Firestore Timestamps to Date objects
-    return {
+    const restaurant: RestaurantDocument = {
       ...data,
       slug,
       createdAt: data.createdAt instanceof Date ? data.createdAt : new Date(data.createdAt),
@@ -42,6 +112,17 @@ export async function getRestaurant(
           : undefined,
       },
     };
+
+    // Check and update subscription status (client-side checking on every page load)
+    const updatedStatus = await checkAndUpdateSubscriptionStatus(slug, restaurant);
+
+    // If status was updated, return the updated restaurant object
+    if (updatedStatus) {
+      restaurant.subscription.status = updatedStatus;
+      restaurant.updatedAt = new Date();
+    }
+
+    return restaurant;
   } catch (error) {
     console.error('Error fetching restaurant:', error);
     return null;
