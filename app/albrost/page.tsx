@@ -414,7 +414,7 @@ const content: Record<string, string> = {
   tagline: "Fast Food",
   badge_text: "Halal · Since 2014",
   subtitle: "Mahim, Mumbai · Take Away & Delivery",
-  delivery_banner: "🛵 FREE HOME DELIVERY ON ORDERS ABOVE ₹200 · WITHIN 1 KM IN MAHIM",
+  delivery_banner: "🛵 FREE HOME DELIVERY ON ORDERS ABOVE ₹200 · WITHIN 500 M IN MAHIM",
   phone: "8976638228",
   phone_secondary: "8369575908",
   whatsapp_number: "918976638228",
