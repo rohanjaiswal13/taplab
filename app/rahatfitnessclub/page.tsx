@@ -314,7 +314,7 @@ const socialData: { style: 'brand'; handles: SocialHandle[] } = {
   style: 'brand',
   handles: [
     { platform: 'whatsapp', url: 'https://wa.me/919890123103' },
-    { platform: 'instagram', url: 'https://www.instagram.com/fitness_squad_9777/' },
+    { platform: 'instagram', url: 'https://www.instagram.com/rahat_fitness_squad?igsh=MWF5M2dyNzY5Z25m' },
     { platform: 'google_maps', url: 'https://maps.app.goo.gl/upAqrVxr8WGKiDjn8?g_st=awb' },
   ],
 };
