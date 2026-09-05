@@ -196,8 +196,16 @@ const HighOnShakesMenu = () => {
       items: [
         { name: "Korean Bucket", price: "190" },
         { name: "American Bucket", price: "190" },
-        { name: "Avocado Jalapeno Bucket", price: "190" },
         { name: "Three Cheese Bucket", price: "190" },
+      ],
+    },
+    {
+      id: "pasta",
+      label: "Pasta",
+      items: [
+        { name: "White Cheese Pasta", price: "170" },
+        { name: "Magic Masala Pasta", price: "150" },
+        { name: "Peri Peri Pasta", price: "150" },
       ],
     },
     {
