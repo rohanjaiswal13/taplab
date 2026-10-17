@@ -90,15 +90,15 @@ const HighOnShakesMenu = () => {
       id: "premium-shakes",
       label: "Premium Shakes",
       items: [
-        { name: "Alphanso Mango", price: "250", bestseller: true },
+        { name: "Alphanso Mango", price: "260", bestseller: true },
         { name: "Caramel Peanut Butter", price: "200" },
-        { name: "Bubble Gum", price: "150" },
+        { name: "Snickers", price: "210" },
         { name: "Banoffee Pie", price: "170" },
         { name: "Nutella", price: "240", bestseller: true },
-        { name: "Ferrero Rocher", price: "250", bestseller: true },
+        { name: "Ferrero Rocher", price: "260", bestseller: true },
         { name: "Brownie", price: "220" },
         { name: "Caramel Brownie", price: "230" },
-        { name: "Strawberry Nutella", price: "240" },
+        { name: "Strawberry Nutella", price: "260" },
         { name: "Kitkat [Chunky]", price: "240" },
         { name: "Caramel Kitkat", price: "250" },
         { name: "Cheese Cake", price: "220" },
@@ -107,9 +107,9 @@ const HighOnShakesMenu = () => {
         { name: "Nutella Brownie", price: "270", bestseller: true },
         { name: "Nutella Cookie", price: "240" },
         { name: "Lotus Biscof", price: "260", bestseller: true },
-        { name: "Mississippi Mud", price: "240" },
+        { name: "Mississippi Mud", price: "260" },
         { name: "Belgium Nutty", price: "240" },
-        { name: "Blue Berry Cheese Cake", price: "240" },
+        { name: "Blueberry Cheese Cake", price: "260" },
         { name: "Dry Fruit", price: "260" },
       ],
     },
@@ -194,6 +194,7 @@ const HighOnShakesMenu = () => {
       id: "blitz-bucket",
       label: "Blitz Bucket",
       items: [
+        { name: "Veg Bucket", price: "170" },
         { name: "Korean Bucket", price: "190" },
         { name: "American Bucket", price: "190" },
         { name: "Three Cheese Bucket", price: "190" },
@@ -205,15 +206,16 @@ const HighOnShakesMenu = () => {
       items: [
         { name: "White Cheese Pasta", price: "170" },
         { name: "Magic Masala Pasta", price: "150" },
-        { name: "Peri Peri Pasta", price: "150" },
+        { name: "Chicken Pasta", price: "210" },
       ],
     },
     {
       id: "fries",
       label: "Fries & Dips",
       items: [
-        { name: "Peri Peri Fries", price: "120" },
         { name: "Fries", price: "110" },
+        { name: "Peri Peri Fries", price: "120" },
+        { name: "Cheesy Fries", price: "160" },
         { name: "Chicken Popcorn", price: "140" },
         { name: "Chicken Nuggets (10 pcs)", price: "140" },
         { name: "Fish Finger (6 pcs)", price: "170" },
@@ -343,6 +345,7 @@ const HighOnShakesMenu = () => {
       label: "Thick Shakes",
       items: [
         { name: "Condensed Rose", price: "140" },
+        { name: "Bubble Gum", price: "150" },
         { name: "Orange Vorange", price: "160" },
         { name: "Pineapple Vineapple", price: "160" },
         { name: "Strawberry Vowberry", price: "170" },
@@ -352,7 +355,6 @@ const HighOnShakesMenu = () => {
         { name: "Oreo", price: "160", bestseller: true },
         { name: "Mint Oreo", price: "170" },
         { name: "Chocolate Chip Cookie", price: "190" },
-        { name: "Snickers", price: "210" },
         { name: "Chocolate Mint / Vanilla Mint", price: "170" },
         { name: "Peanut Butter", price: "190" },
       ],
@@ -600,7 +602,9 @@ const HighOnShakesMenu = () => {
                         item.details?.toLowerCase().includes("chicken") ||
                         item.details?.toLowerCase().includes("fish") ||
                         item.name?.toLowerCase().includes("chicken") ||
-                        item.name?.toLowerCase().includes("bucket") ||
+                        item.name?.toLowerCase().includes("korean") ||
+                        item.name?.toLowerCase().includes("american") ||
+                        item.name?.toLowerCase().includes("three") ||
                         item.name?.toLowerCase().includes("fish");
 
                       return (
