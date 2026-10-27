@@ -87,6 +87,44 @@ const HighOnShakesMenu = () => {
   // --- Data Source ---
   const categories: MenuCategory[] = [
     {
+      id: "combos",
+      label: "Meal Combos",
+      items: [
+        { name: "Veg Combo for 1", price: "249", details: "1 Veg Burger, Half Fries, 1 Juice", bestseller: true },
+        { name: "Non-Veg Combo for 1", price: "299", details: "1 Non-Veg Burger, Half Fries, 1 Juice", bestseller: true },
+        { name: "Fish Combo for 1", price: "329", details: "1 Fish Burger, Half Fries, 1 Juice" },
+        { name: "Veg Combo for 2", price: "599", details: "2 Veg Burgers, 2 Juices, Half Fries, 1 Pasta", bestseller: true },
+        { name: "Non-Veg Combo for 2", price: "679", details: "2 Non-Veg Burgers, 2 Juices, Half Fries, Nuggets" },
+        { name: "Fish Combo for 2", price: "729", details: "2 Fish Burgers, 2 Juices, Half Fries, Fish Fingers" },
+        { name: "Veg Family Combo", price: "1249", details: "4 Veg Burgers, 4 Juices, 1 Pasta, 1 Fries, 1 Veg Sandwich" },
+        { name: "Non-Veg Family Combo", price: "1499", details: "4 Non-Veg Burgers, 4 Juices, 1 Pasta, 1 Fries, Nuggets", bestseller: true },
+        { name: "Fish Family Combo", price: "1599", details: "4 Fish Burgers, 4 Juices, 1 Fries, Fish Fingers" },
+      ],
+    },
+    {
+      id: "bucket-combos",
+      label: "Bucket Combos",
+      items: [
+        { name: "Veg Bucket Combo", price: "389", details: "1 Veg Bucket (Fries + Loaded Sauce) + 1 Premium Shake", bestseller: true },
+        { name: "Non-Veg Bucket Combo", price: "409", details: "1 Non-Veg Bucket (Fries + Chicken + Sauce) + 1 Premium Shake", bestseller: true },
+      ],
+    },
+    {
+      id: "pasta-combos",
+      label: "Pasta Combos",
+      items: [
+        { name: "Veg Pasta Combo", price: "399", details: "1 Veg Pasta + 1 Premium Shake" },
+        { name: "Non-Veg Pasta Combo", price: "449", details: "1 Non-Veg Pasta + 1 Premium Shake" },
+      ],
+    },
+    {
+      id: "sandwich-combo",
+      label: "Sandwich Combo",
+      items: [
+        { name: "Non-Veg Sandwich Combo", price: "419", details: "Choose your flavour: Chipotle or Barbeque. Includes 1 Non-Veg Sandwich + 1 Premium Shake", bestseller: true },
+      ],
+    },
+    {
       id: "premium-shakes",
       label: "Premium Shakes",
       items: [
@@ -142,7 +180,7 @@ const HighOnShakesMenu = () => {
         {
           name: "Makhani",
           price: "180 / 190",
-          details: "Paneer / Chicken", // Not in menu
+          details: "Paneer / Chicken",
         },
       ],
     },
@@ -409,6 +447,41 @@ const HighOnShakesMenu = () => {
     </div>
   );
 
+  // Helper for Non-Veg Icon
+  const NonVegIcon = () => (
+    <div className="flex items-center justify-center w-3.5 h-3.5 rounded-sm border border-red-600 p-[1px]">
+      <div className="w-1.5 h-1.5 bg-red-600 rounded-full"></div>
+    </div>
+  );
+
+  // Helper function to determine Veg / Non-Veg / Dual state
+  const getItemDietaryType = (item: MenuItem) => {
+    const nameLower = item.name.toLowerCase();
+    const detailsLower = (item.details || "").toLowerCase();
+
+    // Check if the item offers both Veg and Non-Veg options
+    const isDualOption =
+      detailsLower.includes("paneer / chicken") ||
+      detailsLower.includes("veg / chicken") ||
+      detailsLower.includes("veg / chicken / fish");
+
+    if (isDualOption) {
+      return "both";
+    }
+
+    // Explicit Non-Veg items
+    const isNonVeg =
+      nameLower.includes("non-veg") ||
+      nameLower.includes("chicken") ||
+      nameLower.includes("fish") ||
+      nameLower.includes("nuggets") ||
+      detailsLower.includes("non-veg") ||
+      (detailsLower.includes("chicken") && !detailsLower.includes("veg")) ||
+      (detailsLower.includes("fish") && !detailsLower.includes("veg"));
+
+    return isNonVeg ? "non-veg" : "veg";
+  };
+
   return (
     <>
       {/* Injecting Google Font: Outfit */}
@@ -520,7 +593,7 @@ const HighOnShakesMenu = () => {
           </div>
 
           {/* --- Delivery Partners --- */}
-          <div className="grid grid-cols-3 gap-4 mb-12 items-center justify-items-center">
+          <div className="grid grid-cols-3 gap-4 mb-8 items-center justify-items-center">
             <a
               href="https://wa.me/918652102030"
               target="_blank"
@@ -562,6 +635,28 @@ const HighOnShakesMenu = () => {
             </a>
           </div>
 
+          {/* --- Search Input --- */}
+          <div className="relative mb-12 max-w-md mx-auto">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-zinc-400">
+              <Search className="h-5 w-5" />
+            </div>
+            <input
+              type="text"
+              placeholder="Search delicious menu items..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-11 pr-10 py-3 bg-white rounded-full border border-zinc-200 text-sm placeholder-zinc-400 focus:outline-none focus:border-[#6F4E37] focus:ring-2 focus:ring-[#6F4E37]/10 transition-all shadow-sm"
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm("")}
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-zinc-400 hover:text-zinc-600"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+
           {/* --- Menu Grid --- */}
           <div className="space-y-12">
             {filteredCategories.length === 0 ? (
@@ -598,14 +693,7 @@ const HighOnShakesMenu = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6">
                     {category.items.map((item, index) => {
                       const isBestseller = item.bestseller;
-                      const isNonVeg =
-                        item.details?.toLowerCase().includes("chicken") ||
-                        item.details?.toLowerCase().includes("fish") ||
-                        item.name?.toLowerCase().includes("chicken") ||
-                        item.name?.toLowerCase().includes("korean") ||
-                        item.name?.toLowerCase().includes("american") ||
-                        item.name?.toLowerCase().includes("three") ||
-                        item.name?.toLowerCase().includes("fish");
+                      const dietType = getItemDietaryType(item);
 
                       return (
                         <div
@@ -614,18 +702,21 @@ const HighOnShakesMenu = () => {
                         >
                           <div className="flex flex-col h-full justify-between gap-2">
                             <div>
-                              {/* Header Row: Veg Icon + Bestseller */}
+                              {/* Header Row: Veg / Non-Veg Icons + Bestseller */}
                               <div className="flex items-center gap-2 mb-2">
                                 {/* Veg/NonVeg Indicator */}
-                                {isNonVeg ? (
-                                  <div className="flex items-center justify-center w-3.5 h-3.5 rounded-sm border border-red-600 p-[1px]">
-                                    <div className="w-1.5 h-1.5 bg-red-600 rounded-full"></div>
+                                {dietType === "both" ? (
+                                  <div className="flex items-center gap-1">
+                                    <VegIcon />
+                                    <NonVegIcon />
                                   </div>
+                                ) : dietType === "non-veg" ? (
+                                  <NonVegIcon />
                                 ) : (
                                   <VegIcon />
                                 )}
 
-                                {/* Bestseller Badge (Matching the Image) */}
+                                {/* Bestseller Badge */}
                                 {isBestseller && (
                                   <div className="flex items-center gap-1">
                                     <Sparkles className="w-3 h-3 fill-[#E23744] text-[#E23744]" />
@@ -680,9 +771,9 @@ const HighOnShakesMenu = () => {
                   High On Shakes
                 </div>
                 <p className="text-sm text-zinc-500 leading-relaxed max-w-xs">
-                  Orders once placed will not be cancelled. <br></br>Free home
-                  delivery applicable for orders above Rs 200/- <br></br> Taxes
-                  as Applicable
+                  Orders once placed will not be cancelled. <br />
+                  Free home delivery applicable for orders above Rs 200/- <br />
+                  Taxes as Applicable
                 </p>
               </div>
 
